@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">MystreyIn</string>
+
+    <!-- SelectLanguageFragment-->
+    <string name="welcome">Welcome</string>
+    <string name="please_choose_your_preference_language">Please choose your preferred language!</string>
+    <string name="english">English</string>
+    <string name="arabic">العربية</string>
+    <string name="start">Start</string>
+
+    <!-- error view -->
+    <string name="btn_try_again">try Again</string>
+    <string name="error_no_internet">No Internet connection</string>
+    <string name="error_server">timeout</string>
+    <string name="error_msg">Something went wrong</string>
+    <string name="session_ended">Session Ended</string>
+    <string name="screen_shot_denied">Grant stoarge permission to take screenshot!</string>
+    <string name="camera_permission_denied">Grant camera permission to take the 3 seconds video</string>
+    <string name="screen_shot">take screenshot</string>
+
+    <string name="alert_dialog_title">Fly US VIP</string>
+    <string name="alert_dialog_all_info_in_english">All information entered must be in English</string>
+    <string name="not_available_yet">This feature is coming soon to Al Alami app!</string>
+    <!-- General -->
+    <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="loading">Loading …</string>
+    <string name="under_development">Under Development</string>
+    <string name="ok">OK</string>
+    <string name="none">None</string>
+    <string name="edit">Edit</string>
+    <string name="updated_successfully">Updated Successfully</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="empty_string" />
+    <string name="km">km</string>
+    <string name="you_re_not_logged_in">You\'re Not Logged In.</string>
+    <string name="you_need_to_login_into_your_account_to_see_this_screen">You need to login into your account\nto see this screen</string>
+
+    <!-- Image Picker Strings -->
+    <string name="go_to_settings">Go To Settings</string>
+    <string name="no_activity_data_chart_err">No Data Yet !</string>
+    <string name="choose_image_folders_mode_title">select Image</string>
+    <string name="choose_image_done_button_txt">Done</string>
+    <string name="choose_image_max_select_message">You have reached selection limit!</string>
+    <string name="general_err_msg">"SomeThing Happened Please Try Again "</string>
+
+    <!--  Validator strings  -->
+    <string name="must_not_be_empty">must not be empty</string>
+    <string name="must_not_be_at_least">must not be at least </string>
+    <string name="characters"> characters</string>
+    <string name="numbers"> numbers</string>
+    <string name="text">Text</string>
+    <string name="date">Date</string>
+    <string name="email_not_valid_err">Enter a valid email address (example: aaa@bbb.ccc)</string>
+    <string name="phone_not_valid_err">Enter a valid phone number (example: 07xxxxxxx)</string>
+    <string name="password_not_valid_err">Enter a valid password (example: P@ssw0rd)</string>
+    <string name="please_select_your_gender">Please select your gender</string>
+    <string name="password_not_match">Password not match</string>
+    <string name="text_not_valid_err">Enter a valid Text</string>
+    <string name="date_not_valid_err">Enter a valid date</string>
+    <string name="time_not_valid_err">Enter a valid time</string>
+    <string name="digits">digits</string>
+    <string name="travllers">Travellers</string>
+    <string name="next">NEXT</string>
+    <string name="select_time">Select time</string>
+    <string name="adult">Adult</string>
+    <string name="submit">Submit</string>
+    <string name="data_missing">Data missing</string>
+    <string name="please_fill_data_fields">Please fill all the data fields</string>
+
+    <string name="confirm_password">Confirm Password</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="hint_date">Date</string>
+    <string name="time">Time</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="otp">OTP</string>
+    <string name="number">Number</string>
+
+    <!--    Update App-->
+    <string name="new_update">NEW UPDATE!</string>
+    <string name="there_s_a_new_update_available_for_fly_us_vip">There’s a new update available for\nFLY US VIP</string>
+    <string name="update_now">UPDATE NOW</string>
+    <string name="remind_me_later">REMIND ME LATER</string>
+    <string name="close_app">CLOSE APP</string>
+    <string name="important_update">IMPORTANT UPDATE!</string>
+</resources>

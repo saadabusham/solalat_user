@@ -1,0 +1,76 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.4.20'
+    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = "1.3.72"
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // Navigation Graph
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
+
+        // Hilt Dependence injection tool
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
+
+        classpath 'com.google.gms:google-services:4.3.4'
+
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
+
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven {
+            url "https://dl.bintray.com/mnayef95/WinValidation"
+        }
+
+        flatDir {
+            dirs("lib")
+        }
+        flatDir {
+            dirs("lib1", "lib2")
+        }
+    }
+}
+
+subprojects {
+
+    // SetUp Module Type
+    if (project.name == "app") {
+        apply plugin: "com.android.application"
+        apply plugin: 'com.google.firebase.crashlytics'
+    } else {
+        apply plugin: "com.android.library"
+    }
+
+    // SetUp Module Needed Apply's
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: "kotlin-kapt"
+    apply plugin: "androidx.navigation.safeargs.kotlin"
+    apply plugin: 'dagger.hilt.android.plugin'
+
+    apply plugin: 'com.jakewharton.butterknife'
+
+    // SetUp App Versions and Build Types
+    apply from: rootDir.path + "/android.gradle"
+
+    // SetUp Needed App library
+    apply from: rootDir.path + "/dependencies.gradle"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

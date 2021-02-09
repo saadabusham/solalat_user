@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App Colors -->
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#ED222F</color>
+    <color name="colorAccentDark">#4f5b74</color>
+    <color name="color_app_background">#FFFFFF</color>
+    <color name="ripple_color">#0be8252e</color>
+    <color name="app_background_color">#FFFFFF</color>
+    <!-- Views Default colors -->
+    <color name="text_default_color">#7f8592</color>
+    <color name="text_dark_color">#3A4155</color>
+    <color name="text_gray_color">#606060</color>
+    <color name="text_header_dark_gray">#8C8896</color>
+    <!--    divider color-->
+    <color name="divider_color">#f0f1f2</color>
+    <color name="divider_gray">#BDC0C8</color>
+
+    <color name="semibold_text_gray">#373840</color>
+    <color name="text_gray_trip_info">#8F92A1</color>
+
+    <!-- Shimmering -->
+    <color name="shimmer_background">#dddddd</color>
+    <color name="shimmer_background_light">#C6C3C3</color>
+
+    <color name="texts_background_color">#F0F0F0</color>
+    <color name="texts_background_border">#DFE0E5</color>
+    <!-- White -->
+    <color name="white">#ffffff</color>
+    <color name="alpha_white">#4DFFFFFF</color>
+    <color name="alpha_white_60">#4DFFFFFF</color>
+
+    <!-- Black -->
+    <color name="black">#000000</color>
+    <color name="black_alpha">#80000000</color>
+    <color name="divider_black">#1A000000</color>
+
+    <!-- Gray -->
+    <color name="default_gary">#dfe0e5</color>
+    <color name="lite_gray">#f4f5f7</color>
+    <color name="edittext_boarder_gray">#E6E6E6</color>
+
+    <!-- Blue -->
+    <color name="lite_blue">#e7ecf2</color>
+    <color name="dark_blue">#0B256E</color>
+    <color name="flyus_button_color">#0B256E</color>
+    <color name="blue">#259DDB</color>
+    <color name="welcome_back_blue">#0E4A86</color>
+    <color name="night_blue">#24253D</color>
+    <!-- Red -->
+    <color name="red">#c1113b</color>
+
+    <!-- Alert !-->
+    <color name="alert_red">#DC0C0C</color>
+
+    <!-- Orange -->
+    <color name="orange">#DAA42A</color>
+
+    <!-- Image Picker Colors -->
+    <color name="counter_bg">@android:color/white</color>
+    <color name="counter_color">@color/text_default_color</color>
+    <color name="selector_color">@color/colorAccent</color>
+    <color name="place_holder_color">@android:color/white</color>
+    <color name="toolbar_bg">@color/colorPrimary</color>
+    <color name="done">@color/colorAccent</color>
+    <color name="permission_alert_bg">@android:color/white</color>
+    <color name="permission_alert_color">@color/text_default_color</color>
+    <color name="circle_image_stroke_color">#707070</color>
+    <!-- Toolbar -->
+    <color name="title_toolbar_color">@android:color/black</color>
+    <color name="subtitle_toolbar_color">#7a7a7a</color>
+    <color name="secondary_toolbar_color">@android:color/black</color>
+
+    <!-- TextInputLayout -->
+    <color name="tab_selected_text_color">#161f3d</color>
+    <color name="tab_not_selected_text_color">#4D161F3D</color>
+
+    <!--  TabLayout  -->
+    <color name="tab_background">#3AA7DE</color>
+    <color name="tab_unselected">#B2B2B2</color>
+    <color name="tab_background_ground">#FBFBFB</color>
+
+    <color name="color_7C88A0">#7C88A0</color>
+
+    <color name="selected_chip">#334A66</color>
+    <color name="un_selected_chip">#DFE0E5</color>
+    <color name="un_selected_chip_text">#1B2749</color>
+
+    <color name="color_not_valid">#F1F1F1</color>
+    <color name="color_valid">@color/colorAccent</color>
+
+    <!-- Cardview -->
+    <color name="cardview_state_focused">#259DDB</color>
+    <color name="cardview_state_unfocused">#E6E6E6</color>
+    <color name="cardveiw_state_error">#DC0C0C</color>
+    <color name="cardveiw_state_valid">#60bf04</color>
+    <color name="cardview_orange">#F9C332</color>
+    <color name="cardview_stroke_gray">#D8D8D8</color>
+    <color name="cardview_fill_gray">#FBFBFC</color>
+    <color name="cardview_border_gray">#E8E8E8</color>
+
+    <!--    Search -->
+    <color name="cardview_search_background">#F8F8FA</color>
+    <color name="textview_search_gray">#808A8A8D</color>
+    <!--  TextView  -->
+    <color name="textview_header_gray">#202224</color>
+    <color name="textview_header_gray_alpha">#99202224</color>
+    <color name="textview_number_black">#1E1F20</color>
+
+    <!--  flight  status colors-->
+    <color name="flight_pending">#F9C332</color>
+    <color name="flight_scheduled">#5EB14E</color>
+    <color name="flight_boarding">#2574FF</color>
+    <color name="flight_took_off">#3AA7DE</color>
+    <color name="flight_completed">#0B256E</color>
+    <color name="flight_cancelled">#F93B4F</color>
+    <color name="flight_delayed">#8C8896</color>
+    <!--  booking status colors-->
+    <color name="booking_awaiting_payment">#8C8896</color>
+    <color name="booking_confirmed">#5EB14E</color>
+    <color name="booking_completed">#0B256E</color>
+    <color name="booking_cancelled">#F93B4F</color>
+
+    <color name="night_blue_alpha">#2B4898</color>
+
+    <!--  request  status colors-->
+    <color name="request_new">#F9C332</color>
+    <color name="request_assigned">#2574FF</color>
+    <color name="request_approved">#5EB14E</color>
+    <color name="request_rejected">#F93B4F</color>
+    <color name="request_canceled">#F93B4F</color>
+
+    <!--    Chat   -->
+    <color name="outgoing_bubble_color">#123AA7DE</color>
+    <color name="incoming_bubble_color">#0B256E</color>
+    <color name="progress_load_more_color">#0B256E</color>
+    <color name="attachment_background_color">#3AA7DE</color>
+    <color name="send_background_color">#3AA7DE</color>
+    <color name="input_background_color">#1AFFFFFF</color>
+    <color name="input_text_color">#80FFFFFF</color>
+    <color name="receiver_name_color">#202224</color>
+
+    <color name="outcoming_text_color">#1A1A1A</color>
+    <color name="outcoming_date_color">#757575</color>
+    <color name="incoming_text_color">#FFFFFF</color>
+    <color name="incoming_date_color">#757575</color>
+
+    <!--    Voice Call  -->
+    <color name="name_color">#0C0D10</color>
+    <color name="status_color">#A3A9AF</color>
+    <color name="decline_color">#F32850</color>
+    <color name="decline_ripple_color">#731C2D</color>
+    <color name="answer_color">#7ED221</color>
+    <color name="answer_ripple_color">#569115</color>
+    <color name="profile_ripple_color">#3AA7DE</color>
+    <color name="icons_color">#d7d8da</color>
+</resources>

@@ -1,6 +1,7 @@
 package com.technzone.base.data.repos.configuration
 
 import com.technzone.base.common.CommonEnums
+import com.technzone.base.data.api.response.APIResource
 import com.technzone.base.data.api.response.ResponseHandler
 import com.technzone.base.data.api.response.ResponseWrapper
 import com.technzone.base.data.daos.remote.configuration.ConfigurationRemoteDao
@@ -24,8 +25,12 @@ class ConfigurationRepoImp @Inject constructor(
     }
 
     override suspend fun loadConfigurationData():
-            ResponseWrapper<ConfigurationWrapperResponse> {
-        return configurationRemoteDao.getAppConfiguration()
+            APIResource<ResponseWrapper<ConfigurationWrapperResponse>> {
+        return try {
+            responseHandle.handleSuccess(configurationRemoteDao.getAppConfiguration())
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
     }
 
 }

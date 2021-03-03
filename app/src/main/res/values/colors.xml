@@ -109,51 +109,5 @@
     <color name="textview_header_gray_alpha">#99202224</color>
     <color name="textview_number_black">#1E1F20</color>
 
-    <!--  flight  status colors-->
-    <color name="flight_pending">#F9C332</color>
-    <color name="flight_scheduled">#5EB14E</color>
-    <color name="flight_boarding">#2574FF</color>
-    <color name="flight_took_off">#3AA7DE</color>
-    <color name="flight_completed">#0B256E</color>
-    <color name="flight_cancelled">#F93B4F</color>
-    <color name="flight_delayed">#8C8896</color>
-    <!--  booking status colors-->
-    <color name="booking_awaiting_payment">#8C8896</color>
-    <color name="booking_confirmed">#5EB14E</color>
-    <color name="booking_completed">#0B256E</color>
-    <color name="booking_cancelled">#F93B4F</color>
-
-    <color name="night_blue_alpha">#2B4898</color>
-
-    <!--  request  status colors-->
-    <color name="request_new">#F9C332</color>
-    <color name="request_assigned">#2574FF</color>
-    <color name="request_approved">#5EB14E</color>
-    <color name="request_rejected">#F93B4F</color>
-    <color name="request_canceled">#F93B4F</color>
-
-    <!--    Chat   -->
-    <color name="outgoing_bubble_color">#123AA7DE</color>
-    <color name="incoming_bubble_color">#0B256E</color>
-    <color name="progress_load_more_color">#0B256E</color>
-    <color name="attachment_background_color">#3AA7DE</color>
-    <color name="send_background_color">#3AA7DE</color>
-    <color name="input_background_color">#1AFFFFFF</color>
-    <color name="input_text_color">#80FFFFFF</color>
-    <color name="receiver_name_color">#202224</color>
-
-    <color name="outcoming_text_color">#1A1A1A</color>
-    <color name="outcoming_date_color">#757575</color>
-    <color name="incoming_text_color">#FFFFFF</color>
-    <color name="incoming_date_color">#757575</color>
-
-    <!--    Voice Call  -->
-    <color name="name_color">#0C0D10</color>
-    <color name="status_color">#A3A9AF</color>
-    <color name="decline_color">#F32850</color>
-    <color name="decline_ripple_color">#731C2D</color>
-    <color name="answer_color">#7ED221</color>
-    <color name="answer_ripple_color">#569115</color>
-    <color name="profile_ripple_color">#3AA7DE</color>
-    <color name="icons_color">#d7d8da</color>
+    <color name="defaultTextColor">#2F2C37</color>
 </resources>

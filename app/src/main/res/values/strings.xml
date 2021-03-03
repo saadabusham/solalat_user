@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">BaseApp</string>
+    <string name="app_license">Copyright@Technzone Company</string>
 
     <!-- SelectLanguageFragment-->
     <string name="welcome">Welcome</string>
@@ -92,4 +93,22 @@
 
     <!--    Completed dialog-->
     <string name="completed_successfully">Completed Successfully</string>
+
+    <!--    Login-->
+    <string name="login">Login</string>
+
+    <!--    Language    -->
+    <string name="continue_">Continue</string>
+    <string name="please_choose_your_preferred_language">Please choose your preferred language!</string>
+
+    <!--    OnBoarding  -->
+    <string name="title_on_boarding_1">title_on_boarding_1</string>
+    <string name="description_on_boarding_1">description_on_boarding_1</string>
+    <string name="title_on_boarding_2">title_on_boarding_2</string>
+    <string name="description_on_boarding_2">description_on_boarding_2</string>
+    <string name="title_on_boarding_3">title_on_boarding_3</string>
+    <string name="description_on_boarding_3">description_on_boarding_3</string>
+    <string name="title_on_boarding_4">title_on_boarding_4</string>
+    <string name="description_on_boarding_4">description_on_boarding_4</string>
+
 </resources>

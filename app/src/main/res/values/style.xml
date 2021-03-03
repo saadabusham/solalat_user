@@ -5,8 +5,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
-
-
+    
     <style name="AppTheme.FlightDetails" parent="AppTheme">
         <!-- Customize your theme here. -->
         <!--        <item name="android:windowTranslucentStatus">true</item>-->
@@ -19,7 +18,7 @@
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <!-- Default colors -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@color/color_app_background</item>
@@ -35,11 +34,13 @@
         // Button
         <item name="android:ratingBarStyle">@style/AppTheme.RatingBar</item>
         // Rating View
-        <item name="tabStyle">@style/AppTheme.TabLayout</item>
+        <!--        <item name="tabStyle">@style/AppTheme.TabLayout</item>-->
         // TabLayout
         // EditText
         <item name="textInputStyle">@style/TextInputLayoutStyle</item>
         <item name="editTextStyle">@style/TextInputEditTextStyle</item>
+        <item name="android:editTextBackground">@drawable/edit_text_background</item>
+
         // Radio Button
         <item name="radioButtonStyle">@style/AppTheme.RadioButton</item>
         //Spinner
@@ -83,6 +84,31 @@
         <item name="android:datePickerMode">spinner</item>
     </style>
 
+
+    <style name="AppTheme.Spinner" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
+        <item name="android:paddingStart">@dimen/_10sdp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="AppTheme.InterestSpinner" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="spinnerDropDownItemStyle">@style/interestSpinnerDropDownItemStyle</item>
+        <item name="android:spinnerItemStyle">@style/interestSpinnerItemStyle</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
     <!-- Spinner Design -->
     <style name="spinnerItemStyle">
         <item name="android:gravity">center_vertical</item>
@@ -104,17 +130,27 @@
         <item name="android:textSize">@dimen/_11ssp</item>
     </style>
 
-    <style name="AppTheme.Spinner" parent="android:Widget.Spinner">
-        <item name="android:background">@drawable/spinner_background</item>
-        <item name="android:spinnerMode">dropdown</item>
-        <item name="spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
-        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+    <!-- InterestSpinner Design -->
+    <style name="interestSpinnerItemStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="singleLine">false</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="fontFamily">@font/en_normal_regular</item>
         <item name="android:textSize">@dimen/_11ssp</item>
-        <item name="android:paddingStart">@dimen/_10sdp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingEnd">0dp</item>
+        <item name="android:spinnerMode">dropdown</item>
     </style>
+
+    <style name="interestSpinnerDropDownItemStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:textColor">@color/defaultTextColor</item>
+        <item name="fontFamily">@font/en_normal_regular</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+    </style>
+
 
     <!-- Default TextView Style -->
     <style name="AppTheme.TextViewStyle" parent="android:Widget.Material.TextView">
@@ -130,7 +166,8 @@
 
     <!-- Default Button Style -->
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
-        <item name="backgroundTint">@color/color_button_default_background</item>
+        <item name="cornerRadius">@dimen/_10sdp</item>
+        <item name="backgroundTint">@color/colorAccent</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
@@ -138,9 +175,10 @@
         <item name="android:textSize">14sp</item>
         <!--        <item name="btnFontType">BOLD</item>-->
         <item name="rippleColor">@color/white</item>
-        <item name="android:minHeight">50dp</item>
+        <item name="android:minHeight">@dimen/button_height</item>
         <item name="shapeAppearanceOverlay">@style/Button_Rounded</item>
-        <item name="android:textStyle">bold</item>
+        <item name="shapeAppearance">@style/Button_Rounded</item>
+        <item name="fontFamily">@font/en_normal_regular</item>
     </style>
 
     <style name="Button_Rounded">
@@ -216,6 +254,11 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <style name="DialogFadeAnimations">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
     <!--  CompletedDialog  -->
     <style name="CompletedDialog" parent="android:Theme.Dialog">
 
@@ -245,17 +288,37 @@
     </style>
 
     <!--  Full Screen Dialog  -->
-    <style name="FullScreenDialog" parent="Theme.AppCompat.Light.DialogWhenLarge">
+    <style name="FullScreenDialog">
 
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
         <!-- No backgrounds, titles or window float -->
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">#A6000000</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:statusBarColor">@color/white</item>
-        <!--        <item name="android:windowAnimationStyle">@style/DialogAnimations</item>-->
+        <item name="android:windowAnimationStyle">@style/DialogAnimations</item>
+        // CardView
+        <item name="materialButtonStyle">@null</item>
+        <!-- !Important! Add this to force the use of the Spinner mode -->
+        <!--        <item name="android:datePickerStyle">@style/AppTheme.DatePickerStyle</item>-->
+    </style>
+
+    <!--  Full Screen Transparent Dialog  -->
+    <style name="FullScreenTransparentDialog" parent="Theme.AppCompat.Light.DialogWhenLarge">
+
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/DialogFadeAnimations</item>
+
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
     <!-- IHospital Provider Dialog Buttons Style -->
@@ -316,6 +379,7 @@
         <item name="android:background">@null</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:maxLines">1</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="AppTheme.BasicToolbarStyle">
@@ -371,6 +435,13 @@
         <item name="tabSelectedTextColor">@color/tab_selected_text_color</item>
         <item name="itemRippleColor">@color/colorAccent</item>
         <item name="tabTextAppearance">@style/TabsTextAppearance</item>
+    </style>
+
+    <style name="TabCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="fontFamily">@font/en_normal_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="textAllCaps">false</item>
     </style>
 
     <style name="TabsTextAppearance" parent="TextAppearance.MaterialComponents.Headline3">
@@ -464,14 +535,13 @@
     </style>
 
     <style name="MyMaterialButtom" parent="Widget.MaterialComponents.TextView">
-        <item name="piv_radius">@dimen/_10sdp</item>
         <item name="strokeColor">@color/dark_blue</item>
         <item name="background">@color/blue</item>
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:fontFamily">@font/en_normal_medium</item>
     </style>
 
-    <style name="mystreyin_bordered_buttom" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="bordered_buttom" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="fontFamily">@font/en_normal_medium</item>
         <item name="cornerRadius">@dimen/_13sdp</item>
         <item name="strokeColor">@color/dark_blue</item>
@@ -487,40 +557,7 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <style name="mystreyin_edittext_cardview" parent="Widget.MaterialComponents.CardView">
-        <item name="cornerSizeBottomLeft">@dimen/_15sdp</item>
-        <item name="cornerSizeBottomRight">@dimen/_15sdp</item>
-        <item name="cornerSizeTopLeft">@dimen/_15sdp</item>
-        <item name="cornerSizeTopRight">@dimen/_15sdp</item>
-        <item name="strokeWidth">@dimen/_1sdp</item>
-        <item name="strokeColor">@color/cardview_state_unfocused</item>
-        <item name="background">@color/white</item>
-        <item name="cardElevation">0dp</item>
-        <item name="android:dashGap">4dp</item>
-    </style>
-
-    <style name="mystreyin_edittext_cardview_dashed" parent="Widget.MaterialComponents.CardView">
-        <item name="cornerSizeBottomLeft">@dimen/_15sdp</item>
-        <item name="cornerSizeBottomRight">@dimen/_15sdp</item>
-        <item name="cornerSizeTopLeft">@dimen/_15sdp</item>
-        <item name="cornerSizeTopRight">@dimen/_15sdp</item>
-        <item name="strokeWidth">@dimen/_1sdp</item>
-        <item name="strokeColor">@color/cardview_state_unfocused</item>
-        <item name="background">@color/white</item>
-        <item name="cardElevation">0dp</item>
-        <item name="android:dashGap">@dimen/_6sdp</item>
-        <item name="android:dashWidth">@dimen/_6sdp</item>
-    </style>
-
-    <style name="mystreyin_tablayout_cardview" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/_10sdp</item>
-        <item name="strokeWidth">@dimen/_1sdp</item>
-        <item name="strokeColor">@color/cardview_state_unfocused</item>
-        <item name="background">@color/white</item>
-        <item name="cardElevation">0dp</item>
-    </style>
-
-    <style name="mystreyin_half_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
+    <style name="half_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/_6sdp</item>
         <item name="cornerSizeBottomLeft">@dimen/_6sdp</item>
@@ -529,26 +566,7 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="mystreyin_top_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/_30sdp</item>
-        <item name="cornerSizeTopRight">@dimen/_30sdp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cardElevation">0dp</item>
-    </style>
-
-    <style name="mystreyin_bottomcardview_corner" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/_30sdp</item>
-        <item name="cornerSizeBottomRight">@dimen/_30sdp</item>
-        <item name="cardElevation">0dp</item>
-    </style>
-
-
-    <style name="mystreyin_left_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
+    <style name="left_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/_30sdp</item>
         <item name="cornerSizeTopRight">0dp</item>
@@ -558,35 +576,20 @@
     </style>
 
 
-    <style name="mystreyin_half_cardview_with_fill" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/_15sdp</item>
-        <item name="cardBackgroundColor">@color/cardview_fill_gray</item>
-        <item name="strokeWidth">0.5dp</item>
-        <item name="strokeColor">@color/cardview_stroke_gray</item>
-        <item name="cardElevation">0dp</item>
-    </style>
-
-    <style name="mystreyin_cardview_edittext" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/_10sdp</item>
-        <item name="cardBackgroundColor">@color/white</item>
-        <item name="strokeWidth">@dimen/_1sdp</item>
-        <item name="strokeColor">@color/cardview_state_unfocused</item>
-        <item name="cardElevation">0dp</item>
-    </style>
-
-    <style name="mystreyin_edittext_midsize_with_background" parent="Widget.AppCompat.EditText">
+    <style name="edittext_midsize_with_background" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">@dimen/_11ssp</item>
         <item name="fontFamily">@font/en_normal_regular</item>
         <item name="android:textDirection">ltr</item>
         <item name="singleLine">true</item>
-        <item name="android:background">@drawable/edittext_shape_selector</item>
+        <item name="android:background">@drawable/shape_edittext_focused</item>
         <item name="android:gravity">center|start</item>
         <item name="android:paddingStart">@dimen/_12sdp</item>
         <item name="android:paddingEnd">@dimen/_12sdp</item>
         <item name="android:paddingTop">@dimen/_5sdp</item>
         <item name="android:paddingBottom">@dimen/_5sdp</item>
     </style>
-    <style name="mystreyin_edittext_midsize" parent="Widget.AppCompat.EditText">
+
+    <style name="edittext_midsize" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="fontFamily">@font/en_normal_regular</item>
         <item name="android:textDirection">ltr</item>
@@ -597,57 +600,52 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="mystreyin_textview_smallsize" parent="Widget.AppCompat.TextView">
+    <style name="textview_normal_regular" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/_10ssp</item>
         <item name="fontFamily">@font/en_normal_regular</item>
-        <item name="android:textDirection">ltr</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textColor">@color/text_gray_color</item>
     </style>
 
-    <style name="mystreyin_textview_smallsize_semibold" parent="Widget.AppCompat.TextView">
+    <style name="textview_normal_semibold" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/_11ssp</item>
         <item name="fontFamily">@font/en_normal_semibold</item>
-        <item name="android:textDirection">ltr</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textColor">@color/night_blue</item>
     </style>
 
-    <style name="mystreyin_textview_bold" parent="Widget.AppCompat.TextView">
+    <style name="textview_normal_bold" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="fontFamily">@font/en_normal_bold</item>
-        <item name="android:textDirection">ltr</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textColor">@color/dark_blue</item>
     </style>
 
-    <style name="mystreyin_textview_medium" parent="Widget.AppCompat.TextView">
+    <style name="textview_normal_medium" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/_10ssp</item>
         <item name="fontFamily">@font/en_normal_medium</item>
-        <item name="android:textDirection">ltr</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textColor">@color/text_gray_color</item>
     </style>
 
-    <style name="mystreyin_textview_header_mediumsize" parent="Widget.AppCompat.TextView">
+    <style name="textview_header_regular" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/en_header_regular</item>
-        <item name="android:textDirection">ltr</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textSize">@dimen/_24ssp</item>
         <item name="android:textColor">@color/welcome_back_blue</item>
     </style>
 
-    <style name="mystreyin_button_text" parent="Widget.AppCompat.TextView">
+    <style name="button_text" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/en_normal_medium</item>
-        <item name="android:textDirection">ltr</item>
+
         <item name="android:gravity">center</item>
         <item name="android:padding">0dp</item>
-        <item name="android:textSize">@dimen/mystreyin_button_text_size</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -657,34 +655,34 @@
     </style>
     "
 
-    <style name="mystreyin_tablayout_item" parent="Widget.AppCompat.TextView">
+    <style name="tablayout_item" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/_10ssp</item>
         <item name="android:fontFamily">@font/en_normal_semibold</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="mystreyin_rounded_ImageView" parent="">
+    <style name="rounded_ImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10%</item>
     </style>
 
-    <style name="mystreyin_circleImageView" parent="">
+    <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="mystreyin_textview_playfear_mediumsize" parent="Widget.AppCompat.TextView">
+    <style name="textview_playfear_mediumsize" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/en_header_regular</item>
-        <item name="android:textDirection">ltr</item>
+
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">@color/semibold_text_gray</item>
     </style>
 
-    <style name="mystreyin_textview_header_bold" parent="Widget.AppCompat.TextView">
+    <style name="textview_header_bold" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/en_header_bold</item>
-        <item name="android:textDirection">ltr</item>
+
         <item name="android:gravity">center|start</item>
         <item name="android:padding">0dp</item>
         <item name="android:textSize">@dimen/_10ssp</item>
@@ -713,7 +711,7 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-<!--    Chat    -->
+    <!--    Chat    -->
     <style name="top_cardview_corner" parent="@style/Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/_30sdp</item>
@@ -721,77 +719,51 @@
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
     </style>
 
-    <style name="bottom_right_cardview_no_corner" parent="@style/Widget.MaterialComponents.CardView">
+    <style name="bottomcardview_corner" parent="@style/Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/_15sdp</item>
-        <item name="cornerSizeTopRight">@dimen/_15sdp</item>
-        <item name="cornerSizeBottomLeft">@dimen/_15sdp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/_30sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_30sdp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="TopCornersCardAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/_18sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_18sdp</item>
         <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cardElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/outgoing_bubble_color</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
-    <style name="bottom_left_cardview_no_corner" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cornerFamily">rounded</item>
+    <style name="dashed_cardview" parent="Widget.MaterialComponents.CardView">
+        <item name="cornerSizeBottomLeft">@dimen/_15sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_15sdp</item>
         <item name="cornerSizeTopLeft">@dimen/_15sdp</item>
         <item name="cornerSizeTopRight">@dimen/_15sdp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-        <item name="cornerSizeBottomRight">@dimen/_15sdp</item>
+        <item name="strokeWidth">@dimen/_1sdp</item>
+        <item name="strokeColor">@color/white</item>
+        <item name="cardBackgroundColor">@android:color/transparent</item>
         <item name="cardElevation">0dp</item>
-        <item name="cardBackgroundColor">@color/incoming_bubble_color</item>
+        <item name="android:dashGap">@dimen/_6sdp</item>
+        <item name="android:dashWidth">@dimen/_6sdp</item>
     </style>
 
-    <style name="twillio_input_edittext" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/_14ssp</item>
-        <item name="fontFamily">@font/en_normal_regular</item>
-        <item name="android:textDirection">ltr</item>
-        <item name="android:gravity">center|start</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textColor">@color/input_text_color</item>
+    <style name="SCBSwitch" parent="AppTheme">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f
+        </item>
     </style>
 
-    <style name="outcoming_textview" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/_13ssp</item>
-        <item name="fontFamily">@font/en_normal_regular</item>
-        <item name="android:gravity">center|start</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textColor">@color/outcoming_text_color</item>
-    </style>
-
-    <style name="incoming_textview" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/_13ssp</item>
-        <item name="fontFamily">@font/en_normal_regular</item>
-        <item name="android:gravity">center|start</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textColor">@color/incoming_text_color</item>
-    </style>
-
-    <style name="twillio_receiver_textview" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/_11ssp</item>
-        <item name="fontFamily">@font/en_normal_bold</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textColor">@color/receiver_name_color</item>
-    </style>
-
-    <eat-comment />
-    <color name="rippelColor">#3AA7DE</color>
-    <declare-styleable name="RippleBackground">
-        <attr name="rb_color" format="color" />
-        <attr name="rb_strokeWidth" format="dimension" />
-        <attr name="rb_radius" format="dimension" />
-        <attr name="rb_duration" format="integer" />
-        <attr name="rb_rippleAmount" format="integer" />
-        <attr name="rb_scale" format="float" />
-        <attr name="rb_type" format="enum">
-            <enum name="fillRipple" value="0" />
-            <enum name="strokeRipple" value="1" />
-        </attr>
-    </declare-styleable>
-    <!-- From: file:/Users/fyu/Workplace/android-ripple-background/library/src/main/res/values/dimensions.xml -->
-    <eat-comment />
-    <dimen name="rippleRadius">64dp</dimen>
-    <dimen name="rippleStrokeWidth">2dp</dimen>
 </resources>

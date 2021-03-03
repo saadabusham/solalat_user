@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         if (project.name == "app") {
-            applicationId "com.technzone.flyus"
+            applicationId "com.technzone.base"
         }
 
         minSdkVersion 23
@@ -34,7 +34,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        setProperty("archivesBaseName", "FlyUsVIPCustomer")
+        setProperty("archivesBaseName", "BaseApp")
         vectorDrawables {
             useSupportLibrary = true
         }

@@ -89,4 +89,7 @@
     <string name="remind_me_later">REMIND ME LATER</string>
     <string name="close_app">CLOSE APP</string>
     <string name="important_update">IMPORTANT UPDATE!</string>
+
+    <!--    Completed dialog-->
+    <string name="completed_successfully">Completed Successfully</string>
 </resources>

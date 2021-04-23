@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.raantech.solalat.provider.R"/>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.saad.base.ui.auth.language.LanguageViewModel" />
+            type="com.raantech.solalat.provider.ui.auth.language.LanguageViewModel" />
     </data>
 
     <LinearLayout
@@ -73,58 +74,76 @@
                     android:textColor="@color/text_gray_color"
                     android:textSize="@dimen/_12ssp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/linEnglish"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/shape_button_selected"
-                    android:gravity="center"
+                    android:background="@{viewModel.englishSelected ? @drawable/shape_button_selected : @drawable/shape_button_unselected}"
                     android:onClick="@{()->viewModel.onEnglishClicked()}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvEnglish"
                         style="@style/textview_normal_regular"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:drawableEnd="@{viewModel.englishSelected ? @drawable/ic_true : null}"
-                        android:drawablePadding="@dimen/_3sdp"
                         android:gravity="center|start"
                         android:text="@string/english"
                         android:textColor="@color/text_gray_color"
                         android:textSize="@dimen/_12ssp" />
-                </LinearLayout>
 
-                <LinearLayout
+                    <ImageView
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_9sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:src="@drawable/ic_true"
+                        android:visibility="@{viewModel.englishSelected ? View.VISIBLE : View.GONE}" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/linArabic"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/shape_button_selected"
-                    android:gravity="center"
+                    android:background="@{viewModel.englishSelected ? @drawable/shape_button_unselected : @drawable/shape_button_selected}"
                     android:onClick="@{()->viewModel.onArabicClicked()}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvArabic"
                         style="@style/textview_normal_regular"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
-                        android:drawableEnd="@{viewModel.englishSelected ? null :  @drawable/ic_true}"
-                        android:drawablePadding="@dimen/_3sdp"
-                        android:gravity="center|start"
                         android:layoutDirection="ltr"
                         android:text="@string/arabic"
                         android:textColor="@color/text_gray_color"
                         android:textSize="@dimen/_12ssp" />
-                </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_9sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:src="@drawable/ic_true"
+                        android:visibility="@{viewModel.englishSelected ? View.GONE : View.VISIBLE}" />
+                </RelativeLayout>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinue"
                     style="@style/AppTheme.Button"

@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.saad.base.ui.base.dialogs.appupdate.UpdateAppDialog" />
+            type="com.raantech.solalat.provider.ui.base.dialogs.appupdate.UpdateAppDialog" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -31,7 +31,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/mystreyin_textview_header_mediumsize"
+                style="@style/textview_normal_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -45,7 +45,7 @@
 
             <TextView
                 android:id="@+id/tvFillField"
-                style="@style/mystreyin_textview_smallsize"
+                style="@style/textview_normal_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -68,11 +68,11 @@
 
                 <include
                     android:id="@+id/cvUpdateNow"
-                    layout="@layout/mystreyin_button"
+                    layout="@layout/app_button"
                     android:onClick="@{()->viewModel.onUpdateClicked()}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/mystreyin_button_text"
+                    style="@style/button_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:elevation="@dimen/_3sdp"
@@ -82,7 +82,7 @@
 
             <TextView
                 android:id="@+id/tvRemindMeLater"
-                style="@style/mystreyin_textview_medium"
+                style="@style/textview_normal_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -99,7 +99,7 @@
 
             <TextView
                 android:id="@+id/tvCloseApp"
-                style="@style/mystreyin_textview_medium"
+                style="@style/textview_normal_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

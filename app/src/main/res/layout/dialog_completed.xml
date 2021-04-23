@@ -7,7 +7,7 @@
 
         <variable
             name="dialog"
-            type="com.saad.base.ui.base.dialogs.CompletedDialog" />
+            type="com.raantech.solalat.provider.ui.base.dialogs.CompletedDialog" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -32,7 +32,7 @@
                 tools:src="@drawable/ic_completed" />
 
             <TextView
-                style="@style/mystreyin_textview_smallsize"
+                style="@style/textview_normal_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"

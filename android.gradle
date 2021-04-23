@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         if (project.name == "app") {
-            applicationId "com.saad.base"
+            applicationId "com.raantech.solalat.provider"
         }
 
         minSdkVersion 23

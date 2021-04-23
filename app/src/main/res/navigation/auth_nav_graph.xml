@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.technzone.base.ui.auth.language.LanguageFragment"
+        android:name="com.saad.base.ui.auth.language.LanguageFragment"
         android:label="LanguageFragment"
         tools:layout="@layout/fragment_language">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"
-        android:name="com.technzone.base.ui.auth.onboarding.OnBoardingFragment"
+        android:name="com.saad.base.ui.auth.onboarding.OnBoardingFragment"
         android:label="OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding">
 <!--        <action-->
@@ -33,6 +33,6 @@
     </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/loginFragment"-->
-<!--        android:name="com.technzone.mysteryin.ui.auth.login.fragments.LoginFragment"-->
+<!--        android:name="saaderyin.ui.auth.login.fragments.LoginFragment"-->
 <!--        android:label="LoginFragment" />-->
 </navigation>

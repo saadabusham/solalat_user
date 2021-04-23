@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.raantech.solalat.provider.R"/>
+        <import type="com.raantech.solalat.user.R"/>
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.raantech.solalat.provider.ui.auth.language.LanguageViewModel" />
+            type="com.raantech.solalat.user.ui.auth.language.LanguageViewModel" />
     </data>
 
     <LinearLayout

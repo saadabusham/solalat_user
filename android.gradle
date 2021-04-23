@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         if (project.name == "app") {
-            applicationId "com.raantech.solalat.provider"
+            applicationId "com.raantech.solalat.user"
         }
 
         minSdkVersion 23
@@ -34,7 +34,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        setProperty("archivesBaseName", "BaseApp")
+        setProperty("archivesBaseName", "Solalate User")
         vectorDrawables {
             useSupportLibrary = true
         }

@@ -7,7 +7,7 @@
 
         <variable
             name="dialog"
-            type="com.raantech.solalat.provider.ui.base.dialogs.CompletedDialog" />
+            type="com.raantech.solalat.user.ui.base.dialogs.CompletedDialog" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -1,4 +1,4 @@
-package com.raantech.solalat.provider
+package com.raantech.solalat.user
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

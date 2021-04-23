@@ -1,4 +1,4 @@
-package com.raantech.solalat.provider
+package com.raantech.solalat.user
 
 import org.junit.Test
 

@@ -2,6 +2,7 @@ package com.raantech.solalat.user.data.common
 
 import android.app.Activity
 import androidx.lifecycle.Observer
+import com.raantech.solalat.user.data.api.response.*
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.api.response.RequestStatusEnum
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
@@ -12,7 +13,8 @@ import com.raantech.solalat.user.utils.HandleRequestFailedUtil
 class CustomObserverResponse<T>(
     private val activity: Activity,
     private val apiCallBack: APICallBack<T>,
-    private val withProgress: Boolean = true
+    private val withProgress: Boolean = true,
+    private val showError: Boolean = true
 ) : CustomDialogUtils(activity, withProgress, false),
     Observer<APIResource<ResponseWrapper<T>>> {
 
@@ -27,7 +29,7 @@ class CustomObserverResponse<T>(
                         responseWrapperResponse.statusCode
                             ?: -1,
                         responseWrapperResponse.statusSubCode,
-                        responseWrapperResponse.data?.data
+                        responseWrapperResponse.data?.body
                     )
                     apiCallBack.onSuccess(
                         responseWrapperResponse.statusCode
@@ -40,13 +42,14 @@ class CustomObserverResponse<T>(
                             ?: -1, responseWrapperResponse.statusSubCode, responseWrapperResponse
                     )
                 } else {
-                    handleRequestFailedMessages(
-                        responseWrapperResponse.statusSubCode,
-                        responseWrapperResponse.messages
-                    )
+                    if (showError)
+                        handleRequestFailedMessages(
+                            responseWrapperResponse.statusSubCode,
+                            responseWrapperResponse.errors?.get(0)?.getErrorsString()?:responseWrapperResponse.messages
+                        )
                     responseWrapperResponse.messages?.let {
                         responseWrapperResponse.statusSubCode?.let { it1 ->
-                            apiCallBack.onError(it1, it)
+                            apiCallBack.onError(it1, it, responseWrapperResponse.errors)
                         }
                     }
                 }
@@ -55,13 +58,14 @@ class CustomObserverResponse<T>(
                 if (withProgress) {
                     hideProgress()
                 }
-                handleRequestFailedMessages(
-                    responseWrapperResponse.statusSubCode,
-                    responseWrapperResponse.messages
-                )
+                if (showError)
+                    handleRequestFailedMessages(
+                        responseWrapperResponse.statusSubCode,
+                        responseWrapperResponse.errors?.map { it.getErrorsString() }?.joinToString()?:responseWrapperResponse.messages
+                    )
                 responseWrapperResponse.messages?.let {
                     responseWrapperResponse.statusSubCode?.let { it1 ->
-                        apiCallBack.onError(it1, it)
+                        apiCallBack.onError(it1, it, responseWrapperResponse.errors)
                     }
                 }
             }
@@ -90,7 +94,7 @@ class CustomObserverResponse<T>(
         ) {
         }
 
-        fun onError(subErrorCode: ResponseSubErrorsCodeEnum, message: String) {}
+        fun onError(subErrorCode: ResponseSubErrorsCodeEnum, message: String, errors: List<GeneralError>?) {}
         fun onLoading() {}
     }
 

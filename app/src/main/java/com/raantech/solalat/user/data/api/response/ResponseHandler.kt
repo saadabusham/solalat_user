@@ -1,5 +1,7 @@
 package com.raantech.solalat.user.data.api.response
 
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -9,32 +11,67 @@ open class ResponseHandler @Inject constructor() {
             return APIResource.success(data)
         }
 
-        if (data.success) {
-            return APIResource.success(data, data.message,data.code.toInt())
+        if (data.errors == null) {
+            return APIResource.success(data, data.message, null, data.code.toInt())
         }
-        return APIResource.error(
-            data = data,
-            msgs = data.message,
-            statusCode = data.code.toInt(),
-            failedStatusSubCode = ResponseSubErrorsCodeEnum.getResponseSubErrorsCodeEnumByValue(data.code.toInt())
-        )
+//        return APIResource.error(
+//            data = data,
+//            msgs = data.message,
+//            errors = if (data.errors is List<*>
+//            ) data.errors as List<GeneralError> else null,
+//            statusCode = data.code.toInt(),
+//            failedStatusSubCode = ResponseSubErrorsCodeEnum.getResponseSubErrorsCodeEnumByValue(data.code.toInt())
+//        )
+        try {
+            return APIResource.error(
+                    data = data,
+                    msgs = data.message,
+                    errors = data.errors,
+                    statusCode = data.code,
+                    failedStatusSubCode = ResponseSubErrorsCodeEnum.getResponseSubErrorsCodeEnumByValue(data.code.toInt())
+            )
+        } catch (jsonException: JsonSyntaxException) {
+            return APIResource.error(
+                    data = data,
+                    msgs = data.message,
+                    errors = null,
+                    statusCode = data.code,
+                    failedStatusSubCode = ResponseSubErrorsCodeEnum.getResponseSubErrorsCodeEnumByValue(data.code.toInt())
+            )
+        }
     }
 
     fun <RESPONSE_DATA : Any> handleException(e: Exception): APIResource<RESPONSE_DATA> {
         return when (e) {
             is HttpException -> {
-                APIResource.error(
-                    getErrorMessage(e.code()),
-                    null,
-                    e.code(),
-                    ResponseSubErrorsCodeEnum.GENERAL_FAILED
-                )
+                try {
+                    APIResource.error(
+                            getErrorMessage(e.code()),
+                            null,
+                            Gson().fromJson(
+                                    e.response()?.errorBody()?.string(),
+                                    ResponseWrapper::class.java
+                            ).errors,
+                            e.code(),
+                            ResponseSubErrorsCodeEnum.GENERAL_FAILED
+                    )
+                } catch (jsonException: JsonSyntaxException) {
+                    APIResource.error(
+                            getErrorMessage(e.code()),
+                            null,
+                            null,
+                            e.code(),
+                            ResponseSubErrorsCodeEnum.GENERAL_FAILED
+                    )
+                }
+
             }
             else -> APIResource.error(
-                getErrorMessage(Int.MAX_VALUE),
-                null,
-                -1,
-                ResponseSubErrorsCodeEnum.GENERAL_FAILED
+                    getErrorMessage(Int.MAX_VALUE),
+                    null,
+                    null,
+                    -1,
+                    ResponseSubErrorsCodeEnum.GENERAL_FAILED
             )
         }
     }

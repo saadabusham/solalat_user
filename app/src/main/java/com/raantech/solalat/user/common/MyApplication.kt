@@ -15,8 +15,18 @@ class MyApplication @Inject constructor() : Application() {
     public var deeplink_id = ""
     override fun onCreate() {
         super.onCreate()
+        instance = this
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        Branch.enableLogging();
+        Branch.enableLogging()
         Branch.getAutoInstance(this);
+    }
+
+    fun getInstance(): MyApplication {
+        return instance
+    }
+
+    companion object {
+        lateinit var instance: MyApplication
+            private set
     }
 }

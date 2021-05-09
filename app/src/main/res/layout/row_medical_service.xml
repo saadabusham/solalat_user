@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.raantech.solalat.user.data.models.medical.Medical" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.chauthai.swipereveallayout.SwipeRevealLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dragEdge="right"
+            app:mode="same_level">
+
+            <RelativeLayout
+                android:id="@+id/rlFavorite"
+                android:layout_width="@dimen/_72sdp"
+                android:layout_height="match_parent"
+                android:background="#F7F7F7"
+                android:paddingTop="@dimen/_19sdp"
+                android:paddingBottom="@dimen/_20sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@{item.isWishlist() ? @drawable/ic_favorite_selected : @drawable/ic_favorite}"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?selectableItemBackgroundBorderless"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/textview_normal_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.name}"
+                        android:textColor="@color/service_title_color"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="د. خالد الخالدي" />
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        style="@style/textview_normal_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@{item.description}"
+                        android:textColor="@color/service_title_color"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="اخصائي بيطرة - جامعة اكسفورد" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btnCallNow"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_13sdp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/button_color"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <TextView
+                            style="@style/textview_normal_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:gravity="center"
+                            android:text="@string/call_now"
+                            android:textColor="@color/button_color"
+                            android:textSize="@dimen/_15ssp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btnLocation"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_13sdp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/button_color"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <TextView
+                            style="@style/textview_normal_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:drawableStart="@drawable/ic_service_location"
+                            android:drawablePadding="@dimen/_7sdp"
+                            android:text="@{@string/km(item.distance)}"
+                            android:textColor="@color/button_color"
+                            android:textSize="@dimen/_15ssp"
+                            tools:text="1.2" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+        <View
+            android:id="@+id/divLegend"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/border_color"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+</layout>

@@ -4,7 +4,7 @@
     <!-- App Colors -->
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#ED222F</color>
+    <color name="colorAccent">#FFFFFF</color>
     <color name="colorAccentDark">#4f5b74</color>
     <color name="color_app_background">#FFFFFF</color>
     <color name="ripple_color">#0be8252e</color>
@@ -14,6 +14,7 @@
     <color name="text_dark_color">#3A4155</color>
     <color name="text_gray_color">#606060</color>
     <color name="text_header_dark_gray">#8C8896</color>
+    <color name="border_color">#979797</color>
     <!--    divider color-->
     <color name="divider_color">#f0f1f2</color>
     <color name="divider_gray">#BDC0C8</color>
@@ -31,6 +32,7 @@
     <color name="white">#ffffff</color>
     <color name="alpha_white">#4DFFFFFF</color>
     <color name="alpha_white_60">#4DFFFFFF</color>
+    <color name="off_white">#FAF8F3</color>
 
     <!-- Black -->
     <color name="black">#000000</color>
@@ -39,18 +41,18 @@
 
     <!-- Gray -->
     <color name="default_gary">#dfe0e5</color>
-    <color name="lite_gray">#f4f5f7</color>
+    <color name="lite_gray">#1CA2A2A2</color>
     <color name="edittext_boarder_gray">#E6E6E6</color>
 
     <!-- Blue -->
     <color name="lite_blue">#e7ecf2</color>
     <color name="dark_blue">#0B256E</color>
-    <color name="flyus_button_color">#0B256E</color>
+    <color name="button_color">#236A75</color>
     <color name="blue">#259DDB</color>
     <color name="welcome_back_blue">#0E4A86</color>
     <color name="night_blue">#24253D</color>
     <!-- Red -->
-    <color name="red">#c1113b</color>
+    <color name="red">#D90F0F</color>
 
     <!-- Alert !-->
     <color name="alert_red">#DC0C0C</color>
@@ -96,9 +98,9 @@
     <color name="cardview_state_unfocused">#E6E6E6</color>
     <color name="cardveiw_state_error">#DC0C0C</color>
     <color name="cardveiw_state_valid">#60bf04</color>
-    <color name="cardview_orange">#F9C332</color>
-    <color name="cardview_stroke_gray">#D8D8D8</color>
-    <color name="cardview_fill_gray">#FBFBFC</color>
+    <color name="cardview_orange">#F9C332</color>#000000
+    <color name="cardview_stroke_gray">#80000000</color>
+    <color name="cardview_fill_gray">#D8D8D8</color>
     <color name="cardview_border_gray">#E8E8E8</color>
 
     <!--    Search -->
@@ -110,4 +112,12 @@
     <color name="textview_number_black">#1E1F20</color>
 
     <color name="defaultTextColor">#2F2C37</color>
+    <color name="toolbar_title_color">#101820</color>
+    <color name="product_title_color">#515151</color>
+    <color name="product_body_color">#A2A2A2</color>
+    <color name="edittext_hint_color">#80383838</color>
+    <color name="edittext_color">#383838</color>
+    <color name="dark_gray">#2F2F2F</color>
+
+    <color name="service_title_color">#3F444A</color>
 </resources>

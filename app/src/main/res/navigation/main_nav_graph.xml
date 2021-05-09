@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.raantech.solalat.user.ui.main.fragments.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_accessories"
+        android:name="com.raantech.solalat.user.ui.main.fragments.AccessoriesFragment"
+        tools:layout="@layout/fragment_accessories" />
+
+    <fragment
+        android:id="@+id/nav_medical_services"
+        android:name="com.raantech.solalat.user.ui.main.medical.MedicalServicesFragment"
+        tools:layout="@layout/fragment_medical_services" />
+    <fragment
+        android:id="@+id/nav_barn"
+        android:name="com.raantech.solalat.user.ui.main.barn.BarnFragment"
+        tools:layout="@layout/fragment_barn" >
+    </fragment>
+    <fragment
+        android:id="@+id/nav_truck"
+        android:name="com.raantech.solalat.user.ui.main.truck.TrucksFragment"
+        tools:layout="@layout/fragment_trucks" />
+</navigation>

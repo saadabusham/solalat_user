@@ -37,16 +37,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:src="@mipmap/ic_launcher"/>
+                        tools:src="@drawable/ic_splash_logo"/>
 
-                    <TextView
-                        style="@style/textview_normal_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        tools:text="@string/app_name"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_28ssp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -70,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/please_choose_your_preferred_language"
+                    android:text="@string/please_choose_your_preference_language"
                     android:textColor="@color/text_gray_color"
                     android:textSize="@dimen/_12ssp" />
 

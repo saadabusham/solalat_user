@@ -69,6 +69,11 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment(),
         return rootView
     }
 
+    fun updateDrawer(enableDrawer: Boolean) {
+        if (activity is IBaseBindingActivity) {
+            (activity as IBaseBindingActivity).updateDrawer(enableDrawer)
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (shouldCallVisibleView) {

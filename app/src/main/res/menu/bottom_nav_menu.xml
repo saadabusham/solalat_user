@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_cat_home"
+        android:title="@string/nav_home" />
+
+    <item
+        android:id="@+id/nav_accessories"
+        android:icon="@drawable/ic_cat_accessories"
+        android:title="@string/nav_accessories" />
+
+    <item
+        android:id="@+id/nav_medical_services"
+        android:icon="@drawable/ic_cat_medical"
+        android:title="@string/nav_medical_services" />
+
+    <item
+        android:id="@+id/nav_barn"
+        android:icon="@drawable/ic_cat_barn"
+        android:title="@string/nav_rent_barn" />
+
+    <item
+        android:id="@+id/nav_truck"
+        android:icon="@drawable/ic_cat_transportation"
+        android:title="@string/nav_transport_service" />
+
+</menu>

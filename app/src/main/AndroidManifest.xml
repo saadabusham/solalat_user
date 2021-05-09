@@ -14,13 +14,54 @@
         android:theme="@style/AppTheme"
         tools:replace="allowBackup"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.raantech.solalat.user.ui.MainActivity" >
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name="com.raantech.solalat.user.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.media.MediaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dataview.viewimage.ViewImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dataview.dataviewer.DataViewerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.more.aboutus.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.more.faqs.FaqsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.map.MapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.barn.BarnDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.truck.TruckDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.medical.MedicalsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

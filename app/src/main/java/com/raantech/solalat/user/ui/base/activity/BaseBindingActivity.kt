@@ -12,13 +12,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.drawerlayout.widget.DrawerLayout
 import com.akexorcist.localizationactivity.core.LocalizationActivityDelegate
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.raantech.solalat.user.R
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
+import com.raantech.solalat.user.databinding.ActivityMainBinding
 import com.raantech.solalat.user.ui.base.dialogs.CustomDialogUtils
 import com.raantech.solalat.user.utils.HandleRequestFailedUtil
+import com.raantech.solalat.user.utils.extensions.gone
 import com.raantech.solalat.user.utils.extensions.longToast
+import com.raantech.solalat.user.utils.extensions.visible
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
 import retrofit2.HttpException
@@ -26,7 +30,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 
 abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActivity(),
-    IBaseBindingActivity {
+        IBaseBindingActivity {
 
     var binding: BINDING? = null
     private var toolbar: Toolbar? = null
@@ -40,6 +44,7 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     override fun hideLoadingView() {
         customDialogUtils.hideProgress()
     }
+
     private val localizationDelegate = LocalizationActivityDelegate(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,18 +55,18 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     }
 
     open fun setContentView(
-        layoutResID: Int,
-        hasToolbar: Boolean = false,
-        hasBackButton: Boolean = false,
-        toolbarView: Toolbar? = null,
-        backArrowTint: Int? = null,
-        hasTitle: Boolean = false,
-        title: Int = R.string.empty_string,
-        titleString: String? = null,
-        hasSubTitle: Boolean = false,
-        subTitle: Int = R.string.empty_string,
-        showBackArrow: Boolean = false,
-        @DrawableRes navigationIcon: Int? = null
+            layoutResID: Int,
+            hasToolbar: Boolean = false,
+            hasBackButton: Boolean = false,
+            toolbarView: Toolbar? = null,
+            backArrowTint: Int? = null,
+            hasTitle: Boolean = false,
+            title: Int = R.string.empty_string,
+            titleString: String? = null,
+            hasSubTitle: Boolean = false,
+            subTitle: Int = R.string.empty_string,
+            showBackArrow: Boolean = false,
+            @DrawableRes navigationIcon: Int? = null
     ) {
         if (isBindingEnabled()) {
             binding = DataBindingUtil.inflate(layoutInflater, layoutResID, null, false)
@@ -74,32 +79,32 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         }
 
         addToolbar(
-            hasToolbar,
-            toolbarView,
-            hasBackButton,
-            backArrowTint,
-            hasTitle,
-            title,
-            titleString,
-            hasSubTitle,
-            subTitle,
-            showBackArrow,
-            navigationIcon
+                hasToolbar,
+                toolbarView,
+                hasBackButton,
+                backArrowTint,
+                hasTitle,
+                title,
+                titleString,
+                hasSubTitle,
+                subTitle,
+                showBackArrow,
+                navigationIcon
         )
     }
 
     override fun addToolbar(
-        hasToolbar: Boolean,
-        toolbarView: Toolbar?,
-        hasBackButton: Boolean,
-        backArrowTint: Int?,
-        hasTitle: Boolean,
-        title: Int,
-        titleString: String?,
-        hasSubTitle: Boolean,
-        subTitle: Int,
-        showBackArrow: Boolean,
-        navigationIcon: Int?
+            hasToolbar: Boolean,
+            toolbarView: Toolbar?,
+            hasBackButton: Boolean,
+            backArrowTint: Int?,
+            hasTitle: Boolean,
+            title: Int,
+            titleString: String?,
+            hasSubTitle: Boolean,
+            subTitle: Int,
+            showBackArrow: Boolean,
+            navigationIcon: Int?
     ) {
         if (!hasToolbar) return
 
@@ -112,7 +117,7 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         if (hasTitle) {
             supportActionBar?.title = ""
             toolbar?.tvTitle?.text =
-                if (titleString.isNullOrEmpty()) getString(title) else titleString
+                    if (titleString.isNullOrEmpty()) getString(title) else titleString
         } else {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
@@ -139,9 +144,9 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     }
 
     override fun updateToolbarTitle(
-        hasTitle: Boolean,
-        @StringRes title: Int,
-        titleString: String?
+            hasTitle: Boolean,
+            @StringRes title: Int,
+            titleString: String?
     ) {
         supportActionBar.let {
             if (hasTitle) {
@@ -158,17 +163,17 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     }
 
     override fun updateToolbarTitle(
-        hasTitle: Boolean,
-        title: Int,
-        titleString: String?,
-        hasBackButton: Boolean,
-        backArrowTint: Int?,
-        showBackArrow: Boolean
+            hasTitle: Boolean,
+            title: Int,
+            titleString: String?,
+            hasBackButton: Boolean,
+            backArrowTint: Int?,
+            showBackArrow: Boolean
     ) {
 
         if (hasTitle) {
             supportActionBar?.title =
-                if (titleString.isNullOrEmpty()) getString(title) else titleString
+                    if (titleString.isNullOrEmpty()) getString(title) else titleString
         } else {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
@@ -188,9 +193,9 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     }
 
     override fun updateToolbarSubTitle(
-        hasSubTitle: Boolean,
-        @StringRes subTitle: Int,
-        subTitleString: String?
+            hasSubTitle: Boolean,
+            @StringRes subTitle: Int,
+            subTitleString: String?
     ) {
         supportActionBar.let {
             if (hasSubTitle) {
@@ -205,6 +210,28 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         }
     }
 
+
+    override fun updateDrawer(enableDrawer: Boolean) {
+        if (!enableDrawer) {
+            if (binding is ActivityMainBinding) {
+                (binding as ActivityMainBinding).drawerLayout.setDrawerLockMode(
+                        DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+                )
+            }
+            if (toolbar == null) return
+            toolbar?.gone()
+        } else {
+            if (binding is ActivityMainBinding) {
+                (binding as ActivityMainBinding).drawerLayout.setDrawerLockMode(
+                        DrawerLayout.LOCK_MODE_UNLOCKED
+                )
+            }
+            if (toolbar == null) return
+            toolbar?.visible()
+        }
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
@@ -213,35 +240,35 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     }
 
     override fun handleRequestFailedMessages(
-        errorCode: Int?,
-        subErrorCode: ResponseSubErrorsCodeEnum?,
-        requestMessage: String?
+            errorCode: Int?,
+            subErrorCode: ResponseSubErrorsCodeEnum?,
+            requestMessage: String?
     ) {
         this.let {
             HandleRequestFailedUtil.handleRequestFailedMessages(
-                it,
-                subErrorCode,
-                requestMessage
+                    it,
+                    subErrorCode,
+                    requestMessage
             )
         }
     }
 
     override fun startActivity(intent: Intent?) =
-        super.startActivity(
-            intent, ActivityOptions.makeCustomAnimation(
-                this,
-                R.anim.slide_in_right, R.anim.slide_out_left
+            super.startActivity(
+                    intent, ActivityOptions.makeCustomAnimation(
+                    this,
+                    R.anim.slide_in_right, R.anim.slide_out_left
             ).toBundle()
-        )
+            )
 
 
     override fun startActivityForResult(intent: Intent?, requestCode: Int) =
-        super.startActivityForResult(
-            intent, requestCode, ActivityOptions.makeCustomAnimation(
-                this,
-                R.anim.slide_in_right, R.anim.slide_out_left
+            super.startActivityForResult(
+                    intent, requestCode, ActivityOptions.makeCustomAnimation(
+                    this,
+                    R.anim.slide_in_right, R.anim.slide_out_left
             ).toBundle()
-        )
+            )
 
     fun handleError(throwable: Throwable?) {
         when (throwable) {
@@ -285,9 +312,9 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         window.decorView.layoutDirection =
-            if (super.getCurrentLanguage()
-                    .toString() == "ar"
-            ) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+                if (super.getCurrentLanguage()
+                                .toString() == "ar"
+                ) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
 }

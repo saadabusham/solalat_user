@@ -1,7 +1,14 @@
 package com.raantech.solalat.user.data.di.daos
 
+import com.raantech.solalat.user.data.daos.remote.barn.BarnRemoteDao
 import com.raantech.solalat.user.data.daos.remote.configuration.ConfigurationRemoteDao
+import com.raantech.solalat.user.data.daos.remote.horses.HorsesRemoteDao
+import com.raantech.solalat.user.data.daos.remote.media.MediaRemoteDao
+import com.raantech.solalat.user.data.daos.remote.medical.MedicalRemoteDao
+import com.raantech.solalat.user.data.daos.remote.truck.TruckRemoteDao
 import com.raantech.solalat.user.data.daos.remote.user.UserRemoteDao
+import com.raantech.solalat.user.data.daos.remote.wishlist.WishListRemoteDao
+import com.raantech.solalat.user.data.models.WishList
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object RemoteDaosModule {
-
 
     @Singleton
     @Provides
@@ -30,4 +36,53 @@ object RemoteDaosModule {
     ): ConfigurationRemoteDao {
         return retrofit.create(ConfigurationRemoteDao::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideMediaRemoteDao(
+            retrofit: Retrofit
+    ): MediaRemoteDao {
+        return retrofit.create(MediaRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideBarnRemoteDao(
+            retrofit: Retrofit
+    ): BarnRemoteDao {
+        return retrofit.create(BarnRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTruckRemoteDao(
+            retrofit: Retrofit
+    ): TruckRemoteDao {
+        return retrofit.create(TruckRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHorseRemoteDao(
+            retrofit: Retrofit
+    ): HorsesRemoteDao {
+        return retrofit.create(HorsesRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideWishListRemoteDao(
+            retrofit: Retrofit
+    ): WishListRemoteDao {
+        return retrofit.create(WishListRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMedicalRemoteDao(
+            retrofit: Retrofit
+    ): MedicalRemoteDao {
+        return retrofit.create(MedicalRemoteDao::class.java)
+    }
+
 }

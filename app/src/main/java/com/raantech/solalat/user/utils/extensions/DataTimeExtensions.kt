@@ -10,6 +10,7 @@ import com.raantech.solalat.user.utils.DateTimeUtil.MESSAGE_DATE_FORMATE
 import com.raantech.solalat.user.utils.DateTimeUtil.MONTH_NAME_DAY_YEAR_DATE_FORMATTING
 import com.raantech.solalat.user.utils.DateTimeUtil.MONTH_NAME_DAY_YEAR_DATE_TIME_FORMATTING
 import com.raantech.solalat.user.utils.DateTimeUtil.TIME_FORMATTING_HOUR_MIN_24
+import com.raantech.solalat.user.utils.DateTimeUtil.TIME_FORMATTING_HOUR_MIN_SEC
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -261,8 +262,8 @@ fun String.getMonthName(): String {
     return dateFormat.format(this.toMillieSecconds())
 }
 
-fun String.getDateFormattedForJet(): String {
-    val dateFormat = SimpleDateFormat(FULL_DATE_AT_TIME_FORMATTING, Locale.ENGLISH)
+fun String.getDateFormattedForHorse(): String {
+    val dateFormat = SimpleDateFormat(TIME_FORMATTING_HOUR_MIN_SEC, Locale.ENGLISH)
     return dateFormat.format(this.toMillieSecconds())
 }
 

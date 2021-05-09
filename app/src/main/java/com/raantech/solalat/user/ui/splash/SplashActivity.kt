@@ -6,18 +6,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.raantech.solalat.user.R
 import com.raantech.solalat.user.common.MyApplication
-import com.raantech.solalat.user.data.api.response.APIResource
-import com.raantech.solalat.user.data.api.response.RequestStatusEnum
+import com.raantech.solalat.user.data.api.response.GeneralError
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.models.configuration.ConfigurationWrapperResponse
 import com.raantech.solalat.user.databinding.ActivitySplashBinding
-import com.raantech.solalat.user.ui.MainActivity
 import com.raantech.solalat.user.ui.auth.AuthActivity
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
+import com.raantech.solalat.user.ui.main.MainActivity
+import com.raantech.solalat.user.utils.extensions.showErrorAlert
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import dagger.hilt.android.AndroidEntryPoint
 import io.branch.referral.Branch
@@ -30,6 +29,7 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
 
     @Inject
     lateinit var myApp: MyApplication
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,48 +53,12 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
                     subErrorCode: ResponseSubErrorsCodeEnum,
                     data: ConfigurationWrapperResponse?
                 ) {
-                    when {
-                        subErrorCode == ResponseSubErrorsCodeEnum.Success -> {
-                            SharedPreferencesUtil.getInstance(this@SplashActivity)
-                                .setConfigurationPreferences(data)
-                            goToNextPage()
-                        }
-                    }
+                    SharedPreferencesUtil.getInstance(this@SplashActivity)
+                        .setConfigurationPreferences(data)
+                    goToNextPage()
                 }
             })
     }
-
-    private val configurationResultObserver =
-        Observer<APIResource<ConfigurationWrapperResponse>> {
-            when (it.status) {
-                RequestStatusEnum.SUCCESS -> {
-                    hideLoadingView()
-                    when {
-                        it.statusSubCode == ResponseSubErrorsCodeEnum.Success -> {
-                            SharedPreferencesUtil.getInstance(this)
-                                .setConfigurationPreferences(it.data)
-                            goToNextPage()
-                        }
-                        else -> {
-                            handleRequestFailedMessages(
-                                it.statusCode,
-                                it?.statusSubCode,
-                                it.messages ?: ""
-                            )
-                        }
-                    }
-                }
-                RequestStatusEnum.FAILED -> {
-                    hideLoadingView()
-                    handleRequestFailedMessages(
-                        it.statusCode,
-                        it.statusSubCode,
-                        it.messages
-                    )
-                }
-                RequestStatusEnum.LOADING -> showLoadingView()
-            }
-        }
 
     private fun goToNextPage() {
         if (!viewModel.isUserLoggedIn()) {

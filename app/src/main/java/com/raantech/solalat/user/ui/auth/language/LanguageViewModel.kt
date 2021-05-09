@@ -21,7 +21,7 @@ class LanguageViewModel @ViewModelInject constructor(
     }
 
     fun saveLanguage() = liveData {
-        configurationpref.setAppLanguageValue(if (englishSelected.value!!)CommonEnums.Languages.English.value else CommonEnums.Languages.Arabic.value)
+        configurationpref.setAppLanguageValue(if (englishSelected.value!!) CommonEnums.Languages.English.value else CommonEnums.Languages.Arabic.value)
         emit(null)
     }
 

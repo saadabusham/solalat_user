@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.raantech.solalat.user.R
 import java.util.*
 
+
 fun Fragment.displayLocationSettingsRequest(activity: Activity, requestCode: Int) {
 
     val locationRequest = LocationRequest.create()
@@ -25,8 +26,8 @@ fun Fragment.displayLocationSettingsRequest(activity: Activity, requestCode: Int
     locationRequest.fastestInterval = 10000 / 2.toLong()
 
     LocationServices.getSettingsClient(activity).checkLocationSettings(
-        LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequest).build()
+            LocationSettingsRequest.Builder()
+                    .addLocationRequest(locationRequest).build()
     ).addOnCompleteListener { task ->
         try {
             task.getResult(ApiException::class.java)
@@ -39,13 +40,13 @@ fun Fragment.displayLocationSettingsRequest(activity: Activity, requestCode: Int
                         val resolvable = exception as (ResolvableApiException)
 
                         startIntentSenderForResult(
-                            resolvable.resolution.intentSender,
-                            requestCode,
-                            null,
-                            0,
-                            0,
-                            0,
-                            null
+                                resolvable.resolution.intentSender,
+                                requestCode,
+                                null,
+                                0,
+                                0,
+                                0,
+                                null
                         )
 
                     } catch (e: IntentSender.SendIntentException) {
@@ -66,9 +67,9 @@ fun Fragment.getLocationName(latitude: Double?, longitude: Double?): String {
     try {
 
         val address = Geocoder(context, Locale.ENGLISH).getFromLocation(
-            latitude ?: 0.0,
-            longitude ?: 0.0,
-            1
+                latitude ?: 0.0,
+                longitude ?: 0.0,
+                1
         )
         var locationName = ""
         address?.first()?.let {
@@ -92,13 +93,78 @@ fun Fragment.getLocationName(latitude: Double?, longitude: Double?): String {
 
     return ""
 }
+fun Activity.displayLocationSettingsRequest(requestCode: Int) {
 
-fun Context.getDistance(fromLocation: Location?, toLocation: Location?): String? {
-    val distance: Float = fromLocation?.distanceTo(toLocation) ?: 0f
-    val distanceInKM = distance / 1000
-    return if (distanceInKM != 0f) {
-        java.lang.String.format(Locale.ENGLISH, "%.2f %s", distanceInKM, getString(R.string.km))
-    } else {
-        null
+    val locationRequest = LocationRequest.create()
+    locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    locationRequest.interval = 10000
+    locationRequest.fastestInterval = 10000 / 2.toLong()
+
+    LocationServices.getSettingsClient(this).checkLocationSettings(
+            LocationSettingsRequest.Builder()
+                    .addLocationRequest(locationRequest).build()
+    ).addOnCompleteListener { task ->
+        try {
+            task.getResult(ApiException::class.java)
+        } catch (exception: ApiException) {
+            when (exception.statusCode) {
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+
+                    try {
+                        // Cast to a resolvable exception.
+                        val resolvable = exception as (ResolvableApiException)
+
+                        startIntentSenderForResult(
+                                resolvable.resolution.intentSender,
+                                requestCode,
+                                null,
+                                0,
+                                0,
+                                0,
+                                null
+                        )
+
+                    } catch (e: IntentSender.SendIntentException) {
+                        // Ignore the error.
+                    } catch (e: ClassCastException) {
+                        // Ignore, should be an impossible error.
+                    }
+                }
+                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                }
+
+            }
+        }
     }
+}
+
+fun Activity.getLocationName(latitude: Double?, longitude: Double?): String {
+    try {
+
+        val address = Geocoder(this, Locale.ENGLISH).getFromLocation(
+                latitude ?: 0.0,
+                longitude ?: 0.0,
+                1
+        )
+        var locationName = ""
+        address?.first()?.let {
+            if (it.locality != null) {
+                locationName += it.locality + " "
+            }
+            if (it.subLocality != null) {
+                locationName += it.subLocality + " "
+            }
+            if (it.thoroughfare != null) {
+                locationName += it.thoroughfare + " "
+            }
+            if (it.subThoroughfare != null) {
+                locationName += it.subThoroughfare + " "
+            }
+        }
+        return locationName
+    } catch (ex: Exception) {
+        Log.e("location name", ex.message.toString())
+    }
+
+    return ""
 }

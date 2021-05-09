@@ -50,7 +50,7 @@ interface IBaseBindingActivity {
         subErrorCode: ResponseSubErrorsCodeEnum?,
         requestMessage: String?
     )
-
+    fun updateDrawer(enableDrawer: Boolean)
     fun isBindingEnabled(): Boolean = true
 
     fun screenOrientation(): Int = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT

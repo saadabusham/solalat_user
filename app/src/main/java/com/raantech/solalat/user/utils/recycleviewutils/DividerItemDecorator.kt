@@ -19,8 +19,8 @@ class DividerItemDecorator(private val mDivider: Drawable,private val topSpaceHe
         for (i in 0..childCount - 2) {
             val child: View = parent.getChildAt(i)
             val params =
-                child.getLayoutParams() as RecyclerView.LayoutParams
-            val dividerTop: Int = child.getBottom() + params.bottomMargin
+                child.layoutParams as RecyclerView.LayoutParams
+            val dividerTop: Int = child.bottom + params.bottomMargin
             val dividerBottom = dividerTop + mDivider.intrinsicHeight
             mDivider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom)
             mDivider.draw(c)
@@ -34,6 +34,7 @@ class DividerItemDecorator(private val mDivider: Drawable,private val topSpaceHe
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.top = topSpaceHeight
+//        outRect.top = topSpaceHeight
+//        outRect.bottom = bottomSpaceHeight
     }
 }

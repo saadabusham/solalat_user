@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">BaseApp</string>
-    <string name="app_license">Copyright@Technzone Company</string>
+    <string name="app_name">Solalat</string>
+    <string name="app_license">Copyright@Raantech Company</string>
+
 
     <!-- SelectLanguageFragment-->
     <string name="welcome">Welcome</string>
@@ -19,7 +20,7 @@
     <string name="camera_permission_denied">Grant camera permission to take the 3 seconds video</string>
     <string name="screen_shot">take screenshot</string>
 
-    <string name="alert_dialog_title">Fly US VIP</string>
+    <string name="alert_dialog_title">Solalat Provider</string>
     <string name="alert_dialog_all_info_in_english">All information entered must be in English</string>
     <string name="not_available_yet">This feature is coming soon to Al Alami app!</string>
     <!-- General -->
@@ -35,10 +36,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="empty_string" />
-    <string name="km">km</string>
     <string name="you_re_not_logged_in">You\'re Not Logged In.</string>
     <string name="you_need_to_login_into_your_account_to_see_this_screen">You need to login into your account\nto see this screen</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="concat_two_string">%s %s</string>
     <!-- Image Picker Strings -->
     <string name="go_to_settings">Go To Settings</string>
     <string name="no_activity_data_chart_err">No Data Yet !</string>
@@ -49,7 +51,8 @@
 
     <!--  Validator strings  -->
     <string name="must_not_be_empty">must not be empty</string>
-    <string name="must_not_be_at_least">must not be at least </string>
+    <string name="must_be_at_least">must be at least </string>
+    <string name="must_not_be">must not be </string>
     <string name="characters"> characters</string>
     <string name="numbers"> numbers</string>
     <string name="text">Text</string>
@@ -63,10 +66,8 @@
     <string name="date_not_valid_err">Enter a valid date</string>
     <string name="time_not_valid_err">Enter a valid time</string>
     <string name="digits">digits</string>
-    <string name="travllers">Travellers</string>
     <string name="next">NEXT</string>
     <string name="select_time">Select time</string>
-    <string name="adult">Adult</string>
     <string name="submit">Submit</string>
     <string name="data_missing">Data missing</string>
     <string name="please_fill_data_fields">Please fill all the data fields</string>
@@ -94,12 +95,13 @@
     <!--    Completed dialog-->
     <string name="completed_successfully">Completed Successfully</string>
 
-    <!--    Login-->
-    <string name="login">Login</string>
-
     <!--    Language    -->
     <string name="continue_">Continue</string>
-    <string name="please_choose_your_preferred_language">Please choose your preferred language!</string>
+
+    <!--    Login-->
+    <string name="login">Login</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="logout">Logout</string>
 
     <!--    OnBoarding  -->
     <string name="title_on_boarding_1">title_on_boarding_1</string>
@@ -110,5 +112,97 @@
     <string name="description_on_boarding_3">description_on_boarding_3</string>
     <string name="title_on_boarding_4">title_on_boarding_4</string>
     <string name="description_on_boarding_4">description_on_boarding_4</string>
+
+    <!--    Verification Login   -->
+    <string name="verification">Verification</string>
+    <string name="please_check_you_message_for_a_four_digit_security_code_and_enter_it_below">Please check you message for a four-digit security code and enter it below.</string>
+    <string name="i_didn_t_receive_the_code">I didn’t receive the code</string>
+    <string name="confirm">Confirm</string>
+    <string name="resend_code">RESEND CODE</string>
+    <string name="verify">Verify</string>
+
+    <!--    Media   -->
+    <string name="add_Media">Add Media</string>
+    <string name="media">Media</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="no_available_data">-- No Available Data --</string>
+
+    <!--    Menu    -->
+    <string name="menu_my_account">My Account</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_language">Language</string>
+    <string name="menu_report_provider">Report provider</string>
+    <string name="menu_technical_support">Technical Support</string>
+    <string name="menu_about_us">About solalat</string>
+
+    <!--    Main Activity   -->
+    <string name="solalat">Solalat</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_medical_services">Medical</string>
+    <string name="nav_accessories">Accessories</string>
+    <string name="nav_rent_barn">Rent stables</string>
+    <string name="nav_transport_service">Transport</string>
+
+    <!--    About Us    -->
+    <string name="contact_us">Contact us</string>
+    <string name="search_what_to_ask_here">Search here</string>
+
+    <!--    Faqs    -->
+    <string name="no_faq_s_found">No Faq\'s Found</string>
+    <string name="help_request">Help Request</string>
+    <string name="didnt_find_answer">Didn\'t find answer</string>
+    <string name="call_us_now">Call us now</string>
+
+    <!--    Map    -->
+    <string name="search_here">Search here</string>
+    <string name="location">Location</string>
+    <string name="please_pick_location">Please pick location</string>
+
+    <!--    Accessories    -->
+    <string name="product_count_">%s products in this section</string>
+
+    <!--    Medical    -->
+
+    <!--    Barn    -->
+    <string name="all_cities">All Cities</string>
+    <string name="cities">Cities</string>
+    <string name="please_select_city">Please select city</string>
+
+    <!--    Horses     -->
+    <string name="all">All</string>
+    <string name="sell">Sell</string>
+    <string name="auction">Auction</string>
+    <string name="horse_title">%s / %s years</string>
+
+
+    <!--    Time Units -->
+    <string name="year">y</string>
+    <string name="month">mm</string>
+    <string name="week">w</string>
+    <string name="day">d</string>
+    <string name="hour">h</string>
+    <string name="minute">m</string>
+    <string name="second">s</string>
+    <string name="now">Now</string>
+
+    <!--    Truck details   -->
+    <string name="call_us">Call us</string>
+    <string name="contact_us_whatsapp">Contact us whatsapp</string>
+
+    <!--    Barn Details    -->
+    <string name="address">Address</string>
+    <string name="services_provided">Services provided</string>
+    <string name="prices">Prices : </string>
+
+    <!--    Truck details   -->
+    <string name="truck_owner_name">Truck owner name</string>
+    <string name="truck_type">Truck type</string>
+    <string name="manufacturingYear">Manufacturing Year</string>
+    <string name="plate_number">Plate number</string>
+    <string name="provided_cities">Provided cities</string>
+
+    <!--    Medical    -->
+    <string name="call_now">Call now</string>
+    <string name="km">%s km</string>
 
 </resources>

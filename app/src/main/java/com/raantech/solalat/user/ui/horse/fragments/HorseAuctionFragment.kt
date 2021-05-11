@@ -10,10 +10,10 @@ import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
 import com.raantech.solalat.user.ui.dataview.viewimage.ViewImageActivity
+import com.raantech.solalat.user.ui.horse.adapters.PriceDigitsRecyclerAdapter
 import com.raantech.solalat.user.ui.horse.viewmodels.HorseViewModel
 import com.raantech.solalat.user.ui.main.adapters.barn.IndecatorImagesRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.SliderAdapter
-import com.raantech.solalat.user.utils.extensions.openWhatsApp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.row_image_view.view.*
@@ -26,7 +26,8 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     lateinit var indicatorRecyclerAdapter: IndecatorImagesRecyclerAdapter
     lateinit var onBoardingAdapter: SliderAdapter
     private var indicatorPosition = 0
-
+    private lateinit var priceDigitsRecyclerAdapter: PriceDigitsRecyclerAdapter
+    private var lastPrice: String? = null
     override fun getLayoutId(): Int = R.layout.fragment_horse_auction
 
     override fun onViewVisible() {
@@ -43,6 +44,10 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         setUpBinding()
         setUpListeners()
         setUpPager()
+        setUpRvPrice()
+        viewModel.horse?.price?.amount = viewModel.horse?.price?.amount?.replace(".", "")
+        lastPrice = viewModel.horse?.price?.amount
+        viewModel.horse?.price?.amount?.let { refreshAuction() }
     }
 
     private fun setUpBinding() {
@@ -53,6 +58,46 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     private fun setUpListeners() {
         binding?.btnAddPrice?.setOnClickListener {
 
+        }
+    }
+
+    private fun setUpRvPrice() {
+        priceDigitsRecyclerAdapter = PriceDigitsRecyclerAdapter(requireContext())
+        binding?.rvPrice?.adapter = priceDigitsRecyclerAdapter
+        binding?.rvPrice?.setOnItemClickListener(object :
+            BaseBindingRecyclerViewAdapter.OnItemClickListener {
+            override fun onItemClick(view: View?, position: Int, item: Any) {
+                item as Int
+                if (view?.id == R.id.imgUp) {
+                    var numberToMinus = StringBuilder()
+                    for (i in 0..position)
+                        numberToMinus.append(if (i == 0) 1 else 0)
+                    lastPrice =
+                        (lastPrice?.toInt()?.plus(numberToMinus.toString().toInt())).toString()
+                    refreshAuction()
+                } else {
+                    if (priceDigitsRecyclerAdapter.items.joinToString(separator = "")
+                            .toInt() > 200 && priceDigitsRecyclerAdapter.items.joinToString(
+                            separator = ""
+                        ) != viewModel.horse?.price?.amount
+                    ) {
+                        var numberToMinus = StringBuilder()
+                        for (i in 0..position)
+                            numberToMinus.append(if (i == 0) 1 else 0)
+                        lastPrice = lastPrice?.toInt()?.minus(numberToMinus.toString().toInt())
+                            .toString()
+                        refreshAuction()
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun refreshAuction() {
+        priceDigitsRecyclerAdapter.items.clear()
+        lastPrice?.reversed()?.forEach {
+            priceDigitsRecyclerAdapter.submitItem(Integer.parseInt(it.toString()))
         }
     }
 

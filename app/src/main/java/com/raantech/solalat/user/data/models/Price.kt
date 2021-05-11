@@ -6,7 +6,7 @@ import java.io.Serializable
 data class Price(
 
 	@field:SerializedName("amount")
-	val amount: String? = null,
+    var amount: String? = null,
 
 	@field:SerializedName("formatted")
 	val formatted: String? = null,

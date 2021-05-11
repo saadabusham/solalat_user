@@ -149,6 +149,38 @@
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12ssp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_weight="1"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_price_digit" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:text="@string/sar"
+                        android:textAppearance="@style/textview_normal_bold"
+                        android:textColor="@color/toolbar_title_color"
+                        android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAddPrice"
                     style="@style/AppTheme.Button"

@@ -7,6 +7,7 @@ import com.raantech.solalat.user.data.models.Price
 import com.raantech.solalat.user.data.models.ServiceCategory
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.utils.DateTimeUtil.getDifferenceTime
+import com.raantech.solalat.user.utils.extensions.getCurrentDate
 import com.raantech.solalat.user.utils.extensions.getDate
 import com.raantech.solalat.user.utils.extensions.toMillieSecconds
 import java.io.Serializable
@@ -80,18 +81,9 @@ data class Horse(
 ):Serializable {
 	fun action():String{
 		return if(typeOfSale == HorseAdsTypeEnum.SELL.value) price?.formatted?:""
-		else MyApplication.instance.getDifferenceTime(startDateAuction.toMillieSecconds(),endDateAuction.toMillieSecconds())
-	}
-	fun minuteUntilFinish():Long{
-		val deference = endDateAuction.toMillieSecconds() - startDateAuction.toMillieSecconds()
-		return (TimeUnit.MILLISECONDS.toMinutes(deference)
-				- TimeUnit.HOURS.toMinutes(
-				TimeUnit.MILLISECONDS.toHours(
-						deference
-				)
-		))
+		else getDifferenceTime(getCurrentDate().toMillieSecconds(),endDateAuction.toMillieSecconds())
 	}
 	fun millisUntilFinish():Long{
-		return endDateAuction.toMillieSecconds() - startDateAuction.toMillieSecconds()
+		return endDateAuction.toMillieSecconds() - getCurrentDate().toMillieSecconds()
 	}
 }

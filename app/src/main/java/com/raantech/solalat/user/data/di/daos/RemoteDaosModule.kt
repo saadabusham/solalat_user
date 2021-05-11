@@ -1,5 +1,6 @@
 package com.raantech.solalat.user.data.di.daos
 
+import com.raantech.solalat.user.data.daos.remote.accessories.AccessoriesRemoteDao
 import com.raantech.solalat.user.data.daos.remote.barn.BarnRemoteDao
 import com.raantech.solalat.user.data.daos.remote.configuration.ConfigurationRemoteDao
 import com.raantech.solalat.user.data.daos.remote.horses.HorsesRemoteDao
@@ -83,6 +84,14 @@ object RemoteDaosModule {
             retrofit: Retrofit
     ): MedicalRemoteDao {
         return retrofit.create(MedicalRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAccessoriesRemoteDao(
+            retrofit: Retrofit
+    ): AccessoriesRemoteDao {
+        return retrofit.create(AccessoriesRemoteDao::class.java)
     }
 
 }

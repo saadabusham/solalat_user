@@ -1,4 +1,4 @@
-package com.raantech.solalat.user.ui.main.truck
+package com.raantech.solalat.user.ui.main.truck.activities
 
 import android.content.Context
 import android.content.Intent

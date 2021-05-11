@@ -12,20 +12,20 @@
 
     <fragment
         android:id="@+id/nav_accessories"
-        android:name="com.raantech.solalat.user.ui.main.fragments.AccessoriesFragment"
-        tools:layout="@layout/fragment_accessories" />
+        android:name="com.raantech.solalat.user.ui.main.accessories.fragments.AccessoriesServicesFragment"
+        tools:layout="@layout/fragment_accessories_services" />
 
     <fragment
         android:id="@+id/nav_medical_services"
-        android:name="com.raantech.solalat.user.ui.main.medical.MedicalServicesFragment"
+        android:name="com.raantech.solalat.user.ui.main.medical.fragments.MedicalServicesFragment"
         tools:layout="@layout/fragment_medical_services" />
     <fragment
         android:id="@+id/nav_barn"
-        android:name="com.raantech.solalat.user.ui.main.barn.BarnFragment"
+        android:name="com.raantech.solalat.user.ui.main.barn.fragments.BarnFragment"
         tools:layout="@layout/fragment_barn" >
     </fragment>
     <fragment
         android:id="@+id/nav_truck"
-        android:name="com.raantech.solalat.user.ui.main.truck.TrucksFragment"
+        android:name="com.raantech.solalat.user.ui.main.truck.fragments.TrucksFragment"
         tools:layout="@layout/fragment_trucks" />
 </navigation>

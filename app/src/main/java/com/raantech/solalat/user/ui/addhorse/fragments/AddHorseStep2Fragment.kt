@@ -95,7 +95,7 @@ class AddHorseStep2Fragment : BaseBindingFragment<FragmentAddHorseStep2Binding>(
                             subErrorCode: ResponseSubErrorsCodeEnum,
                             data: Any?
                     ) {
-                        requireActivity().finish()
+                        navigationController.navigate(R.id.action_addHorseStep2Fragment_to_horseAddedSuccessFragment)
                     }
                 }, showError = true
         )

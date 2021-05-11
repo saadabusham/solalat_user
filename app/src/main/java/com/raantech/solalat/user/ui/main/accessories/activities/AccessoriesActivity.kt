@@ -1,11 +1,13 @@
-package com.raantech.solalat.user.ui.main.fragments
+package com.raantech.solalat.user.ui.main.accessories.activities
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.paginate.Paginate
 import com.paginate.recycler.LoadingListItemCreator
@@ -13,104 +15,60 @@ import com.raantech.solalat.user.R
 import com.raantech.solalat.user.data.api.response.GeneralError
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
+import com.raantech.solalat.user.data.common.Constants
 import com.raantech.solalat.user.data.common.CustomObserverResponse
-import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
-import com.raantech.solalat.user.data.models.horses.Horse
-import com.raantech.solalat.user.databinding.FragmentHomeBinding
+import com.raantech.solalat.user.data.models.ServiceCategory
+import com.raantech.solalat.user.data.models.accessories.Accessory
+import com.raantech.solalat.user.databinding.ActivityAccessoriesBinding
+import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
-import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
-import com.raantech.solalat.user.ui.horse.HorseActivity
-import com.raantech.solalat.user.ui.main.adapters.horse.HorsesGridRecyclerAdapter
+import com.raantech.solalat.user.ui.main.accessories.dialogs.AccessoriesDialog
+import com.raantech.solalat.user.ui.main.adapters.accessories.AccessoriesGridRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
-import com.raantech.solalat.user.utils.extensions.disableViews
-import com.raantech.solalat.user.utils.extensions.enableViews
 import com.raantech.solalat.user.utils.extensions.gone
 import com.raantech.solalat.user.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 @AndroidEntryPoint
-class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
+class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
     BaseBindingRecyclerViewAdapter.OnItemClickListener {
-
-    override fun getLayoutId(): Int = R.layout.fragment_home
 
     private val viewModel: MainViewModel by viewModels()
     private val loading: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isFinished = false
+    lateinit var medicalsRecyclerAdapter: AccessoriesGridRecyclerAdapter
 
-    lateinit var horsesGridRecyclerAdapter: HorsesGridRecyclerAdapter
-
-    var refreshData: Boolean = false
-
-    override fun onResume() {
-        super.onResume()
-        if (!refreshData) {
-            refreshData = true
-            return
-        }
-        horsesGridRecyclerAdapter.items.clear()
-        loadData()
-    }
-
-    override fun onViewVisible() {
-        super.onViewVisible()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.category =
+            intent.getSerializableExtra(Constants.BundleData.CATEGORY) as ServiceCategory
+        setContentView(
+            layoutResID = R.layout.activity_accessories,
+            hasToolbar = true,
+            toolbarView = toolbar,
+            hasBackButton = true,
+            showBackArrow = true,
+            hasTitle = true,
+            titleString = viewModel.category?.name
+        )
         setUpBinding()
-        loadingObserver()
-        setUpListeners()
-        init()
+        setUpRecyclerView()
+        loadData()
     }
 
     private fun setUpBinding() {
         binding?.viewModel = viewModel
     }
 
-    private fun setUpListeners() {
-        binding?.tvAll?.setOnClickListener {
-            viewModel.horseAdsTypeEnum.value = HorseAdsTypeEnum.ALL
-            reloadData()
-        }
-        binding?.tvMazad?.setOnClickListener {
-            viewModel.horseAdsTypeEnum.value = HorseAdsTypeEnum.AUCTION
-            reloadData()
-        }
-        binding?.tvSell?.setOnClickListener {
-            viewModel.horseAdsTypeEnum.value = HorseAdsTypeEnum.SELL
-            reloadData()
-        }
-    }
-
-    private fun init() {
-        setUpRecyclerView()
-        loadData()
-    }
-
-    private fun loadingObserver() {
-        loading.observe(this, Observer {
-            if (it) {
-                binding?.root?.disableViews()
-            } else {
-                binding?.root?.enableViews()
-            }
-        })
-    }
-
-    private fun reloadData() {
-        horsesGridRecyclerAdapter.clear()
-        viewModel.getHorses(horsesGridRecyclerAdapter.itemCount).observe(this, horsesObserver())
-    }
-
-    private fun loadData() {
-        viewModel.getHorses(horsesGridRecyclerAdapter.itemCount).observe(this, horsesObserver())
-    }
-
     private fun setUpRecyclerView() {
-        horsesGridRecyclerAdapter = HorsesGridRecyclerAdapter(requireContext())
-        binding?.recyclerView?.adapter = horsesGridRecyclerAdapter
-        binding?.recyclerView.setOnItemClickListener(this)
+        medicalsRecyclerAdapter = AccessoriesGridRecyclerAdapter(this)
+        binding?.recyclerView?.adapter = medicalsRecyclerAdapter
+        binding?.recyclerView?.setOnItemClickListener(this)
         Paginate.with(binding?.recyclerView, object : Paginate.Callbacks {
             override fun onLoadMore() {
-                if (loading.value == false && horsesGridRecyclerAdapter.itemCount > 0 && !isFinished) {
+                if (loading.value == false && medicalsRecyclerAdapter.itemCount > 0 && !isFinished) {
                     loadData()
                 }
             }
@@ -144,29 +102,27 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
             .build()
     }
 
-    private fun hideShowNoData() {
-        if (horsesGridRecyclerAdapter.itemCount == 0) {
-            binding?.recyclerView?.gone()
-            binding?.layoutNoData?.linearNoData?.visible()
-        } else {
-            binding?.layoutNoData?.linearNoData?.gone()
-            binding?.recyclerView?.visible()
-        }
+
+    private fun loadData() {
+        viewModel.getAccessories(
+            medicalsRecyclerAdapter.itemCount,
+            viewModel.category?.id
+        ).observe(this, accessoriesObserver())
     }
 
 
-    private fun horsesObserver(): CustomObserverResponse<List<Horse>> {
+    private fun accessoriesObserver(): CustomObserverResponse<List<Accessory>> {
         return CustomObserverResponse(
-            requireActivity(),
-            object : CustomObserverResponse.APICallBack<List<Horse>> {
+            this,
+            object : CustomObserverResponse.APICallBack<List<Accessory>> {
                 override fun onSuccess(
                     statusCode: Int,
                     subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: ResponseWrapper<List<Horse>>?
+                    data: ResponseWrapper<List<Accessory>>?
                 ) {
                     isFinished = data?.body?.isNullOrEmpty() == true
                     data?.body?.let {
-                        horsesGridRecyclerAdapter.addItems(it)
+                        medicalsRecyclerAdapter.addItems(it)
                     }
                     loading.postValue(false)
                     hideShowNoData()
@@ -189,9 +145,39 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
         )
     }
 
+
+    private fun hideShowNoData() {
+        if (medicalsRecyclerAdapter.itemCount == 0) {
+            binding?.recyclerView?.gone()
+            binding?.layoutNoData?.linearNoData?.visible()
+        } else {
+            binding?.layoutNoData?.linearNoData?.gone()
+            binding?.recyclerView?.visible()
+        }
+    }
+
+
     override fun onItemClick(view: View?, position: Int, item: Any) {
-        item as Horse
-        HorseActivity.start(requireContext(),item)
+        item as Accessory
+        AccessoriesDialog(this, this, item, viewModel, object : AccessoriesDialog.CallBack {
+            override fun callBack(position: Int, accessory: Accessory) {
+                medicalsRecyclerAdapter.items[position].isWishlist = accessory.isWishlist
+            }
+
+        }, position).show()
+    }
+
+
+    companion object {
+        fun start(
+            context: Context?,
+            category: ServiceCategory
+        ) {
+            val intent = Intent(context, AccessoriesActivity::class.java)
+            intent.putExtra(Constants.BundleData.CATEGORY, category)
+            context?.startActivity(intent)
+        }
+
     }
 
 }

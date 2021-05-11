@@ -1,5 +1,7 @@
 package com.raantech.solalat.user.data.di
 
+import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
+import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepoImp
 import com.raantech.solalat.user.data.repos.barn.BarnRepo
 import com.raantech.solalat.user.data.repos.barn.BarnRepoImp
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
@@ -57,5 +59,9 @@ abstract class RepoModule {
     @Singleton
     @Binds
     abstract fun bindMedicalRepo(medicalRepoImp: MedicalRepoImp): MedicalRepo
+
+    @Singleton
+    @Binds
+    abstract fun bindAccessoryRepo(accessoriesRepoImp: AccessoriesRepoImp): AccessoriesRepo
 
 }

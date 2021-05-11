@@ -37,7 +37,15 @@ class HorseViewModel @ViewModelInject constructor(
     }
 
     private fun refreshFinishingTime(millisUntilFinished: Long) {
-
+        val s: Long = millisUntilFinished / 1000
+        val m = s / 60
+        val h = m / 60
+        val d = h / 24
+        days.postValue(d.toInt())
+        hours.postValue((h % 24).toInt())
+        minutes.postValue((m % 60).toInt())
+//        seconds.postValue((s % 60).toInt())
+//        val time = days.toString() + ":" + hours % 24 + ":" + minutes % 60 + ":" + seconds % 60
     }
 
     fun startHandleAuctionFinish() {

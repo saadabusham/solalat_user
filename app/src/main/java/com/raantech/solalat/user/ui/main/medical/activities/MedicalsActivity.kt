@@ -1,4 +1,4 @@
-package com.raantech.solalat.user.ui.main.medical
+package com.raantech.solalat.user.ui.main.medical.activities
 
 import android.Manifest
 import android.app.Activity
@@ -33,7 +33,6 @@ import com.raantech.solalat.user.ui.map.MapActivity
 import com.raantech.solalat.user.utils.displayLocationSettingsRequest
 import com.raantech.solalat.user.utils.extensions.*
 import com.raantech.solalat.user.utils.getLocationName
-import com.raantech.solalat.user.utils.recycleviewutils.DividerItemDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import io.nlopez.smartlocation.SmartLocation
 import kotlinx.android.synthetic.main.layout_favorite_toolbar.*

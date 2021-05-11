@@ -4,35 +4,30 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
-import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
-import com.raantech.solalat.user.data.models.DataView
 import com.raantech.solalat.user.data.models.media.Media
-import com.raantech.solalat.user.databinding.FragmentHorseDetailsBinding
+import com.raantech.solalat.user.databinding.FragmentHorseAuctionBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
 import com.raantech.solalat.user.ui.dataview.viewimage.ViewImageActivity
 import com.raantech.solalat.user.ui.horse.viewmodels.HorseViewModel
-import com.raantech.solalat.user.ui.main.adapters.DataViewRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.IndecatorImagesRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.SliderAdapter
-import com.raantech.solalat.user.utils.extensions.openDial
 import com.raantech.solalat.user.utils.extensions.openWhatsApp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.row_image_view.view.*
 
 @AndroidEntryPoint
-class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
+class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: HorseViewModel by activityViewModels()
     lateinit var indicatorRecyclerAdapter: IndecatorImagesRecyclerAdapter
     lateinit var onBoardingAdapter: SliderAdapter
     private var indicatorPosition = 0
-    lateinit var dataViewAdapter: DataViewRecyclerAdapter
 
-    override fun getLayoutId(): Int = R.layout.fragment_horse_details
+    override fun getLayoutId(): Int = R.layout.fragment_horse_auction
 
     override fun onViewVisible() {
         super.onViewVisible()
@@ -47,10 +42,7 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
         )
         setUpBinding()
         setUpListeners()
-        setUpRecyclerView()
         setUpPager()
-        if (viewModel.horse?.typeOfSale == HorseAdsTypeEnum.AUCTION.value)
-            viewModel.startHandleAuctionFinish()
     }
 
     private fun setUpBinding() {
@@ -58,41 +50,9 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
         binding?.layoutAuctionTimer?.viewModel = viewModel
     }
 
-    private fun setUpRecyclerView() {
-        dataViewAdapter = DataViewRecyclerAdapter(requireContext())
-        binding?.rvDataView?.adapter = dataViewAdapter
-        viewModel.horse?.let {
-            dataViewAdapter.submitItems(
-                arrayListOf(
-                    DataView(resources.getString(R.string.horse_name), it.name),
-                    DataView(resources.getString(R.string.horse_gender), it.sex),
-                    DataView(resources.getString(R.string.horse_type), it.category?.name),
-                    DataView(resources.getString(R.string.father_name), it.fatherName),
-                    DataView(resources.getString(R.string.mother_name), it.motherName),
-                    DataView(
-                        resources.getString(R.string.age),
-                        "${it.age} ${resources.getString(R.string.years_)}"
-                    ),
-                    DataView(resources.getString(R.string.height), it.height),
-                    DataView(resources.getString(R.string.safety), it.safety),
-                    DataView(
-                        resources.getString(R.string.vaccinate),
-                        if (it.isVaccinated == true) resources.getString(R.string.vaccinated) else "--"
-                    )
-                )
-            )
-        }
-    }
-
     private fun setUpListeners() {
-        binding?.btnWhatsapp?.setOnClickListener {
-            viewModel.horse?.contactNumber.openWhatsApp(requireActivity())
-        }
-        binding?.btnCallUs?.setOnClickListener {
-            requireActivity().openDial(viewModel.horse?.contactNumber)
-        }
-        binding?.btnJoinAuction?.setOnClickListener {
-            navigationController.navigate(R.id.action_horseDetailsFragment_to_horseAuctionFragment)
+        binding?.btnAddPrice?.setOnClickListener {
+
         }
     }
 

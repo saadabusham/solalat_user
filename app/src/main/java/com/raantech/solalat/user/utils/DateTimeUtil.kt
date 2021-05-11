@@ -5,9 +5,7 @@ import com.raantech.solalat.user.R
 import com.raantech.solalat.user.utils.extensions.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.Duration
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
 
@@ -257,62 +255,13 @@ object DateTimeUtil {
         return diff.millisecondToMinutes().toInt()
     }
 
-    fun Context.getDifferenceTime(start_date: Long, end_date: Long):String {
+    fun getDifferenceTime(start_date: Long, end_date: Long):String {
         val deference = end_date - start_date
-        var dy: Long = TimeUnit.MILLISECONDS.toDays(deference)
-        val yr = dy / 365
-        dy %= 365
-        val mn = dy / 30
-        dy %= 30
-        val wk = dy / 7
-        dy %= 7
-        val hr: Long = (TimeUnit.MILLISECONDS.toHours(deference)
-                - TimeUnit.DAYS.toHours(
-            TimeUnit.MILLISECONDS.toDays(
-                deference
-            )
-        ))
-        val min: Long = (TimeUnit.MILLISECONDS.toMinutes(deference)
-                - TimeUnit.HOURS.toMinutes(
-            TimeUnit.MILLISECONDS.toHours(
-                deference
-            )
-        ))
-        val sec: Long = (TimeUnit.MILLISECONDS.toSeconds(deference)
-                - TimeUnit.MINUTES.toSeconds(
-            TimeUnit.MILLISECONDS.toMinutes(
-                deference
-            )
-        ))
-        val ms: Long = (TimeUnit.MILLISECONDS.toMillis(deference)
-                - TimeUnit.SECONDS.toMillis(
-            TimeUnit.MILLISECONDS.toSeconds(
-                deference
-            )
-        ))
-        val stringBuilder = StringBuilder()
-        if (yr > 0) {
-            stringBuilder.append(yr.toString() + " " + this.resources.getString(R.string.year) + " ")
-        }
-        if (mn > 0) {
-            stringBuilder.append(mn.toString() + " " + this.resources.getString(R.string.month) + " ")
-        }
-        if (wk > 0) {
-            stringBuilder.append(wk.toString() + " " + this.resources.getString(R.string.week) + " ")
-        }
-        if (dy > 0) {
-            stringBuilder.append(dy.toString() + " " + this.resources.getString(R.string.day) + " ")
-        }
-        if (hr > 0) {
-            stringBuilder.append(hr.toString() + " " + this.resources.getString(R.string.hour) + " ")
-        }
-        if (min > 0) {
-            stringBuilder.append(min.toString() + " " + this.resources.getString(R.string.minute) + " ")
-        }
-        if (sec > 0) {
-            stringBuilder.append(min.toString() + " " + this.resources.getString(R.string.second) + " ")
-        }
-        return stringBuilder.toString()
+        val seconds: Long = deference / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        val days = hours / 24
+        return days.toString() + ":" + hours % 24 + ":" + minutes % 60 //+ ":" + seconds % 60
     }
 
     fun Context.getDifferenceTime2(start_date: Long, end_date: Long):String {

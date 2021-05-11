@@ -10,5 +10,19 @@
         android:id="@+id/horseDetailsFragment"
         android:name="com.raantech.solalat.user.ui.horse.fragments.HorseDetailsFragment"
         android:label="HorseDetailsFragment"
-        tools:layout="@layout/fragment_horse_details"/>
+        tools:layout="@layout/fragment_horse_details">
+        <action
+            android:id="@+id/action_horseDetailsFragment_to_horseAuctionFragment"
+            app:destination="@id/horseAuctionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/horseAuctionFragment"
+        android:name="com.raantech.solalat.user.ui.horse.fragments.HorseAuctionFragment"
+        android:label="HorseAuctionFragment"
+        tools:layout="@layout/fragment_horse_auction"/>
+
 </navigation>

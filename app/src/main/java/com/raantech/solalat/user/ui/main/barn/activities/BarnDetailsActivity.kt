@@ -1,4 +1,4 @@
-package com.raantech.solalat.user.ui.main.barn
+package com.raantech.solalat.user.ui.main.barn.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
-import com.raantech.solalat.user.data.api.response.GeneralError
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.Constants

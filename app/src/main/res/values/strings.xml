@@ -241,10 +241,22 @@
     <string name="sale_auction">Sale Auction</string>
     <string name="is_ad_active">Is Ads Active</string>
     <string name="enter_the_starting_price_of_the_auction">Enter the starting price of the auction</string>
+
+    <!--    Horse Details   -->
     <string name="vaccinate">Vaccinate</string>
     <string name="vaccinated">Vaccinated</string>
     <string name="join_auction">Join Auction</string>
     <string name="minute_">Minute</string>
     <string name="hour_">Hour</string>
     <string name="day_">Day</string>
+    <string name="add_price">Add Price</string>
+
+    <!--    Horse Auction   -->
+    <string name="starting_auction_price">Starting auction price</string>
+    <string name="last_payed_price">Last payed price</string>
+    <string name="add_new_price">Add new price</string>
+    <string name="the_minimum_increase_is_200_sar">(The minimum increase is 200 SAR)</string>
+    <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">The horse addition has been successfully\ncompleted. Your request will be studied and we will inform you of the approval once it is issued</string>
+    <string name="done">Done</string>
+    <string name="add_to_cart">Add to cart</string>
 </resources>

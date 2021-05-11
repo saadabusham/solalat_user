@@ -1,23 +1,25 @@
-package com.raantech.solalat.user.ui.main.adapters
+package com.raantech.solalat.user.ui.main.adapters.accessories
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.raantech.solalat.user.data.models.horses.Horse
-import com.raantech.solalat.user.databinding.RowHorseBinding
+import com.raantech.solalat.user.data.models.accessories.Accessory
+import com.raantech.solalat.user.data.models.truck.Truck
+import com.raantech.solalat.user.databinding.RowAccessoryBinding
+import com.raantech.solalat.user.databinding.RowTruckBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
 
-class HorsesGridRecyclerAdapter(
-        context: Context
-) : BaseBindingRecyclerViewAdapter<Horse>(context) {
+class AccessoriesGridRecyclerAdapter(
+    context: Context
+) : BaseBindingRecyclerViewAdapter<Accessory>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(
-            RowHorseBinding.inflate(
-                        LayoutInflater.from(context), parent, false
-                )
+            RowAccessoryBinding.inflate(
+                LayoutInflater.from(context), parent, false
+            )
         )
     }
 
@@ -27,10 +29,10 @@ class HorsesGridRecyclerAdapter(
         }
     }
 
-    inner class ViewHolder(private val binding: RowHorseBinding) :
-            BaseViewHolder<Horse>(binding.root) {
+    inner class ViewHolder(private val binding: RowAccessoryBinding) :
+        BaseViewHolder<Accessory>(binding.root) {
 
-        override fun bind(item: Horse) {
+        override fun bind(item: Accessory) {
             binding.item = item
             binding.root.setOnClickListener {
                 itemClickListener?.onItemClick(it, adapterPosition, item)

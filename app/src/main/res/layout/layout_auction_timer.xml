@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.raantech.solalat.user.ui.horse.viewmodels.HorseViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:cardBackgroundColor="@color/horse_price_backgroun_color"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    style="@style/textview_normal_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@{viewModel.days.toString()}"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_15ssp"
+                    tools:text="2" />
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/day_"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@color/border_color_alpha" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    style="@style/textview_normal_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@{viewModel.hours.toString()}"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_15ssp"
+                    tools:text="2" />
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/hour_"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@color/border_color_alpha" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    style="@style/textview_normal_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@{viewModel.minutes.toString()}"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_15ssp"
+                    tools:text="2" />
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/minute_"
+                    android:textColor="@color/product_title_color"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

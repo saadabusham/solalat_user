@@ -22,5 +22,21 @@
         android:id="@+id/addHorseStep2Fragment"
         android:name="com.raantech.solalat.user.ui.addhorse.fragments.AddHorseStep2Fragment"
         android:label="AddHorseStep2Fragment"
-        tools:layout="@layout/fragment_add_horse_step2"/>
+        tools:layout="@layout/fragment_add_horse_step2">
+        <action
+            android:id="@+id/action_addHorseStep2Fragment_to_horseAddedSuccessFragment"
+            app:destination="@id/horseAddedSuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/addHorseStep2Fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/horseAddedSuccessFragment"
+        android:name="com.raantech.solalat.user.ui.horse.fragments.HorseAddedSuccessFragment"
+        android:label="HorseAddedSuccessFragment"
+        tools:layout="@layout/fragment_horse_added_success"/>
 </navigation>

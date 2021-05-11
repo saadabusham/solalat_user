@@ -54,19 +54,22 @@
             android:name=".ui.map.MapActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.barn.BarnDetailsActivity"
+            android:name=".ui.main.barn.activities.BarnDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.truck.TruckDetailsActivity"
+            android:name=".ui.main.truck.activities.TruckDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.medical.MedicalsActivity"
+            android:name=".ui.main.medical.activities.MedicalsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.addhorse.AddHorseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.horse.HorseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.accessories.activities.AccessoriesActivity"
             android:screenOrientation="portrait" />
     </application>
 

@@ -12,11 +12,13 @@ import com.raantech.solalat.user.data.enums.UserEnums
 import com.raantech.solalat.user.data.models.Category
 import com.raantech.solalat.user.data.models.City
 import com.raantech.solalat.user.data.models.ServiceCategory
+import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.data.models.barn.Barn
 import com.raantech.solalat.user.data.models.map.Address
 import com.raantech.solalat.user.data.models.truck.Truck
 import com.raantech.solalat.user.data.pref.configuration.ConfigurationPref
 import com.raantech.solalat.user.data.pref.user.UserPref
+import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
 import com.raantech.solalat.user.data.repos.barn.BarnRepo
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
@@ -38,7 +40,8 @@ class MainViewModel @ViewModelInject constructor(
         private val truckRepo: TruckRepo,
         private val horseRepo: HorseRepo,
         private val wishListRepo: WishListRepo,
-        private val medicalRepo: MedicalRepo
+        private val medicalRepo: MedicalRepo,
+        private val accessoriesRepo: AccessoriesRepo
 ) : BaseViewModel() {
     var address: Address? = null
     var cities: MutableList<City> = mutableListOf()
@@ -47,6 +50,7 @@ class MainViewModel @ViewModelInject constructor(
     val horseAdsTypeEnum: MutableLiveData<HorseAdsTypeEnum> = MutableLiveData(HorseAdsTypeEnum.ALL)
     val barn: MutableLiveData<Barn> = MutableLiveData()
     val truck: MutableLiveData<Truck> = MutableLiveData()
+    val accessory: MutableLiveData<Accessory> = MutableLiveData()
     var category: ServiceCategory? = null
     fun logoutRemote() = liveData {
         emit(APIResource.loading())
@@ -146,6 +150,16 @@ class MainViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response = medicalRepo.getMedicals(skip, categoryId, latitude, longitude)
+        emit(response)
+    }
+
+
+    fun getAccessories(
+            skip: Int,
+            categoryId: Int?
+    ) = liveData {
+        emit(APIResource.loading())
+        val response = accessoriesRepo.getAccessories(skip, categoryId)
         emit(response)
     }
 

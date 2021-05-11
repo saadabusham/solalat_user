@@ -5,6 +5,7 @@ import com.raantech.solalat.user.BuildConfig
 
 object NetworkConstants {
 
+    const val SOCKET_URL: String = ""
     const val APP_TIMEOUT_MINUTES = 1L
     const val APP_BASE_URL = BuildConfig.AppBaseUrl
 

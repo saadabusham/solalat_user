@@ -1,4 +1,4 @@
-package com.raantech.solalat.user.ui.main.barn
+package com.raantech.solalat.user.ui.main.truck.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.paginate.Paginate
 import com.paginate.recycler.LoadingListItemCreator
@@ -18,23 +18,24 @@ import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.Constants
 import com.raantech.solalat.user.data.common.CustomObserverResponse
-import com.raantech.solalat.user.data.models.barn.Barn
+import com.raantech.solalat.user.data.models.City
 import com.raantech.solalat.user.data.models.map.Address
-import com.raantech.solalat.user.databinding.FragmentBarnBinding
+import com.raantech.solalat.user.data.models.truck.Truck
+import com.raantech.solalat.user.databinding.FragmentTrucksBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
-import com.raantech.solalat.user.ui.main.adapters.barn.BarnGridRecyclerAdapter
+import com.raantech.solalat.user.ui.main.adapters.truck.TrucksGridRecyclerAdapter
+import com.raantech.solalat.user.ui.main.dialogs.CitiesBottomSheet
+import com.raantech.solalat.user.ui.main.truck.activities.TruckDetailsActivity
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
-import com.raantech.solalat.user.ui.map.MapActivity
 import com.raantech.solalat.user.utils.extensions.gone
 import com.raantech.solalat.user.utils.extensions.visible
 import com.raantech.solalat.user.utils.getLocationName
 import dagger.hilt.android.AndroidEntryPoint
-import io.branch.referral.util.Product
 
 @AndroidEntryPoint
-class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
+class TrucksFragment : BaseBindingFragment<FragmentTrucksBinding>(),
     BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModels()
@@ -42,7 +43,7 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
     private val loading: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isFinished = false
 
-    lateinit var barnGridRecyclerAdapter: BarnGridRecyclerAdapter
+    lateinit var trucksGridRecyclerAdapter: TrucksGridRecyclerAdapter
 
     var refreshData: Boolean = false
 
@@ -52,11 +53,11 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
             refreshData = true
             return
         }
-        barnGridRecyclerAdapter.clear()
+        trucksGridRecyclerAdapter.clear()
         loadBarns()
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_barn
+    override fun getLayoutId(): Int = R.layout.fragment_trucks
 
     override fun onViewVisible() {
         super.onViewVisible()
@@ -75,8 +76,25 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
     }
 
     private fun setUpListeners() {
-        binding?.linearAddress?.setOnClickListener {
-            MapActivity.start(requireActivity(), resultLauncher)
+        binding?.cvFromCity?.setOnClickListener {
+            CitiesBottomSheet(object : CitiesBottomSheet.CityPickerCallBack {
+                override fun callBack(selectedCities: List<City>) {
+                    viewModel.fromCity = selectedCities[0]
+                    binding?.tvFromCity?.text = selectedCities.map { it.name }.joinToString()
+                    trucksGridRecyclerAdapter.items.clear()
+                    loadBarns()
+                }
+            }, viewModel, viewModel.cities,true).show(childFragmentManager, "CitiesPicker")
+        }
+        binding?.cvToCity?.setOnClickListener {
+            CitiesBottomSheet(object : CitiesBottomSheet.CityPickerCallBack {
+                override fun callBack(selectedCities: List<City>) {
+                    viewModel.toCity = selectedCities[0]
+                    binding?.tvToCity?.text = selectedCities.map { it.name }.joinToString()
+                    trucksGridRecyclerAdapter.items.clear()
+                    loadBarns()
+                }
+            }, viewModel, viewModel.cities,true).show(childFragmentManager, "CitiesPicker")
         }
     }
 
@@ -86,30 +104,33 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
                 val data: Intent? = result.data
                 viewModel.address =
                     data?.getSerializableExtra(Constants.BundleData.ADDRESS) as Address
-                binding?.tvAddress?.text =
+                binding?.tvFromCity?.text =
                     getLocationName(
                         viewModel.address?.lat,
                         viewModel.address?.lon
                     )
-                barnGridRecyclerAdapter.items.clear()
+                trucksGridRecyclerAdapter.items.clear()
                 loadBarns()
             }
         }
 
     private fun loadBarns() {
-        viewModel.getBarns(
-            barnGridRecyclerAdapter.itemCount,
-            viewModel.address?.lat, viewModel.address?.lon
-        ).observe(this, barnsObserver())
+        viewModel.getTrucks(
+            trucksGridRecyclerAdapter.itemCount,
+            viewModel.fromCity?.id,
+            viewModel.toCity?.id,
+            viewModel.address?.lat,
+            viewModel.address?.lon
+        ).observe(this, truckObserver())
     }
 
     private fun setUpRecyclerView() {
-        barnGridRecyclerAdapter = BarnGridRecyclerAdapter(requireContext())
-        binding?.recyclerView?.adapter = barnGridRecyclerAdapter
+        trucksGridRecyclerAdapter = TrucksGridRecyclerAdapter(requireContext())
+        binding?.recyclerView?.adapter = trucksGridRecyclerAdapter
         binding?.recyclerView?.setOnItemClickListener(this)
         Paginate.with(binding?.recyclerView, object : Paginate.Callbacks {
             override fun onLoadMore() {
-                if (loading.value == false && barnGridRecyclerAdapter.itemCount > 0 && !isFinished) {
+                if (loading.value == false && trucksGridRecyclerAdapter.itemCount > 0 && !isFinished) {
                     loadBarns()
                 }
             }
@@ -145,7 +166,7 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
     }
 
     private fun hideShowNoData() {
-        if (barnGridRecyclerAdapter.itemCount == 0) {
+        if (trucksGridRecyclerAdapter.itemCount == 0) {
             binding?.recyclerView?.gone()
             binding?.layoutNoData?.linearNoData?.visible()
         } else {
@@ -153,18 +174,33 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
             binding?.recyclerView?.visible()
         }
     }
-    private fun barnsObserver(): CustomObserverResponse<List<Barn>> {
+
+    private fun observeLoading() {
+        loading.observe(this, Observer {
+            if (it) {
+                binding?.recyclerView?.gone()
+//                binding?.layoutShimmer?.shimmerViewContainer?.visible()
+//                binding?.layoutShimmer?.shimmerViewContainer?.startShimmer()
+            } else {
+//                binding?.layoutShimmer?.shimmerViewContainer?.gone()
+//                binding?.layoutShimmer?.shimmerViewContainer?.stopShimmer()
+                binding?.recyclerView?.visible()
+            }
+        })
+    }
+
+    private fun truckObserver(): CustomObserverResponse<List<Truck>> {
         return CustomObserverResponse(
             requireActivity(),
-            object : CustomObserverResponse.APICallBack<List<Barn>> {
+            object : CustomObserverResponse.APICallBack<List<Truck>> {
                 override fun onSuccess(
                     statusCode: Int,
                     subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: ResponseWrapper<List<Barn>>?
+                    data: ResponseWrapper<List<Truck>>?
                 ) {
                     isFinished = data?.body?.isNullOrEmpty() == true
                     data?.body?.let {
-                        barnGridRecyclerAdapter.addItems(it)
+                        trucksGridRecyclerAdapter.addItems(it)
                     }
                     loading.postValue(false)
                     hideShowNoData()
@@ -189,8 +225,8 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
 
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
-        item as Barn
-        BarnDetailsActivity.start(requireContext(),item)
+        item as Truck
+        TruckDetailsActivity.start(requireContext(),item)
     }
 
 

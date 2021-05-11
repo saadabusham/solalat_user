@@ -56,139 +56,17 @@
                     tools:itemCount="4"
                     tools:listitem="@layout/row_indecator_image" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) ? View.VISIBLE : View.GONE}"
-                    app:cardBackgroundColor="@color/horse_price_backgroun_color"
-                    app:cardCornerRadius="@dimen/_16sdp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_5sdp">
-
-                            <TextView
-                                style="@style/textview_normal_bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:lineSpacingExtra="0dp"
-                                android:text="@{viewModel.days.toString()}"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_15ssp"
-                                tools:text="2" />
-
-                            <TextView
-                                style="@style/textview_normal_regular"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/day_"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_13ssp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:layout_marginBottom="@dimen/_12sdp"
-                            android:background="@color/border_color_alpha" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_5sdp">
-
-                            <TextView
-                                style="@style/textview_normal_bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:lineSpacingExtra="0dp"
-                                android:text="@{viewModel.hours.toString()}"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_15ssp"
-                                tools:text="2" />
-
-                            <TextView
-                                style="@style/textview_normal_regular"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/hour_"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_13ssp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            android:layout_marginBottom="@dimen/_12sdp"
-                            android:background="@color/border_color_alpha" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_5sdp">
-
-                            <TextView
-                                style="@style/textview_normal_bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:lineSpacingExtra="0dp"
-                                android:text="@{viewModel.minutes.toString()}"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_15ssp"
-                                tools:text="2" />
-
-                            <TextView
-                                style="@style/textview_normal_regular"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/minute_"
-                                android:textColor="@color/product_title_color"
-                                android:textSize="@dimen/_13ssp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                <include
+                    android:id="@+id/layout_auction_timer"
+                    layout="@layout/layout_auction_timer"
+                    android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) ? View.VISIBLE : View.GONE}" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
-                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.SELL.value) ? View.VISIBLE : View.GONE}"
                     app:cardBackgroundColor="@color/horse_price_backgroun_color"
                     app:cardCornerRadius="@dimen/_16sdp"

@@ -1,4 +1,4 @@
-package com.raantech.solalat.user.ui.main.medical
+package com.raantech.solalat.user.ui.main.accessories.fragments
 
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,24 +10,26 @@ import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.enums.ServiceTypesEnum
 import com.raantech.solalat.user.data.models.ServiceCategoriesResponse
 import com.raantech.solalat.user.data.models.ServiceCategory
-import com.raantech.solalat.user.databinding.FragmentMedicalServicesBinding
+import com.raantech.solalat.user.databinding.FragmentAccessoriesServicesBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
-import com.raantech.solalat.user.ui.main.adapters.medical.MedicalCategoriesRecyclerAdapter
+import com.raantech.solalat.user.ui.main.accessories.activities.AccessoriesActivity
+import com.raantech.solalat.user.ui.main.adapters.CategoryRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
 import com.raantech.solalat.user.utils.extensions.gone
 import com.raantech.solalat.user.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MedicalServicesFragment : BaseBindingFragment<FragmentMedicalServicesBinding>(),
-        BaseBindingRecyclerViewAdapter.OnItemClickListener {
+class AccessoriesServicesFragment :
+    BaseBindingFragment<FragmentAccessoriesServicesBinding>(),
+    BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
-    override fun getLayoutId(): Int = R.layout.fragment_medical_services
+    override fun getLayoutId(): Int = R.layout.fragment_accessories_services
 
     private val viewModel: MainViewModel by viewModels()
-    lateinit var categoriesRecyclerAdapter: MedicalCategoriesRecyclerAdapter
+    lateinit var categoryRecyclerAdapter: CategoryRecyclerAdapter
     var refreshData: Boolean = false
 
     override fun onResume() {
@@ -36,7 +38,7 @@ class MedicalServicesFragment : BaseBindingFragment<FragmentMedicalServicesBindi
             refreshData = true
             return
         }
-        categoriesRecyclerAdapter.clear()
+        categoryRecyclerAdapter.clear()
         loadCategories()
     }
 
@@ -62,17 +64,18 @@ class MedicalServicesFragment : BaseBindingFragment<FragmentMedicalServicesBindi
 
 
     private fun loadCategories() {
-        viewModel.getServicesCategories(ServiceTypesEnum.MEDICAL.value).observe(this, categoriesObserver())
+        viewModel.getServicesCategories(ServiceTypesEnum.ACCESSORIES.value)
+            .observe(this, categoriesObserver())
     }
 
     private fun setUpRecyclerView() {
-        categoriesRecyclerAdapter = MedicalCategoriesRecyclerAdapter(requireContext())
-        binding?.recyclerView?.adapter = categoriesRecyclerAdapter
+        categoryRecyclerAdapter = CategoryRecyclerAdapter(requireContext())
+        binding?.recyclerView?.adapter = categoryRecyclerAdapter
         binding?.recyclerView.setOnItemClickListener(this)
     }
 
     private fun hideShowNoData() {
-        if (categoriesRecyclerAdapter.itemCount == 0) {
+        if (categoryRecyclerAdapter.itemCount == 0) {
             binding?.recyclerView?.gone()
             binding?.layoutNoData?.linearNoData?.visible()
         } else {
@@ -84,34 +87,41 @@ class MedicalServicesFragment : BaseBindingFragment<FragmentMedicalServicesBindi
 
     private fun categoriesObserver(): CustomObserverResponse<ServiceCategoriesResponse> {
         return CustomObserverResponse(
-                requireActivity(),
-                object : CustomObserverResponse.APICallBack<ServiceCategoriesResponse> {
-                    override fun onSuccess(
-                            statusCode: Int,
-                            subErrorCode: ResponseSubErrorsCodeEnum,
-                            data: ResponseWrapper<ServiceCategoriesResponse>?
-                    ) {
-                        data?.body?.categories?.let {
-                            categoriesRecyclerAdapter.addItems(it)
-                        }
-                        hideShowNoData()
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<ServiceCategoriesResponse> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ResponseWrapper<ServiceCategoriesResponse>?
+                ) {
+                    data?.body?.categories?.let {
+                        categoryRecyclerAdapter.addItems(it)
                     }
+                    hideShowNoData()
+                }
 
-                    override fun onError(
-                            subErrorCode: ResponseSubErrorsCodeEnum,
-                            message: String,
-                            errors: List<GeneralError>?
-                    ) {
-                        super.onError(subErrorCode, message, errors)
-                        hideShowNoData()
-                    }
-                }, showError = false
+                override fun onError(
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    message: String,
+                    errors: List<GeneralError>?
+                ) {
+                    super.onError(subErrorCode, message, errors)
+//                        hideShowNoData()
+                    categoryRecyclerAdapter.submitItems(
+                        arrayListOf(
+                            ServiceCategory(id = 0, name = "حذوات الخيل", count = 5, logo = null),
+                            ServiceCategory(id = 0, name = "سراج الخيل", count = 5, logo = null),
+                            ServiceCategory(id = 0, name = "لجام الخيل", count = 5, logo = null)
+                        )
+                    )
+                }
+            }, showError = false
         )
     }
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as ServiceCategory
-        MedicalsActivity.start(requireContext(),item)
+        AccessoriesActivity.start(requireContext(),item)
     }
 
 }

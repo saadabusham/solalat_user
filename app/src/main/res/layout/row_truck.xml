@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_140sdp"
             app:cardBackgroundColor="@color/cardview_stroke_gray"
-            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_7sdp"
             app:cardElevation="0dp">
 
             <ImageView

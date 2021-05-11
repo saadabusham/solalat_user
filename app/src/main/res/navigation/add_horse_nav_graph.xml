@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_horse_nav_graph"
+    app:startDestination="@id/addHorseFragment">
+
+    <fragment
+        android:id="@+id/addHorseFragment"
+        android:name="com.raantech.solalat.user.ui.addhorse.fragments.AddHorseFragment"
+        android:label="AddHorseFragment"
+        tools:layout="@layout/fragment_add_horse">
+        <action
+            android:id="@+id/action_addHorseFragment_to_addHorseStep2Fragment"
+            app:destination="@id/addHorseStep2Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addHorseStep2Fragment"
+        android:name="com.raantech.solalat.user.ui.addhorse.fragments.AddHorseStep2Fragment"
+        android:label="AddHorseStep2Fragment"
+        tools:layout="@layout/fragment_add_horse_step2"/>
+</navigation>

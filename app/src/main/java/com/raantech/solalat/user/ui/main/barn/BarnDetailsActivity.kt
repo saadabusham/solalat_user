@@ -146,7 +146,7 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Media
-        view?.imgMedia?.let { ViewImageActivity.start(this, item.url, it) }
+        view?.imgMedia?.let { item.url?.let { it1 -> ViewImageActivity.start(this, it1, it) } }
     }
 
     companion object {

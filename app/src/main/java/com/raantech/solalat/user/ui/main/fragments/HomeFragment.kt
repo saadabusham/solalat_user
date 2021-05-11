@@ -20,6 +20,7 @@ import com.raantech.solalat.user.databinding.FragmentHomeBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.base.fragment.BaseBindingFragment
+import com.raantech.solalat.user.ui.horse.HorseActivity
 import com.raantech.solalat.user.ui.main.adapters.HorsesGridRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
 import com.raantech.solalat.user.utils.extensions.disableViews
@@ -48,7 +49,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
             refreshData = true
             return
         }
-        horsesGridRecyclerAdapter.clear()
+        horsesGridRecyclerAdapter.items.clear()
         loadData()
     }
 
@@ -189,7 +190,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
     }
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
-
+        item as Horse
+        HorseActivity.start(requireContext(),item)
     }
 
 }

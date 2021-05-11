@@ -189,7 +189,7 @@ class MediaActivity : BaseBindingActivity<ActivityMediaBinding>(),
                 setResult(RESULT_OK, data)
                 finish()
             } else {
-                view?.imgMedia?.let { ViewImageActivity.start(this, item.url, it) }
+                view?.imgMedia?.let { item.url?.let { it1 -> ViewImageActivity.start(this, it1, it) } }
             }
         }
     }
@@ -197,7 +197,7 @@ class MediaActivity : BaseBindingActivity<ActivityMediaBinding>(),
     override fun onItemLongClick(view: View?, position: Int, item: Any) {
         super.onItemLongClick(view, position, item)
         item as Media
-        view?.imgMedia?.let { ViewImageActivity.start(this, item.url, it) }
+        view?.imgMedia?.let { item.url?.let { it1 -> ViewImageActivity.start(this, it1, it) } }
     }
 
     private fun mediaObserver(): CustomObserverResponse<List<Media>> {

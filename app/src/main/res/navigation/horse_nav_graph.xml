@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/horse_nav_graph"
+    app:startDestination="@id/horseDetailsFragment">
+
+
+    <fragment
+        android:id="@+id/horseDetailsFragment"
+        android:name="com.raantech.solalat.user.ui.horse.fragments.HorseDetailsFragment"
+        android:label="HorseDetailsFragment"
+        tools:layout="@layout/fragment_horse_details"/>
+</navigation>

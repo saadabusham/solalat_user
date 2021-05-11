@@ -46,5 +46,10 @@ interface ConfigurationRemoteDao {
     suspend fun getBarnServices(
     ): ResponseWrapper<List<ServicesItem>>
 
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @GET("categories")
+    suspend fun getServiceCategories(
+            @Query("type") type: String
+    ): ResponseWrapper<ServiceCategoriesResponse>
 
 }

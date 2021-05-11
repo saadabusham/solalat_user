@@ -205,4 +205,46 @@
     <string name="call_now">Call now</string>
     <string name="km">%s km</string>
 
+    <!--    Add Horse   -->
+    <string name="horse_type">Horse Type</string>
+    <string name="horse_name">Horse Name</string>
+    <string name="add_horse_name">Add Horse Name</string>
+    <string name="father_name">Father Name</string>
+    <string name="add_father_name">Add Father Name</string>
+    <string name="mother_name">Mother Name</string>
+    <string name="add_mother_name">Add Mother Name</string>
+    <string name="upload_horse_image">Upload Horse Images</string>
+    <string name="is_vaccinated">Is Vaccinated</string>
+    <string name="horse_gender">Horse Gender</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="safety">Safety</string>
+    <string name="please_select_horse_type">Please select horse type</string>
+    <string name="horse_images">Horse Images</string>
+    <string name="please_select_the_horse_images">Please select the horse images</string>
+    <string name="year_">Year</string>
+    <string name="years_">years</string>
+    <string name="weak">Weak</string>
+    <string name="good">Good</string>
+    <string name="very_good">Very Good</string>
+    <string name="excellent">Excellent</string>
+    <string name="meter">M</string>
+    <string name="cm">Cm</string>
+    <string name="enter_price">Enter price</string>
+    <string name="sar">SAR</string>
+    <string name="enter_phone_number_to_contact">Enter phone number to contact</string>
+    <string name="receive_whatsapp">Receive WhatsApp</string>
+    <string name="add_product">Add Horse</string>
+    <string name="sale_type">Sale Type</string>
+    <string name="horse_price">Horse Price</string>
+    <string name="sale_direct">Sale Direct</string>
+    <string name="sale_auction">Sale Auction</string>
+    <string name="is_ad_active">Is Ads Active</string>
+    <string name="enter_the_starting_price_of_the_auction">Enter the starting price of the auction</string>
+    <string name="vaccinate">Vaccinate</string>
+    <string name="vaccinated">Vaccinated</string>
+    <string name="join_auction">Join Auction</string>
+    <string name="minute_">Minute</string>
+    <string name="hour_">Hour</string>
+    <string name="day_">Day</string>
 </resources>

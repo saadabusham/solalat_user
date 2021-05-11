@@ -31,5 +31,8 @@ interface ConfigurationRepo {
 
     suspend fun getBarnServices(
     ): APIResource<ResponseWrapper<List<ServicesItem>>>
+    suspend fun getServiceCategories(
+            type: String
+    ): APIResource<ResponseWrapper<ServiceCategoriesResponse>>
 
 }

@@ -17,8 +17,8 @@ import com.raantech.solalat.user.R
 import com.raantech.solalat.user.common.CommonEnums
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.common.CustomObserverResponse
-import com.raantech.solalat.user.data.models.configuration.ConfigurationWrapperResponse
 import com.raantech.solalat.user.databinding.ActivityMainBinding
+import com.raantech.solalat.user.ui.addhorse.AddHorseActivity
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
@@ -29,7 +29,6 @@ import com.raantech.solalat.user.ui.more.aboutus.AboutUsActivity
 import com.raantech.solalat.user.ui.more.faqs.FaqsActivity
 import com.raantech.solalat.user.ui.splash.SplashActivity
 import com.raantech.solalat.user.utils.LocaleUtil
-import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main_content.*
 import kotlinx.android.synthetic.main.layout_home_toolbar.*
@@ -57,9 +56,13 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
     }
 
     private fun setUpListeners() {
-        binding?.appBarMain?.layoutToolbar?.imgHelp?.setOnClickListener {
+        binding?.appBarMain?.layoutToolbar?.imgCart?.setOnClickListener {
+
         }
-        binding?.appBarMain?.layoutToolbar?.imgNotifications?.setOnClickListener {
+        binding?.appBarMain?.layoutToolbar?.imgAddHorse?.setOnClickListener {
+            AddHorseActivity.start(this)
+        }
+        binding?.appBarMain?.layoutToolbar?.imgSearch?.setOnClickListener {
 
         }
     }

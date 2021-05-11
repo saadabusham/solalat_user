@@ -13,6 +13,7 @@ object Constants {
     const val AppPlatform: String = "android"
 
     object BundleData {
+        const val HORSE: String = "horse"
         const val CATEGORY: String = "category"
         const val CATEGORY_ID: String = "categoryId"
         const val TRUCK: String = "truck"
@@ -20,7 +21,7 @@ object Constants {
         const val PRODUCT: String = "product"
         const val SERVICE: String = "service"
         const val ADD_NEW: String = "addNew"
-        const val ADDRESS: String ="address"
+        const val ADDRESS: String = "address"
         const val IMAGE: String = "image"
         const val MEDIA: String = "media"
         const val SELECT_MEDIA: String = "selectMedia"

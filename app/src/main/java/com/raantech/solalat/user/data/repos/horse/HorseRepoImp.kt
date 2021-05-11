@@ -4,6 +4,7 @@ import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.api.response.ResponseHandler
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.daos.remote.horses.HorsesRemoteDao
+import com.raantech.solalat.user.data.models.horses.AddHorseRequest
 import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.repos.base.BaseRepo
 import javax.inject.Inject
@@ -16,6 +17,22 @@ class HorseRepoImp @Inject constructor(
     override suspend fun getHorses(type_of_sale: String, skip: Int?): APIResource<ResponseWrapper<List<Horse>>> {
         return try {
             responseHandle.handleSuccess(horsesRemoteDao.getHorses(type_of_sale, skip))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
+
+    override suspend fun addHorses(addHorseRequest: AddHorseRequest): APIResource<ResponseWrapper<Any>> {
+        return try {
+            responseHandle.handleSuccess(horsesRemoteDao.addHorses(addHorseRequest))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
+
+    override suspend fun updateHorses(id: Int, addHorseRequest: AddHorseRequest): APIResource<ResponseWrapper<Any>> {
+        return try {
+            responseHandle.handleSuccess(horsesRemoteDao.updateHorse(id, addHorseRequest))
         } catch (e: Exception) {
             responseHandle.handleException(e)
         }

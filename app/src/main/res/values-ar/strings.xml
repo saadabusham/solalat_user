@@ -203,4 +203,46 @@
     <string name="call_now">اتصل الان</string>
     <string name="km">كم %s</string>
 
+    <!--    Add Horse   -->
+    <string name="horse_type">نوع الخيل</string>
+    <string name="horse_name">اسم الخيل</string>
+    <string name="add_horse_name">اضف اسم الخيل</string>
+    <string name="father_name">اسم الأب</string>
+    <string name="add_father_name">ادخل اسم الاب للخيل</string>
+    <string name="mother_name">اسم الأم</string>
+    <string name="add_mother_name">ادخل اسم الأم للخيل</string>
+    <string name="upload_horse_image">ارفع صور الخيل</string>
+    <string name="is_vaccinated">الفرس ملقح</string>
+    <string name="horse_gender">جنس الخيل</string>
+    <string name="age">العمر</string>
+    <string name="height">اللارتفاع</string>
+    <string name="safety">السلامة</string>
+    <string name="please_select_horse_type">Please select horse type</string>
+    <string name="horse_images">Horse Images</string>
+    <string name="please_select_the_horse_images">Please select the horse images</string>
+    <string name="year_">سنة</string>
+    <string name="years_">سنوات</string>
+    <string name="weak">ضعيف</string>
+    <string name="good">جيد</string>
+    <string name="very_good">جيد جدا</string>
+    <string name="excellent">ممتاز</string>
+    <string name="meter">م</string>
+    <string name="cm">سم</string>
+    <string name="enter_price">ادخل السعر</string>
+    <string name="sar">ريال سعودي</string>
+    <string name="enter_phone_number_to_contact">ادخل رقم الجوال للتواصل</string>
+    <string name="receive_whatsapp">استقبل واتس اب</string>
+    <string name="add_product">اضف الحصان</string>
+    <string name="sale_type">نوع البيع</string>
+    <string name="horse_price">ادخل السعر</string>
+    <string name="sale_direct">بيع مباشر</string>
+    <string name="sale_auction">بيع مزاد</string>
+    <string name="is_ad_active">هل الاعلان فعال</string>
+    <string name="enter_the_starting_price_of_the_auction">ادخل سعر  بداية المزاد</string>
+    <string name="vaccinate">اللقاح</string>
+    <string name="vaccinated">ملقح</string>
+    <string name="join_auction">شارك في المزاد</string>
+    <string name="minute_">دقيقة</string>
+    <string name="hour_">ساعة</string>
+    <string name="day_">يوم</string>
 </resources>

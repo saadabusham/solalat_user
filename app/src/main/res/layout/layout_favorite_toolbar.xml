@@ -37,7 +37,7 @@
                     android:gravity="center"
                     android:textColor="@color/textview_header_gray"
                     android:textSize="@dimen/_17ssp"
-                    tools:text="mkldnjkvnkjdnjkvnd" />
+                    tools:text="Title" />
 
                 <ImageView
                     android:id="@+id/imgFavorite"

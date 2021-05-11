@@ -79,4 +79,11 @@ class ConfigurationRepoImp @Inject constructor(
         }
     }
 
+    override suspend fun getServiceCategories(type: String): APIResource<ResponseWrapper<ServiceCategoriesResponse>> {
+        return try {
+            responseHandle.handleSuccess(configurationRemoteDao.getServiceCategories(type))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
 }

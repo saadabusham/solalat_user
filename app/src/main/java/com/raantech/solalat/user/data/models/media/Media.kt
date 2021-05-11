@@ -21,5 +21,5 @@ data class Media(
 	val id: Int,
 
 	@field:SerializedName("url")
-	val url: String
+	val url: String?
 ):Serializable

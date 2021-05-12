@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class WishList(
 
@@ -15,4 +16,4 @@ data class WishList(
 
 	@field:SerializedName("type")
 	val type: String? = null
-)
+): Serializable

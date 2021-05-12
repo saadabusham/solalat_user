@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.data.models.more
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class FaqsResponse(
         @field:SerializedName("id")
@@ -10,4 +11,4 @@ data class FaqsResponse(
         @field:SerializedName("answer")
         var answer: String,
         var isExpanded: Boolean = false
-)
+): Serializable

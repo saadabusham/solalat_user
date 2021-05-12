@@ -3,6 +3,7 @@ package com.raantech.solalat.user.data.models.medical
 import com.google.gson.annotations.SerializedName
 import com.raantech.solalat.user.data.models.ServiceCategory
 import com.raantech.solalat.user.data.models.media.Media
+import java.io.Serializable
 
 data class Medical(
 
@@ -53,4 +54,4 @@ data class Medical(
 
 	@field:SerializedName("longitude")
 	val longitude: String? = null
-)
+): Serializable

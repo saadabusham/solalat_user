@@ -4,6 +4,8 @@ import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
 import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepoImp
 import com.raantech.solalat.user.data.repos.barn.BarnRepo
 import com.raantech.solalat.user.data.repos.barn.BarnRepoImp
+import com.raantech.solalat.user.data.repos.cart.CartRepo
+import com.raantech.solalat.user.data.repos.cart.CartRepoImp
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepoImp
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
@@ -63,5 +65,9 @@ abstract class RepoModule {
     @Singleton
     @Binds
     abstract fun bindAccessoryRepo(accessoriesRepoImp: AccessoriesRepoImp): AccessoriesRepo
+
+    @Singleton
+    @Binds
+    abstract fun bindCartRepo(cartRepoImp: CartRepoImp): CartRepo
 
 }

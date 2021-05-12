@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.data.models.horses
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class AddHorseRequest(
 
@@ -48,4 +49,4 @@ data class AddHorseRequest(
 
 	@field:SerializedName("height")
 	val height: String? = null
-)
+): Serializable

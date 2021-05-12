@@ -1,5 +1,6 @@
 package com.raantech.solalat.user.ui.horse.fragments
 
+import android.transition.TransitionManager
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -68,37 +69,50 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
             BaseBindingRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, position: Int, item: Any) {
                 item as Int
+                val doublePrice = position == 2
                 if (view?.id == R.id.imgUp) {
-                    var numberToMinus = StringBuilder()
+                    var numberToPlus = StringBuilder()
                     for (i in 0..position)
-                        numberToMinus.append(if (i == 0) 1 else 0)
+                        numberToPlus.append(if (i == 0) 1 else 0)
                     lastPrice =
-                        (lastPrice?.toInt()?.plus(numberToMinus.toString().toInt())).toString()
+                        (lastPrice?.toInt()?.plus(
+                            if (doublePrice) numberToPlus.toString().toInt() * 2
+                            else numberToPlus.toString().toInt()
+                        )).toString()
                     refreshAuction()
                 } else {
-                    if (priceDigitsRecyclerAdapter.items.joinToString(separator = "")
-                            .toInt() > 200 && priceDigitsRecyclerAdapter.items.joinToString(
-                            separator = ""
-                        ) != viewModel.horse?.price?.amount
-                    ) {
-                        var numberToMinus = StringBuilder()
-                        for (i in 0..position)
-                            numberToMinus.append(if (i == 0) 1 else 0)
-                        lastPrice = lastPrice?.toInt()?.minus(numberToMinus.toString().toInt())
-                            .toString()
-                        refreshAuction()
-                    }
+                    priceDigitsRecyclerAdapter.items.reversed().joinToString(separator = "")
+                        .toInt().let {
+                            if (it > 200 &&
+                                it > viewModel.horse?.price?.amount?.toInt()?.plus(200) ?: 0
+                            ) {
+                                var numberToMinus = StringBuilder()
+                                for (i in 0..position)
+                                    numberToMinus.append(if (i == 0) 1 else 0)
+                                lastPrice?.toInt()?.minus(
+                                    if (doublePrice) numberToMinus.toString().toInt() * 2
+                                    else numberToMinus.toString().toInt()
+                                )?.let {
+                                    if (it > viewModel.horse?.price?.amount?.toInt() ?: 0) {
+                                        lastPrice = it.toString()
+                                        refreshAuction()
+                                    }
+                                }
+                            }
+                        }
                 }
             }
         })
-
     }
 
     private fun refreshAuction() {
-        priceDigitsRecyclerAdapter.items.clear()
+        val list = mutableListOf<Int>()
         lastPrice?.reversed()?.forEach {
-            priceDigitsRecyclerAdapter.submitItem(Integer.parseInt(it.toString()))
+            list.add(Integer.parseInt(it.toString()))
         }
+        TransitionManager.beginDelayedTransition(binding?.rvPrice)
+        priceDigitsRecyclerAdapter.items.clear()
+        priceDigitsRecyclerAdapter.submitItems(list)
     }
 
     private fun setUpPager() {

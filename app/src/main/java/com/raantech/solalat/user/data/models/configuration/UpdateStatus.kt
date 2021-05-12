@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.data.models.configuration
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class UpdateStatus(
 
@@ -27,4 +28,4 @@ data class UpdateStatus(
 
 	@field:Json(name ="isMandatory")
 	val isMandatory: Boolean? = null
-)
+): Serializable

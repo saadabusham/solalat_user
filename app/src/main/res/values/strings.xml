@@ -259,4 +259,9 @@
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">The horse addition has been successfully\ncompleted. Your request will be studied and we will inform you of the approval once it is issued</string>
     <string name="done">Done</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="you_have_x_of_product_in_your_cart">You have %s of product in your cart</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="value_added_tax_15">Value-added tax (15%)</string>
+    <string name="total">Total</string>
+    <string name="pay">Pay</string>
 </resources>

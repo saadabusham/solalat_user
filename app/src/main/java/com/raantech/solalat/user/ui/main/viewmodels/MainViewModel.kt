@@ -5,11 +5,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.raantech.solalat.user.common.CommonEnums
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.enums.UserEnums
-import com.raantech.solalat.user.data.models.Category
 import com.raantech.solalat.user.data.models.City
 import com.raantech.solalat.user.data.models.ServiceCategory
 import com.raantech.solalat.user.data.models.accessories.Accessory
@@ -20,6 +20,7 @@ import com.raantech.solalat.user.data.pref.configuration.ConfigurationPref
 import com.raantech.solalat.user.data.pref.user.UserPref
 import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
 import com.raantech.solalat.user.data.repos.barn.BarnRepo
+import com.raantech.solalat.user.data.repos.cart.CartRepo
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
 import com.raantech.solalat.user.data.repos.medical.MedicalRepo
@@ -28,6 +29,7 @@ import com.raantech.solalat.user.data.repos.user.UserRepo
 import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
+import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
         @Assisted private val savedStateHandle: SavedStateHandle,
@@ -41,7 +43,8 @@ class MainViewModel @ViewModelInject constructor(
         private val horseRepo: HorseRepo,
         private val wishListRepo: WishListRepo,
         private val medicalRepo: MedicalRepo,
-        private val accessoriesRepo: AccessoriesRepo
+        private val accessoriesRepo: AccessoriesRepo,
+        private val cartRepo: CartRepo
 ) : BaseViewModel() {
     var address: Address? = null
     var cities: MutableList<City> = mutableListOf()
@@ -160,6 +163,18 @@ class MainViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response = accessoriesRepo.getAccessories(skip, categoryId)
+        emit(response)
+    }
+
+    fun addToCart(accessory: Accessory) = viewModelScope.launch {
+        cartRepo.saveCart(accessory)
+    }
+    fun getCarts() = liveData {
+        val response = cartRepo.loadCarts()
+        emit(response)
+    }
+    fun getCart(id:Int) = liveData {
+        val response = cartRepo.getCart(id)
         emit(response)
     }
 

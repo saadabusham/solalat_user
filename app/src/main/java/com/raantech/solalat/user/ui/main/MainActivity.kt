@@ -22,6 +22,7 @@ import com.raantech.solalat.user.ui.addhorse.AddHorseActivity
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
+import com.raantech.solalat.user.ui.cart.CartActivity
 import com.raantech.solalat.user.ui.main.adapters.DrawerRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
 import com.raantech.solalat.user.ui.media.MediaActivity
@@ -36,18 +37,18 @@ import kotlin.math.abs
 
 @AndroidEntryPoint
 class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
-        BaseBindingRecyclerViewAdapter.OnItemClickListener {
+    BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModels()
     lateinit var drawerRecyclerAdapter: DrawerRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(
-                layoutResID = R.layout.activity_main,
-                hasToolbar = true,
-                toolbarView = toolbar,
-                hasTitle = true,
-                title = R.string.solalat
+            layoutResID = R.layout.activity_main,
+            hasToolbar = true,
+            toolbarView = toolbar,
+            hasTitle = true,
+            title = R.string.solalat
         )
         setUpBinding()
         setupNavigation()
@@ -57,7 +58,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
 
     private fun setUpListeners() {
         binding?.appBarMain?.layoutToolbar?.imgCart?.setOnClickListener {
-
+            CartActivity.start(this)
         }
         binding?.appBarMain?.layoutToolbar?.imgAddHorse?.setOnClickListener {
             AddHorseActivity.start(this)
@@ -75,8 +76,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
     private fun setupNavigation() {
         val navController = findNavController(R.id.main_nav_host_fragment)
         NavigationUI.setupWithNavController(
-                bnv_main,
-                navController
+            bnv_main,
+            navController
         )
 
         bnv_main?.setOnNavigationItemReselectedListener {
@@ -84,14 +85,15 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
         }
 
     }
+
     private fun setUpDrawer() {
         drawerRecyclerAdapter = DrawerRecyclerAdapter(this)
         drawerRecyclerAdapter.submitItems(getDrawerList())
         binding?.drawerRecyclerView?.adapter = drawerRecyclerAdapter
         binding?.drawerRecyclerView?.setOnItemClickListener(this)
         val toggle = ActionBarDrawerToggle(
-                this, binding?.drawerLayout, binding?.appBarMain?.layoutToolbar?.toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, binding?.drawerLayout, binding?.appBarMain?.layoutToolbar?.toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         initDrawer(toggle)
     }
@@ -99,8 +101,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
 
     private fun initDrawer(toggle: ActionBarDrawerToggle) {
         val drawable = ResourcesCompat.getDrawable(
-                resources, R.drawable.ic_menu,
-                theme
+            resources, R.drawable.ic_menu,
+            theme
         )
         toggle.isDrawerIndicatorEnabled = false
         toggle.setHomeAsUpIndicator(drawable)
@@ -127,7 +129,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
                     binding?.appBarMain?.container?.pivotY = (1000).toFloat()
                 } else {
                     binding?.appBarMain?.container?.x =
-                            (binding?.navigationView?.width!! * (slideOffset))
+                        (binding?.navigationView?.width!! * (slideOffset))
                     binding?.appBarMain?.holder?.rotation = slideOffset * 10
                     binding?.appBarMain?.container?.scaleX = abs(slideOffset * 0.4f - 1)
                     binding?.appBarMain?.container?.scaleY = abs(slideOffset * 0.4f - 1)
@@ -143,14 +145,14 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
 
     private fun getDrawerList(): List<String> {
         return arrayListOf(
-                resources.getString(R.string.menu_my_account),
-                resources.getString(R.string.media),
-                resources.getString(R.string.menu_notifications),
-                resources.getString(R.string.menu_language),
-                resources.getString(R.string.menu_report_provider),
-                resources.getString(R.string.menu_technical_support),
-                resources.getString(R.string.menu_about_us),
-                resources.getString(R.string.logout)
+            resources.getString(R.string.menu_my_account),
+            resources.getString(R.string.media),
+            resources.getString(R.string.menu_notifications),
+            resources.getString(R.string.menu_language),
+            resources.getString(R.string.menu_report_provider),
+            resources.getString(R.string.menu_technical_support),
+            resources.getString(R.string.menu_about_us),
+            resources.getString(R.string.logout)
         )
     }
 
@@ -162,15 +164,15 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
                 3 -> viewModel.saveLanguage().observe(this, Observer {
                     this.let {
                         (it as BaseBindingActivity<*>).setLanguage(
-                                if (viewModel.getAppLanguage() == "ar")
-                                    CommonEnums.Languages.Arabic.value else CommonEnums.Languages.English.value
+                            if (viewModel.getAppLanguage() == "ar")
+                                CommonEnums.Languages.Arabic.value else CommonEnums.Languages.English.value
                         )
                     }
                 })
                 5 -> FaqsActivity.start(this)
                 6 -> AboutUsActivity.start(this)
                 7 -> {
-                  viewModel.logoutRemote().observe(this,logoutResultObserver())
+                    viewModel.logoutRemote().observe(this, logoutResultObserver())
                 }
             }
         }

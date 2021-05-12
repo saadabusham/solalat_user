@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.data.models.configuration
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ConfigurationWrapperResponse(
 
@@ -27,4 +28,4 @@ data class ConfigurationWrapperResponse(
 
 	@field:SerializedName("twitter_url")
 	val twitterUrl: String? = null
-)
+): Serializable

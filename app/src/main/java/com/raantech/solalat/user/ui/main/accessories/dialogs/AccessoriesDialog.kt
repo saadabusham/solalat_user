@@ -8,6 +8,7 @@ import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.raantech.solalat.user.R
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
@@ -15,6 +16,7 @@ import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.databinding.DialogAccessoryBinding
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
+import com.raantech.solalat.user.utils.extensions.longToast
 
 class AccessoriesDialog(
     val context: Activity,
@@ -44,6 +46,7 @@ class AccessoriesDialog(
         binding.lifecycleOwner = lifecycle
         setContentView(binding.root)
         setCancelable(true)
+        checkCart()
     }
 
     fun onCancelClicked() {
@@ -52,7 +55,19 @@ class AccessoriesDialog(
     }
 
     fun onAddToCartClicked() {
+        accessory.count = count.value
+        viewModel.addToCart(accessory)
         cancel()
+    }
+
+    fun checkCart() {
+        accessory.id?.let {
+            viewModel.getCart(it).observe(lifecycle, Observer {
+                it?.count?.let {
+                    count.postValue(it)
+                }
+            })
+        }
     }
 
     fun  onFavoriteClicked(){

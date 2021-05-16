@@ -266,5 +266,7 @@
     <string name="total">المجموع النهائي</string>
     <string name="pay">دفع المبلغ</string>
     <string name="cart">سلة المشتريات</string>
+    <string name="successful_purchase_will_be_delivered_to_you_within_3_days">تمت  عملية الشراء بنجاح ، سيتم توصيلها لك خلال 3 أيام</string>
+    <string name="purchas_completed">Purchase Completed</string>
 
 </resources>

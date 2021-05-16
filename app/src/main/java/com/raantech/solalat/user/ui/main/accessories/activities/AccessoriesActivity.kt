@@ -156,16 +156,40 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
         }
     }
 
+    private fun accessoryObserver(position: Int): CustomObserverResponse<Accessory> {
+        return CustomObserverResponse(
+            this,
+            object : CustomObserverResponse.APICallBack<Accessory> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Accessory?
+                ) {
+                    data?.let {
+                        AccessoriesDialog(
+                            this@AccessoriesActivity,
+                            this@AccessoriesActivity,
+                            it,
+                            viewModel,
+                            object : AccessoriesDialog.CallBack {
+                                override fun callBack(position: Int, accessory: Accessory) {
+                                    medicalsRecyclerAdapter.items[position].isWishlist =
+                                        accessory.isWishlist
+                                }
+
+                            },
+                            position
+                        ).show()
+                    }
+                }
+            }, true
+        )
+    }
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Accessory
         if (item.isAvailable == true) {
-            AccessoriesDialog(this, this, item, viewModel, object : AccessoriesDialog.CallBack {
-                override fun callBack(position: Int, accessory: Accessory) {
-                    medicalsRecyclerAdapter.items[position].isWishlist = accessory.isWishlist
-                }
-
-            }, position).show()
+            item.id?.let { viewModel.getAccessory(it).observe(this, accessoryObserver(position)) }
         }
     }
 

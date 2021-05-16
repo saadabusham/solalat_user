@@ -192,5 +192,14 @@ class MainViewModel @ViewModelInject constructor(
         emit(response)
     }
 
+    fun getAccessory(
+        id: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            accessoriesRepo.getAccessory(id)
+        emit(response)
+    }
+
 
 }

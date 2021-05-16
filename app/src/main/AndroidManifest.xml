@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.raantech.solalat.user">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name="com.raantech.solalat.user.common.MyApplication"
@@ -12,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="allowBackup"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="allowBackup">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -76,6 +77,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.wishlist.activities.WishListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.cart.PayedSuccessActivity"
             android:screenOrientation="portrait" />
     </application>
 

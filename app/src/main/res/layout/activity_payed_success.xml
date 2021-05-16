@@ -28,7 +28,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:gravity="center"
             android:layout_below="@id/img"
-            android:text="@string/the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued"
+            android:text="@string/successful_purchase_will_be_delivered_to_you_within_3_days"
             android:textColor="@color/toolbar_title_color"
             android:textSize="@dimen/_18ssp" />
 

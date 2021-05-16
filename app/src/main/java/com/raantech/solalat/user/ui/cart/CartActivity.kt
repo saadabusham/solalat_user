@@ -43,7 +43,9 @@ class CartActivity : BaseBindingActivity<ActivityCartBinding>(),
     }
 
     private fun setUpListeners() {
-
+        binding?.btnPay?.setOnClickListener {
+            PayedSuccessActivity.start(this)
+        }
     }
 
     private fun setUpBinding() {

@@ -269,4 +269,6 @@
     <string name="total">Total</string>
     <string name="pay">Pay</string>
     <string name="cart">Cart</string>
+    <string name="successful_purchase_will_be_delivered_to_you_within_3_days">Successful purchase, will be delivered to you within 3 days</string>
+    <string name="purchas_completed">Purchase Completed</string>
 </resources>

@@ -2,6 +2,7 @@ package com.raantech.solalat.user.ui.cart.viewmodels
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -19,10 +20,14 @@ class CartViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val cartRepo: CartRepo
 ) : BaseViewModel() {
-    var tax:Price = Price("10.0",formatted = "10.0 ر.س")
-    var subTotal:Price = Price("10.0",formatted = "10.0 ر.س")
-    var total:Price = Price("10.0",formatted = "10.0 ر.س")
-    fun addToCart(accessory: Accessory) = viewModelScope.launch {
+    companion object{
+    }
+
+    val TAX_CONST:Double = 0.15
+    var tax:MutableLiveData<Price> = MutableLiveData()
+    var subTotal:MutableLiveData<Price> = MutableLiveData()
+    var total:MutableLiveData<Price> = MutableLiveData()
+    fun updateCartItem(accessory: Accessory) = viewModelScope.launch {
         cartRepo.saveCart(accessory)
     }
 

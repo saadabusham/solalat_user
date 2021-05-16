@@ -159,12 +159,14 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Accessory
-        AccessoriesDialog(this, this, item, viewModel, object : AccessoriesDialog.CallBack {
-            override fun callBack(position: Int, accessory: Accessory) {
-                medicalsRecyclerAdapter.items[position].isWishlist = accessory.isWishlist
-            }
+        if (item.isAvailable == true) {
+            AccessoriesDialog(this, this, item, viewModel, object : AccessoriesDialog.CallBack {
+                override fun callBack(position: Int, accessory: Accessory) {
+                    medicalsRecyclerAdapter.items[position].isWishlist = accessory.isWishlist
+                }
 
-        }, position).show()
+            }, position).show()
+        }
     }
 
 

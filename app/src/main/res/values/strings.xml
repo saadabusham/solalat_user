@@ -129,7 +129,8 @@
 
     <!--    Menu    -->
     <string name="menu_my_account">My Account</string>
-    <string name="menu_notifications">Notifications</string>
+    <string name="menu_my_purchases">My purchases</string>
+    <string name="menu_favorites">Favorites</string>
     <string name="menu_language">Language</string>
     <string name="menu_report_provider">Report provider</string>
     <string name="menu_technical_support">Technical Support</string>
@@ -160,6 +161,7 @@
 
     <!--    Accessories    -->
     <string name="product_count_">%s products in this section</string>
+    <string name="available_at">available at %s</string>
 
     <!--    Medical    -->
 
@@ -257,6 +259,8 @@
     <string name="add_new_price">Add new price</string>
     <string name="the_minimum_increase_is_200_sar">(The minimum increase is 200 SAR)</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">The horse addition has been successfully\ncompleted. Your request will be studied and we will inform you of the approval once it is issued</string>
+
+    <!--    Cart    -->
     <string name="done">Done</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="you_have_x_of_product_in_your_cart">You have %s of product in your cart</string>
@@ -264,4 +268,5 @@
     <string name="value_added_tax_15">Value-added tax (15%)</string>
     <string name="total">Total</string>
     <string name="pay">Pay</string>
+    <string name="cart">Cart</string>
 </resources>

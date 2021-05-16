@@ -13,6 +13,7 @@ object Constants {
     const val AppPlatform: String = "android"
 
     object BundleData {
+        const val ID: String = "id"
         const val HORSE: String = "horse"
         const val CATEGORY: String = "category"
         const val CATEGORY_ID: String = "categoryId"

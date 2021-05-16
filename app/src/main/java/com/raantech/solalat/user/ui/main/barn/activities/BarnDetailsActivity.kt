@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.row_image_view.view.*
 
 @AndroidEntryPoint
 class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
-        BaseBindingRecyclerViewAdapter.OnItemClickListener {
+    BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -40,23 +40,23 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
     lateinit var servicesRecyclerAdapter: SelectedServicesRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.barn.value = (intent.getSerializableExtra(Constants.BundleData.BARN) as Barn)
         setContentView(
-                layoutResID = R.layout.activity_barn_details,
-                hasToolbar = true,
-                toolbarView = toolbar,
-                hasTitle = true,
-                title = R.string.solalat,
-                hasBackButton = true,
-                showBackArrow = true
+            layoutResID = R.layout.activity_barn_details,
+            hasToolbar = true,
+            toolbarView = toolbar,
+            hasTitle = true,
+            title = R.string.solalat,
+            hasBackButton = true,
+            showBackArrow = true
         )
         binding?.layoutToolbar?.isFavorite = viewModel.barn.value?.is_wishlist
         setUpBinding()
         setUpListeners()
-        init()
+        viewModel.getBarnDetails(intent.getIntExtra(Constants.BundleData.ID, 0))
+            .observe(this, barnDetailsObserver())
     }
 
-    private fun init() {
+    private fun setData() {
         setUpRecyclerView()
         setUpPager()
     }
@@ -73,27 +73,47 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
             openDial(viewModel.barn.value?.contactNumber)
         }
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
-            if(viewModel.barn.value?.is_wishlist == true){
-                viewModel.barn.value?.id?.let { it1 -> viewModel.removeFromWishList(it1).observe(this,wishListActionObserver()) }
-            }else{
-                viewModel.barn.value?.id?.let { it1 -> viewModel.addToWishList(it1).observe(this,wishListActionObserver()) }
+            if (viewModel.barn.value?.is_wishlist == true) {
+                viewModel.barn.value?.id?.let { it1 ->
+                    viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
+                }
+            } else {
+                viewModel.barn.value?.id?.let { it1 ->
+                    viewModel.addToWishList(it1).observe(this, wishListActionObserver())
+                }
             }
         }
     }
 
+    private fun barnDetailsObserver(): CustomObserverResponse<Barn> {
+        return CustomObserverResponse(
+            this,
+            object : CustomObserverResponse.APICallBack<Barn> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Barn?
+                ) {
+                    viewModel.barn.value = (data)
+                    setData()
+                }
+            }
+        )
+    }
+
     private fun wishListActionObserver(): CustomObserverResponse<Any> {
         return CustomObserverResponse(
-                this,
-                object : CustomObserverResponse.APICallBack<Any> {
-                    override fun onSuccess(
-                            statusCode: Int,
-                            subErrorCode: ResponseSubErrorsCodeEnum,
-                            data: ResponseWrapper<Any>?
-                    ) {
-                        viewModel.barn.value?.is_wishlist = viewModel.barn.value?.is_wishlist != true
-                        binding?.layoutToolbar?.isFavorite = viewModel.barn.value?.is_wishlist
-                    }
-                }, true
+            this,
+            object : CustomObserverResponse.APICallBack<Any> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ResponseWrapper<Any>?
+                ) {
+                    viewModel.barn.value?.is_wishlist = viewModel.barn.value?.is_wishlist != true
+                    binding?.layoutToolbar?.isFavorite = viewModel.barn.value?.is_wishlist
+                }
+            }, true
         )
     }
 
@@ -106,12 +126,12 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
     private fun setUpPager() {
         onBoardingAdapter = SliderAdapter(this)
         binding?.vpOnBoarding?.adapter =
-                onBoardingAdapter.apply {
-                    viewModel.barn.value?.additionalImages?.let {
-                        viewModel.barn.value?.baseImage?.let { it1 -> submitItem(it1) }
-                        submitItems(it)
-                    }
+            onBoardingAdapter.apply {
+                viewModel.barn.value?.additionalImages?.let {
+                    viewModel.barn.value?.baseImage?.let { it1 -> submitItem(it1) }
+                    submitItems(it)
                 }
+            }
         binding?.vpOnBoarding?.setOnItemClickListener(this)
         setUpIndicator()
     }
@@ -125,7 +145,7 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
             }
         }
         binding?.vpOnBoarding?.registerOnPageChangeCallback(
-                pagerCallback
+            pagerCallback
         )
     }
 
@@ -149,10 +169,12 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
     }
 
     companion object {
-        fun start(context: Context?,
-                  barn: Barn) {
+        fun start(
+            context: Context?,
+            barnId: Int
+        ) {
             val intent = Intent(context, BarnDetailsActivity::class.java)
-            intent.putExtra(Constants.BundleData.BARN, barn)
+            intent.putExtra(Constants.BundleData.ID, barnId)
             context?.startActivity(intent)
         }
 

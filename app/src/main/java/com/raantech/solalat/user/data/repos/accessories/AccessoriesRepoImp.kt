@@ -26,4 +26,12 @@ class AccessoriesRepoImp @Inject constructor(
         }
     }
 
+    override suspend fun getAccessory(id: Int): APIResource<ResponseWrapper<Accessory>> {
+        return try {
+            responseHandle.handleSuccess(accessoriesRemoteDao.getAccessory(id))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
+
 }

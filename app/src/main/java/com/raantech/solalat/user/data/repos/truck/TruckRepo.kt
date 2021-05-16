@@ -9,11 +9,15 @@ import retrofit2.http.Query
 interface TruckRepo {
 
     suspend fun getTrucks(
-        @Query("skip") skip: Int,
-        @Query("from_city") fromCity: Int?,
-        @Query("to_city") toCity: Int?,
-        @Query("latitude") latitude: Double?,
-        @Query("longitude") longitude: Double?
+        skip: Int,
+        fromCity: Int?,
+        toCity: Int?,
+        latitude: Double?,
+        longitude: Double?
     ): APIResource<ResponseWrapper<List<Truck>>>
+
+    suspend fun getTruck(
+        id: Int
+    ): APIResource<ResponseWrapper<Truck>>
 
 }

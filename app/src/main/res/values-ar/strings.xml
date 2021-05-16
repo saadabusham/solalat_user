@@ -129,7 +129,8 @@
 
     <!--    Menu    -->
     <string name="menu_my_account">حسابي الشخصي</string>
-    <string name="menu_notifications">اشعارات</string>
+    <string name="menu_my_purchases">مشترياتي</string>
+    <string name="menu_favorites">المفضلة</string>
     <string name="menu_language">اللغة</string>
     <string name="menu_report_provider">بلغ عن مقدم خدمة</string>
     <string name="menu_technical_support">الدعم الفني</string>
@@ -160,6 +161,7 @@
 
     <!--    Accessories    -->
     <string name="product_count_">%s منتج في هذا القسم</string>
+    <string name="available_at">متوفر في %s</string>
 
     <!--    Barn    -->
     <string name="all_cities">جميع المناطق</string>
@@ -255,6 +257,7 @@
     <string name="add_new_price">اضف سعر جديد أعلى</string>
     <string name="the_minimum_increase_is_200_sar">( الحد الادنى للزيادة 200 ر.س )</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">تمت عملية اضافة الخيل بنجاح ، سيتم دراسة طلبك وسنبلغك بالموافقة حال صدورها</string>
+    <!--   Cart    -->
     <string name="done">تم</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="you_have_x_of_product_in_your_cart">لديك منتجات عدد %s في السلة</string>
@@ -262,5 +265,6 @@
     <string name="value_added_tax_15">ضريبة القيمة المضافة(15%)</string>
     <string name="total">المجموع النهائي</string>
     <string name="pay">دفع المبلغ</string>
+    <string name="cart">سلة المشتريات</string>
 
 </resources>

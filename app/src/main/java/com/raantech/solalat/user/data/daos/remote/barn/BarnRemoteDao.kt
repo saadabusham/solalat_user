@@ -5,6 +5,7 @@ import com.raantech.solalat.user.data.common.NetworkConstants
 import com.raantech.solalat.user.data.models.barn.Barn
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BarnRemoteDao {
@@ -12,9 +13,15 @@ interface BarnRemoteDao {
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @GET("stables")
     suspend fun getBarns(
-            @Query("skip") skip: Int,
-            @Query("latitude") latitude: Double?,
-            @Query("longitude") longitude: Double?
+        @Query("skip") skip: Int,
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?
     ): ResponseWrapper<List<Barn>>
+
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @GET("stables/{id}/show")
+    suspend fun getBarn(
+        @Path("id") id: Int
+    ): ResponseWrapper<Barn>
 
 }

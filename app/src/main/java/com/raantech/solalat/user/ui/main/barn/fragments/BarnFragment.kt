@@ -189,7 +189,7 @@ class BarnFragment : BaseBindingFragment<FragmentBarnBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Barn
-        BarnDetailsActivity.start(requireContext(), item)
+        item.id?.let { BarnDetailsActivity.start(requireContext(), it) }
     }
 
 

@@ -1,18 +1,15 @@
 package com.raantech.solalat.user.data.models.horses
 
 import com.google.gson.annotations.SerializedName
-import com.raantech.solalat.user.common.MyApplication
 import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.models.Price
 import com.raantech.solalat.user.data.models.ServiceCategory
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.utils.DateTimeUtil.getDifferenceTime
+import com.raantech.solalat.user.utils.LocaleUtil
 import com.raantech.solalat.user.utils.extensions.getCurrentDate
-import com.raantech.solalat.user.utils.extensions.getDate
 import com.raantech.solalat.user.utils.extensions.toMillieSecconds
 import java.io.Serializable
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 data class Horse(
 
@@ -78,12 +75,27 @@ data class Horse(
 
 	@field:SerializedName("height")
 	val height: String? = null
-):Serializable {
-	fun action():String{
-		return if(typeOfSale == HorseAdsTypeEnum.SELL.value) price?.formatted?:""
-		else getDifferenceTime(getCurrentDate().toMillieSecconds(),endDateAuction.toMillieSecconds())
-	}
-	fun millisUntilFinish():Long{
-		return endDateAuction.toMillieSecconds() - getCurrentDate().toMillieSecconds()
-	}
+) : Serializable {
+    fun action(): String {
+        return if (typeOfSale == HorseAdsTypeEnum.SELL.value) price?.formatted ?: ""
+        else getDifferenceTime(
+			getCurrentDate().toMillieSecconds(),
+			endDateAuction.toMillieSecconds()
+		)
+    }
+
+    fun millisUntilFinish(): Long {
+        return endDateAuction.toMillieSecconds() - getCurrentDate().toMillieSecconds()
+    }
+
+    fun horseTitle(): String {
+        return when (LocaleUtil.getLanguage() == "ar") {
+			true -> {
+				"$age"+"سنوات"+"/"+category?.name
+			}
+            else -> {
+                "$age years /${category?.name}"
+            }
+        }
+    }
 }

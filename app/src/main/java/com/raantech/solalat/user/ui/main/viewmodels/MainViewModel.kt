@@ -98,6 +98,13 @@ class MainViewModel @ViewModelInject constructor(
         val response = barnRepo.getBarns(skip, latitude, longitude)
         emit(response)
     }
+    fun getBarnDetails(
+            id: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response = barnRepo.getBarn(id)
+        emit(response)
+    }
 
     fun getCities() = liveData {
         emit(APIResource.loading())
@@ -114,6 +121,13 @@ class MainViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response = truckRepo.getTrucks(skip, fromCity, toCity, latitude, longitude)
+        emit(response)
+    }
+    fun getTruck(
+            id: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response = truckRepo.getTruck(id)
         emit(response)
     }
 

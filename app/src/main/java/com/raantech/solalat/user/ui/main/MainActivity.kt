@@ -29,6 +29,7 @@ import com.raantech.solalat.user.ui.media.MediaActivity
 import com.raantech.solalat.user.ui.more.aboutus.AboutUsActivity
 import com.raantech.solalat.user.ui.more.faqs.FaqsActivity
 import com.raantech.solalat.user.ui.splash.SplashActivity
+import com.raantech.solalat.user.ui.wishlist.activities.WishListActivity
 import com.raantech.solalat.user.utils.LocaleUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -147,7 +148,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
         return arrayListOf(
             resources.getString(R.string.menu_my_account),
             resources.getString(R.string.media),
-            resources.getString(R.string.menu_notifications),
+            resources.getString(R.string.menu_my_purchases),
+            resources.getString(R.string.menu_favorites),
             resources.getString(R.string.menu_language),
             resources.getString(R.string.menu_report_provider),
             resources.getString(R.string.menu_technical_support),
@@ -161,7 +163,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
             binding?.drawerLayout?.closeDrawer(GravityCompat.START)
             when (position) {
                 1 -> MediaActivity.start(this)
-                3 -> viewModel.saveLanguage().observe(this, Observer {
+                3 -> WishListActivity.start(this)
+                4 -> viewModel.saveLanguage().observe(this, Observer {
                     this.let {
                         (it as BaseBindingActivity<*>).setLanguage(
                             if (viewModel.getAppLanguage() == "ar")
@@ -169,9 +172,9 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
                         )
                     }
                 })
-                5 -> FaqsActivity.start(this)
-                6 -> AboutUsActivity.start(this)
-                7 -> {
+                6 -> FaqsActivity.start(this)
+                7 -> AboutUsActivity.start(this)
+                8 -> {
                     viewModel.logoutRemote().observe(this, logoutResultObserver())
                 }
             }

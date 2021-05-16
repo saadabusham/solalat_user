@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.raantech.solalat.user.R
+import com.raantech.solalat.user.data.models.Price
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.databinding.ActivityCartBinding
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
@@ -32,7 +33,7 @@ class CartActivity : BaseBindingActivity<ActivityCartBinding>(),
             hasToolbar = true,
             toolbarView = toolbar,
             hasTitle = true,
-            title = R.string.solalat,
+            title = R.string.cart,
             hasBackButton = true,
             showBackArrow = true
         )
@@ -60,13 +61,24 @@ class CartActivity : BaseBindingActivity<ActivityCartBinding>(),
         viewModel.getCarts(
         ).observe(this, Observer {
             cartRecyclerAdapter.submitItems(it)
-            calculateCount()
+            calculattion()
             hideShowNoData()
         })
     }
-    private fun calculateCount(){
+
+    private fun calculattion() {
         binding?.count = cartRecyclerAdapter.itemCount
+        var subtotal = 0.0
+        cartRecyclerAdapter.items.forEach {
+            subtotal += it.price?.amount?.toDouble()?.times(it.count ?:1)?:0.0
+        }
+        viewModel.subTotal.postValue(Price(amount = subtotal.toString(),formatted = "$subtotal ${resources.getString(R.string.sar)}"))
+        viewModel.TAX_CONST?.times(subtotal)?.let {
+            viewModel.tax.postValue(Price(amount = it.toString(),formatted = "${it} ${resources.getString(R.string.sar)}"))
+            viewModel.total.postValue(Price(amount = (subtotal+it).toString(),formatted = "${(subtotal+it)} ${resources.getString(R.string.sar)}"))
+        }
     }
+
     private fun hideShowNoData() {
         if (cartRecyclerAdapter.itemCount == 0) {
             binding?.recyclerView?.gone()
@@ -87,14 +99,15 @@ class CartActivity : BaseBindingActivity<ActivityCartBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Accessory
-        if (view?.id == R.id.imgPlus || view?.id == R.id.imgMinus)
-            viewModel.addToCart(item)
-        else if (view?.id == R.id.cvDelete) {
+        if (view?.id == R.id.imgPlus || view?.id == R.id.imgMinus) {
+            viewModel.updateCartItem(item)
+            calculattion()
+        } else if (view?.id == R.id.cvDelete) {
             item.id?.let {
                 viewModel.deleteCart(it)
                 cartRecyclerAdapter.items.remove(item)
                 cartRecyclerAdapter.notifyItemRemoved(position)
-                calculateCount()
+                calculattion()
                 hideShowNoData()
             }
         }

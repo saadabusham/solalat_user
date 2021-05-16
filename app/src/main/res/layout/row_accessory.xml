@@ -57,8 +57,7 @@
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_marginBottom="@dimen/_6sdp"
-                android:src="@drawable/ic_mazad"
-                android:visibility="gone"
+                android:visibility="@{item.isAvailable == false ? View.VISIBLE : View.GONE}"
                 app:cardBackgroundColor="#85FFFFFF"
                 app:cardCornerRadius="@dimen/_5sdp">
 
@@ -67,8 +66,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="يتوفر في 20 يناير"
-                    android:textColor="@color/red" />
+                    android:text="@{@string/available_at(DataTimeExtensionsKt.getDateWithMonthName(item.dateOfAvailability))}"
+                    android:textColor="@color/red"
+                    tools:text="يتوفر في 20 يناير"
+                    android:textSize="@dimen/_11ssp"/>
             </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 

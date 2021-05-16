@@ -66,6 +66,14 @@ data class Accessory(
 	@ColumnInfo(name = "received_whatsapp")
 	val receivedWhatsapp: Boolean? = null,
 
+	@field:SerializedName("is_available")
+	@ColumnInfo(name = "is_available")
+	val isAvailable: Boolean? = null,
+
+	@field:SerializedName("date_of_availability")
+	@ColumnInfo(name = "date_of_availability")
+	val dateOfAvailability: String? = null,
+
 	@field:SerializedName("count")
 	@ColumnInfo(name = "count")
 	var count: Int? = 1

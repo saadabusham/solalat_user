@@ -16,7 +16,7 @@ import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.databinding.DialogAccessoryBinding
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
-import com.raantech.solalat.user.utils.extensions.longToast
+import dagger.hilt.android.AndroidEntryPoint
 
 class AccessoriesDialog(
     val context: Activity,
@@ -51,7 +51,7 @@ class AccessoriesDialog(
 
     fun onCancelClicked() {
         cancel()
-        callBack.callBack(position,accessory)
+        position.let { callBack.callBack(it,accessory) }
     }
 
     fun onAddToCartClicked() {

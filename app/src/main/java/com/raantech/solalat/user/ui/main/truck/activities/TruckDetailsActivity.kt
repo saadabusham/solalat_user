@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.row_image_view.view.*
 
 @AndroidEntryPoint
 class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
-        BaseBindingRecyclerViewAdapter.OnItemClickListener {
+    BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -43,19 +43,19 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
         super.onCreate(savedInstanceState)
         viewModel.truck.value = (intent.getSerializableExtra(Constants.BundleData.TRUCK) as Truck)
         setContentView(
-                layoutResID = R.layout.activity_truck_details,
-                hasToolbar = true,
-                toolbarView = toolbar,
-                hasTitle = true,
-                title = R.string.solalat,
-                hasBackButton = true,
-                showBackArrow = true
+            layoutResID = R.layout.activity_truck_details,
+            hasToolbar = true,
+            toolbarView = toolbar,
+            hasTitle = true,
+            title = R.string.solalat,
+            hasBackButton = true,
+            showBackArrow = true
         )
         binding?.layoutToolbar?.isFavorite = viewModel.truck.value?.is_wishlist
         setUpBinding()
         setUpListeners()
-        setUpRecyclerView()
-        init()
+        viewModel.getTruck(intent.getIntExtra(Constants.BundleData.ID, 0))
+            .observe(this, truckObserver())
     }
 
     private fun setUpRecyclerView() {
@@ -63,19 +63,23 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
         binding?.rvDataView?.adapter = dataViewAdapter
         viewModel.truck.value?.let {
             dataViewAdapter.submitItems(
-                    arrayListOf(
-                            DataView(resources.getString(R.string.truck_owner_name), it.name),
-                            DataView(resources.getString(R.string.truck_type), it.name),
-                            DataView(resources.getString(R.string.manufacturingYear), it.manufacturingYear),
-                            DataView(resources.getString(R.string.plate_number), it.truckNumber),
-                            DataView(resources.getString(R.string.provided_cities), it.cities?.map { it.name }?.joinToString())
+                arrayListOf(
+                    DataView(resources.getString(R.string.truck_owner_name), it.name),
+                    DataView(resources.getString(R.string.truck_type), it.name),
+                    DataView(resources.getString(R.string.manufacturingYear), it.manufacturingYear),
+                    DataView(resources.getString(R.string.plate_number), it.truckNumber),
+                    DataView(
+                        resources.getString(R.string.provided_cities),
+                        it.cities?.map { it.name }?.joinToString()
                     )
+                )
             )
         }
     }
 
-    private fun init() {
+    private fun setData() {
         setUpPager()
+        setUpRecyclerView()
     }
 
     private fun setUpBinding() {
@@ -91,38 +95,59 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
         }
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
             if (viewModel.truck.value?.is_wishlist == true) {
-                viewModel.truck.value?.id?.let { it1 -> viewModel.removeFromWishList(it1).observe(this, wishListActionObserver()) }
+                viewModel.truck.value?.id?.let { it1 ->
+                    viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
+                }
             } else {
-                viewModel.truck.value?.id?.let { it1 -> viewModel.addToWishList(it1).observe(this, wishListActionObserver()) }
+                viewModel.truck.value?.id?.let { it1 ->
+                    viewModel.addToWishList(it1).observe(this, wishListActionObserver())
+                }
             }
         }
     }
 
+
+    private fun truckObserver(): CustomObserverResponse<Truck> {
+        return CustomObserverResponse(
+            this,
+            object : CustomObserverResponse.APICallBack<Truck> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Truck?
+                ) {
+                    viewModel.truck.value = data
+                    setData()
+                }
+            }
+        )
+    }
+
     private fun wishListActionObserver(): CustomObserverResponse<Any> {
         return CustomObserverResponse(
-                this,
-                object : CustomObserverResponse.APICallBack<Any> {
-                    override fun onSuccess(
-                            statusCode: Int,
-                            subErrorCode: ResponseSubErrorsCodeEnum,
-                            data: ResponseWrapper<Any>?
-                    ) {
-                        viewModel.truck.value?.is_wishlist = viewModel.truck.value?.is_wishlist != true
-                        binding?.layoutToolbar?.isFavorite = viewModel.truck.value?.is_wishlist
-                    }
-                }, true
+            this,
+            object : CustomObserverResponse.APICallBack<Any> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ResponseWrapper<Any>?
+                ) {
+                    viewModel.truck.value?.is_wishlist = viewModel.truck.value?.is_wishlist != true
+                    binding?.layoutToolbar?.isFavorite = viewModel.truck.value?.is_wishlist
+                }
+            }, true
         )
     }
 
     private fun setUpPager() {
         onBoardingAdapter = SliderAdapter(this)
         binding?.vpOnBoarding?.adapter =
-                onBoardingAdapter.apply {
-                    viewModel.truck.value?.additionalImages?.let {
-                        viewModel.truck.value?.baseImage?.let { it1 -> submitItem(it1) }
-                        submitItems(it)
-                    }
+            onBoardingAdapter.apply {
+                viewModel.truck.value?.additionalImages?.let {
+                    viewModel.truck.value?.baseImage?.let { it1 -> submitItem(it1) }
+                    submitItems(it)
                 }
+            }
         binding?.vpOnBoarding?.setOnItemClickListener(this)
         setUpIndicator()
     }
@@ -136,7 +161,7 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
             }
         }
         binding?.vpOnBoarding?.registerOnPageChangeCallback(
-                pagerCallback
+            pagerCallback
         )
     }
 
@@ -160,10 +185,12 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
     }
 
     companion object {
-        fun start(context: Context?,
-                  truck: Truck) {
+        fun start(
+            context: Context?,
+            truckId: Int
+        ) {
             val intent = Intent(context, TruckDetailsActivity::class.java)
-            intent.putExtra(Constants.BundleData.TRUCK, truck)
+            intent.putExtra(Constants.BundleData.ID, truckId)
             context?.startActivity(intent)
         }
 

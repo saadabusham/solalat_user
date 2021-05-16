@@ -4,7 +4,7 @@ import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.api.response.ResponseHandler
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.daos.remote.wishlist.WishListRemoteDao
-import com.raantech.solalat.user.data.models.WishList
+import com.raantech.solalat.user.data.models.wishlist.WishList
 import com.raantech.solalat.user.data.repos.base.BaseRepo
 import javax.inject.Inject
 

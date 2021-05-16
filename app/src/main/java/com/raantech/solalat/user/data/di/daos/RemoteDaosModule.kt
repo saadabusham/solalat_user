@@ -9,7 +9,6 @@ import com.raantech.solalat.user.data.daos.remote.medical.MedicalRemoteDao
 import com.raantech.solalat.user.data.daos.remote.truck.TruckRemoteDao
 import com.raantech.solalat.user.data.daos.remote.user.UserRemoteDao
 import com.raantech.solalat.user.data.daos.remote.wishlist.WishListRemoteDao
-import com.raantech.solalat.user.data.models.WishList
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

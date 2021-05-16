@@ -9,16 +9,25 @@ import com.raantech.solalat.user.data.repos.base.BaseRepo
 import javax.inject.Inject
 
 class BarnRepoImp @Inject constructor(
-        responseHandler: ResponseHandler,
-        private val barnRemoteDao: BarnRemoteDao
+    responseHandler: ResponseHandler,
+    private val barnRemoteDao: BarnRemoteDao
 ) : BaseRepo(responseHandler), BarnRepo {
 
     override suspend fun getBarns(
-            skip: Int,
-            latitude: Double?,
-            longitude: Double?): APIResource<ResponseWrapper<List<Barn>>> {
+        skip: Int,
+        latitude: Double?,
+        longitude: Double?
+    ): APIResource<ResponseWrapper<List<Barn>>> {
         return try {
             responseHandle.handleSuccess(barnRemoteDao.getBarns(skip, latitude, longitude))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
+
+    override suspend fun getBarn(id: Int): APIResource<ResponseWrapper<Barn>> {
+        return try {
+            responseHandle.handleSuccess(barnRemoteDao.getBarn(id))
         } catch (e: Exception) {
             responseHandle.handleException(e)
         }

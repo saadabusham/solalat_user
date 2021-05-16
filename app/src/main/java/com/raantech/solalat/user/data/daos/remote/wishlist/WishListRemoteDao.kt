@@ -2,8 +2,7 @@ package com.raantech.solalat.user.data.daos.remote.wishlist
 
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.NetworkConstants
-import com.raantech.solalat.user.data.models.WishList
-import com.raantech.solalat.user.data.models.auth.login.TokenModel
+import com.raantech.solalat.user.data.models.wishlist.WishList
 import retrofit2.http.*
 
 interface WishListRemoteDao {

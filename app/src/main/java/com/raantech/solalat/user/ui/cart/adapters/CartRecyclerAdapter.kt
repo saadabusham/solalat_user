@@ -39,7 +39,7 @@ class CartRecyclerAdapter(
                 itemClickListener?.onItemClick(it, adapterPosition, item)
             }
             binding.imgMinus.setOnClickListener {
-                if (binding.count?:0 > 1)
+                if (binding.count ?: 0 > 1)
                     binding.count = binding.count?.minus(1)
                 item.count = binding.count
                 itemClickListener?.onItemClick(it, adapterPosition, item)

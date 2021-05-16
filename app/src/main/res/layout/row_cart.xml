@@ -10,9 +10,11 @@
         <import type="com.raantech.solalat.user.utils.extensions.DataTimeExtensionsKt" />
 
         <import type="android.view.View" />
+
         <variable
             name="count"
             type="Integer" />
+
         <variable
             name="item"
             type="com.raantech.solalat.user.data.models.accessories.Accessory" />
@@ -29,13 +31,13 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="@dimen/_15sdp"
             app:cardElevation="0dp"
-            app:strokeColor="#EFEFEF"
-            android:clickable="true"
-            android:focusable="true"
             app:rippleColor="@color/button_color"
+            app:strokeColor="#EFEFEF"
             app:strokeWidth="@dimen/_1sdp">
 
             <LinearLayout
@@ -103,12 +105,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
                             android:gravity="center"
-                            android:text="@{count.toString() }"
+                            android:text="@{count.toString()}"
                             android:textColor="@color/product_title_color"
-                            android:textSize="@dimen/_13ssp"
+                            android:textSize="@dimen/_12ssp"
                             tools:text="1" />
 
                         <ImageView
@@ -142,22 +144,22 @@
             android:id="@+id/cvDelete"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            app:cardBackgroundColor="@color/white"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_marginEnd="@dimen/_1sdp"
             android:layout_marginBottom="@dimen/_1sdp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="3dp"
             app:rippleColor="@color/button_color"
             app:shapeAppearanceOverlay="@style/midCornersCardAppearance">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_delete"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/ic_delete" />
         </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
 </layout>

@@ -226,7 +226,7 @@ class TrucksFragment : BaseBindingFragment<FragmentTrucksBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Truck
-        TruckDetailsActivity.start(requireContext(),item)
+        item.id?.let { TruckDetailsActivity.start(requireContext(), it) }
     }
 
 

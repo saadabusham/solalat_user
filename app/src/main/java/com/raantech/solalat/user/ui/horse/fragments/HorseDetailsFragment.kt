@@ -4,8 +4,12 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
+import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
+import com.raantech.solalat.user.data.api.response.ResponseWrapper
+import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.models.DataView
+import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.databinding.FragmentHorseDetailsBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
@@ -36,20 +40,24 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
 
     override fun onViewVisible() {
         super.onViewVisible()
+        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
+    }
+
+    private fun init() {
         addToolbar(
             hasToolbar = true,
             hasBackButton = true,
             showBackArrow = true,
             toolbarView = toolbar,
             hasTitle = true,
-            titleString = viewModel.horse?.name,
+            titleString = viewModel.horse.value?.name,
             hasSubTitle = false
         )
         setUpBinding()
         setUpListeners()
         setUpRecyclerView()
         setUpPager()
-        if (viewModel.horse?.typeOfSale == HorseAdsTypeEnum.AUCTION.value)
+        if (viewModel.horse.value?.typeOfSale == HorseAdsTypeEnum.AUCTION.value)
             viewModel.startHandleAuctionFinish()
     }
 
@@ -61,7 +69,7 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
     private fun setUpRecyclerView() {
         dataViewAdapter = DataViewRecyclerAdapter(requireContext())
         binding?.rvDataView?.adapter = dataViewAdapter
-        viewModel.horse?.let {
+        viewModel.horse.value?.let {
             dataViewAdapter.submitItems(
                 arrayListOf(
                     DataView(resources.getString(R.string.horse_name), it.name),
@@ -86,13 +94,24 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
 
     private fun setUpListeners() {
         binding?.btnWhatsapp?.setOnClickListener {
-            viewModel.horse?.contactNumber.openWhatsApp(requireActivity())
+            viewModel.horse.value?.contactNumber.openWhatsApp(requireActivity())
         }
         binding?.btnCallUs?.setOnClickListener {
-            requireActivity().openDial(viewModel.horse?.contactNumber)
+            requireActivity().openDial(viewModel.horse.value?.contactNumber)
         }
         binding?.btnJoinAuction?.setOnClickListener {
             navigationController.navigate(R.id.action_horseDetailsFragment_to_horseAuctionFragment)
+        }
+        binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
+            if (viewModel.horse.value?.is_wishlist == true) {
+                viewModel.horse.value?.id?.let { it1 ->
+                    viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
+                }
+            } else {
+                viewModel.horse.value?.id?.let { it1 ->
+                    viewModel.addToWishList(it1).observe(this, wishListActionObserver())
+                }
+            }
         }
     }
 
@@ -100,8 +119,8 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
         onBoardingAdapter = SliderAdapter(requireContext())
         binding?.vpOnBoarding?.adapter =
             onBoardingAdapter.apply {
-                viewModel.horse?.additionalImages?.let {
-                    viewModel.horse?.baseImage?.let { it1 -> submitItem(it1) }
+                viewModel.horse.value?.additionalImages?.let {
+                    viewModel.horse.value?.baseImage?.let { it1 -> submitItem(it1) }
                     submitItems(it)
                 }
             }
@@ -135,6 +154,39 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
         indicatorRecyclerAdapter.notifyDataSetChanged()
         indicatorPosition = position
     }
+
+    private fun wishListActionObserver(): CustomObserverResponse<Any> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<Any> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ResponseWrapper<Any>?
+                ) {
+                    viewModel.horse.value?.is_wishlist = viewModel.horse.value?.is_wishlist != true
+                    binding?.layoutToolbar?.isFavorite = viewModel.horse.value?.is_wishlist
+                }
+            }, true
+        )
+    }
+
+    private fun horseObserver(): CustomObserverResponse<Horse> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<Horse> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Horse?
+                ) {
+                    viewModel.horse.value = data
+                    init()
+                }
+            }, true
+        )
+    }
+
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Media

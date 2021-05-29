@@ -8,6 +8,7 @@ import com.raantech.solalat.user.data.models.barn.Barn
 import com.raantech.solalat.user.databinding.RowBarnBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
+import com.raantech.solalat.user.utils.extensions.setPopUpAnimation
 
 class BarnGridRecyclerAdapter(
         context: Context
@@ -22,6 +23,7 @@ class BarnGridRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setPopUpAnimation(position)
         if (holder is ViewHolder) {
             holder.bind(items[position])
         }

@@ -8,6 +8,7 @@ import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.databinding.RowHorseBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
+import com.raantech.solalat.user.utils.extensions.setPopUpAnimation
 
 class HorsesGridRecyclerAdapter(
         context: Context
@@ -22,6 +23,7 @@ class HorsesGridRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setPopUpAnimation(position)
         if (holder is ViewHolder) {
             holder.bind(items[position])
         }

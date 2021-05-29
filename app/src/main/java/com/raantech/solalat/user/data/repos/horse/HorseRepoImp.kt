@@ -22,6 +22,14 @@ class HorseRepoImp @Inject constructor(
         }
     }
 
+    override suspend fun getHorse(id: Int): APIResource<ResponseWrapper<Horse>> {
+        return try {
+            responseHandle.handleSuccess(horsesRemoteDao.getHorse(id))
+        } catch (e: Exception) {
+            responseHandle.handleException(e)
+        }
+    }
+
     override suspend fun addHorses(addHorseRequest: AddHorseRequest): APIResource<ResponseWrapper<Any>> {
         return try {
             responseHandle.handleSuccess(horsesRemoteDao.addHorses(addHorseRequest))

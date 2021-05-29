@@ -5,26 +5,32 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.liveData
+import com.raantech.solalat.user.data.api.response.APIResource
+import com.raantech.solalat.user.data.enums.WishListType
 import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
+import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 
 class HorseViewModel @ViewModelInject constructor(
-        @Assisted private val savedStateHandle: SavedStateHandle,
-        private val horseRepo: HorseRepo,
-        private val configurationRepo: ConfigurationRepo
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val horseRepo: HorseRepo,
+    private val configurationRepo: ConfigurationRepo,
+    private val wishListRepo: WishListRepo
 ) : BaseViewModel() {
 
-    var horse: Horse? = null
+    var horseId: Int? = null
+    var horse: MutableLiveData<Horse> = MutableLiveData()
     var days: MutableLiveData<Int> = MutableLiveData(0)
     var hours: MutableLiveData<Int> = MutableLiveData(0)
     var minutes: MutableLiveData<Int> = MutableLiveData(0)
 
     private val auctionCountDownTimer: CountDownTimer by lazy {
         object : CountDownTimer(
-                horse?.millisUntilFinish() ?: 0,
-                1000
+            horse.value?.millisUntilFinish() ?: 0,
+            1000
         ) {
             override fun onTick(millisUntilFinished: Long) {
                 refreshFinishingTime(millisUntilFinished)
@@ -51,6 +57,33 @@ class HorseViewModel @ViewModelInject constructor(
     fun startHandleAuctionFinish() {
         auctionCountDownTimer.cancel()
         auctionCountDownTimer.start()
+    }
+
+    fun getHorse(
+        id: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            horseRepo.getHorse(id)
+        emit(response)
+    }
+
+    fun addToWishList(
+        productId: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            wishListRepo.addToWishList(WishListType.HORSE.value,productId)
+        emit(response)
+    }
+
+    fun removeFromWishList(
+        productId: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            wishListRepo.removeFromWishList(productId,WishListType.HORSE.value)
+        emit(response)
     }
 
 }

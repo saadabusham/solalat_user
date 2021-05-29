@@ -10,12 +10,14 @@ import com.raantech.solalat.user.common.CommonEnums
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.enums.UserEnums
+import com.raantech.solalat.user.data.enums.WishListType
 import com.raantech.solalat.user.data.models.City
 import com.raantech.solalat.user.data.models.ServiceCategory
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.data.models.barn.Barn
 import com.raantech.solalat.user.data.models.map.Address
 import com.raantech.solalat.user.data.models.truck.Truck
+import com.raantech.solalat.user.data.models.wishlist.WishList
 import com.raantech.solalat.user.data.pref.configuration.ConfigurationPref
 import com.raantech.solalat.user.data.pref.user.UserPref
 import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
@@ -146,7 +148,7 @@ class MainViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.addToWishList(productId)
+                wishListRepo.addToWishList(WishListType.PRODUCT.value,productId)
         emit(response)
     }
 
@@ -155,7 +157,7 @@ class MainViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.removeFromWishList(productId)
+                wishListRepo.removeFromWishList(productId,WishListType.PRODUCT.value)
         emit(response)
     }
 

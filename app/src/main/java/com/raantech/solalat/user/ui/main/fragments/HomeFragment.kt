@@ -191,7 +191,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
 
     override fun onItemClick(view: View?, position: Int, item: Any) {
         item as Horse
-        HorseActivity.start(requireContext(),item)
+        item.id?.let { HorseActivity.start(requireContext(), it) }
     }
 
 }

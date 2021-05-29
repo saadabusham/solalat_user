@@ -28,7 +28,10 @@ import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
 import com.raantech.solalat.user.ui.media.MediaActivity
 import com.raantech.solalat.user.ui.more.aboutus.AboutUsActivity
 import com.raantech.solalat.user.ui.more.faqs.FaqsActivity
+import com.raantech.solalat.user.ui.reportprovider.ReportProviderActivity
 import com.raantech.solalat.user.ui.splash.SplashActivity
+import com.raantech.solalat.user.ui.technicalsupport.TechnicalSupportActivity
+import com.raantech.solalat.user.ui.updateprofile.UpdateProfileActivity
 import com.raantech.solalat.user.ui.wishlist.activities.WishListActivity
 import com.raantech.solalat.user.utils.LocaleUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,10 +119,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
                 binding?.drawerLayout?.openDrawer(GravityCompat.START)
             }
         }
-
         binding?.drawerLayout?.setScrimColor(Color.TRANSPARENT)
         binding?.drawerLayout?.drawerElevation = 0.toFloat()
-//        binding?.drawerLayout?.setScrimColor(resources.getColor(R.color.button_color))
         binding?.drawerLayout?.addDrawerListener(object : SimpleDrawerListener() {
             override fun onDrawerSlide(drawer: View, slideOffset: Float) {
                 if (LocaleUtil.getLanguage() == "ar") {
@@ -147,14 +148,14 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
     private fun getDrawerList(): List<String> {
         return arrayListOf(
             resources.getString(R.string.menu_my_account),
-            resources.getString(R.string.media),
             resources.getString(R.string.menu_my_purchases),
             resources.getString(R.string.menu_favorites),
-            resources.getString(R.string.menu_language),
+            resources.getString(R.string.media),
             resources.getString(R.string.menu_report_provider),
             resources.getString(R.string.menu_technical_support),
             resources.getString(R.string.menu_about_us),
-            resources.getString(R.string.logout)
+            resources.getString(R.string.logout),
+            resources.getString(R.string.menu_language)
         )
     }
 
@@ -162,9 +163,16 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
         if (item is String) {
             binding?.drawerLayout?.closeDrawer(GravityCompat.START)
             when (position) {
-                1 -> MediaActivity.start(this)
-                3 -> WishListActivity.start(this)
-                4 -> viewModel.saveLanguage().observe(this, Observer {
+                0 -> UpdateProfileActivity.start(this)
+                2 -> WishListActivity.start(this)
+                3 -> MediaActivity.start(this)
+                4 -> ReportProviderActivity.start(this)
+                5 -> TechnicalSupportActivity.start(this)
+                6 -> AboutUsActivity.start(this)
+                7 -> {
+                    viewModel.logoutRemote().observe(this, logoutResultObserver())
+                }
+                8 -> viewModel.saveLanguage().observe(this, Observer {
                     this.let {
                         (it as BaseBindingActivity<*>).setLanguage(
                             if (viewModel.getAppLanguage() == "ar")
@@ -172,11 +180,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
                         )
                     }
                 })
-                6 -> FaqsActivity.start(this)
-                7 -> AboutUsActivity.start(this)
-                8 -> {
-                    viewModel.logoutRemote().observe(this, logoutResultObserver())
-                }
             }
         }
     }

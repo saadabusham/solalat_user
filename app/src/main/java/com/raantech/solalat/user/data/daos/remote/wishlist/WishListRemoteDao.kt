@@ -10,20 +10,22 @@ interface WishListRemoteDao {
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @GET("wishlist")
     suspend fun getWishList(
-            @Query("skip") skip: Int
+        @Query("skip") skip: Int
     ): ResponseWrapper<List<WishList>>
 
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @FormUrlEncoded
     @POST("wishlist/store")
     suspend fun addToWishList(
-            @Field("product_id") productId:Int
+        @Field("entity_type") entity_type: String,
+        @Field("entity_id") entity_id: Int
     ): ResponseWrapper<Any>
 
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @DELETE("wishlist/{product_id}/destroy")
     suspend fun removeFromWishList(
-            @Path("product_id") productId:Int
+        @Path("product_id") productId: Int,
+        @Query("entity_type") entity_type: String
     ): ResponseWrapper<Any>
 
 }

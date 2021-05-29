@@ -5,6 +5,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
+import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
+import com.raantech.solalat.user.data.api.response.ResponseWrapper
+import com.raantech.solalat.user.data.common.CustomObserverResponse
+import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.databinding.FragmentHorseAuctionBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
@@ -33,22 +37,28 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
 
     override fun onViewVisible() {
         super.onViewVisible()
+        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
+    }
+
+    private fun init() {
         addToolbar(
             hasToolbar = true,
             hasBackButton = true,
             showBackArrow = true,
             toolbarView = toolbar,
             hasTitle = true,
-            titleString = viewModel.horse?.name,
+            titleString = viewModel.horse.value?.name,
             hasSubTitle = false
         )
+        binding?.layoutToolbar?.isFavorite = viewModel.horse.value?.is_wishlist
         setUpBinding()
         setUpListeners()
         setUpPager()
         setUpRvPrice()
-        viewModel.horse?.price?.amount = viewModel.horse?.price?.amount?.replace(".", "")
-        lastPrice = viewModel.horse?.price?.amount
-        viewModel.horse?.price?.amount?.let { refreshAuction() }
+        viewModel.horse.value?.price?.amount =
+            viewModel.horse.value?.price?.amount?.replace(".", "")
+        lastPrice = viewModel.horse.value?.price?.amount
+        viewModel.horse.value?.price?.amount?.let { refreshAuction() }
     }
 
     private fun setUpBinding() {
@@ -59,6 +69,17 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     private fun setUpListeners() {
         binding?.btnAddPrice?.setOnClickListener {
 
+        }
+        binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
+            if (viewModel.horse.value?.is_wishlist == true) {
+                viewModel.horse.value?.id?.let { it1 ->
+                    viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
+                }
+            } else {
+                viewModel.horse.value?.id?.let { it1 ->
+                    viewModel.addToWishList(it1).observe(this, wishListActionObserver())
+                }
+            }
         }
     }
 
@@ -84,7 +105,7 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                     priceDigitsRecyclerAdapter.items.reversed().joinToString(separator = "")
                         .toInt().let {
                             if (it > 200 &&
-                                it > viewModel.horse?.price?.amount?.toInt()?.plus(200) ?: 0
+                                it > viewModel.horse?.value?.price?.amount?.toInt()?.plus(200) ?: 0
                             ) {
                                 var numberToMinus = StringBuilder()
                                 for (i in 0..position)
@@ -93,7 +114,7 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                                     if (doublePrice) numberToMinus.toString().toInt() * 2
                                     else numberToMinus.toString().toInt()
                                 )?.let {
-                                    if (it > viewModel.horse?.price?.amount?.toInt() ?: 0) {
+                                    if (it > viewModel.horse?.value?.price?.amount?.toInt() ?: 0) {
                                         lastPrice = it.toString()
                                         refreshAuction()
                                     }
@@ -119,8 +140,8 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         onBoardingAdapter = SliderAdapter(requireContext())
         binding?.vpOnBoarding?.adapter =
             onBoardingAdapter.apply {
-                viewModel.horse?.additionalImages?.let {
-                    viewModel.horse?.baseImage?.let { it1 -> submitItem(it1) }
+                viewModel.horse?.value?.additionalImages?.let {
+                    viewModel.horse?.value?.baseImage?.let { it1 -> submitItem(it1) }
                     submitItems(it)
                 }
             }
@@ -153,6 +174,38 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         indicatorRecyclerAdapter.items[position] = true
         indicatorRecyclerAdapter.notifyDataSetChanged()
         indicatorPosition = position
+    }
+
+    private fun wishListActionObserver(): CustomObserverResponse<Any> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<Any> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ResponseWrapper<Any>?
+                ) {
+                    viewModel.horse.value?.is_wishlist = viewModel.horse.value?.is_wishlist != true
+                    binding?.layoutToolbar?.isFavorite = viewModel.horse.value?.is_wishlist
+                }
+            }, true
+        )
+    }
+
+    private fun horseObserver(): CustomObserverResponse<Horse> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<Horse> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Horse?
+                ) {
+                    viewModel.horse.value = data
+                    init()
+                }
+            }, true
+        )
     }
 
     override fun onItemClick(view: View?, position: Int, item: Any) {

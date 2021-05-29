@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.raantech.solalat.user.BuildConfig
 import com.raantech.solalat.user.R
+import com.raantech.solalat.user.data.enums.ServiceTypesEnum
 import com.raantech.solalat.user.utils.extensions.px
 import java.io.File
 
@@ -118,6 +119,21 @@ fun ImageView?.setImageFromRec(
     @DrawableRes imageRes: Int
 ) {
     this?.setImageResource(imageRes)
+}
+
+@BindingAdapter("category_type_icon")
+fun ImageView?.setCategoryTypeIcon(
+    type: String
+) {
+    this?.setImageResource(
+        when(type){
+            ServiceTypesEnum.TRANSPORTATION.value -> R.drawable.ic_cat_transportation
+            ServiceTypesEnum.ACCESSORIES.value -> R.drawable.ic_cat_accessories
+            ServiceTypesEnum.MEDICAL.value -> R.drawable.ic_cat_medical
+            ServiceTypesEnum.BARN.value -> R.drawable.ic_cat_barn
+            else -> R.drawable.ic_cat_transportation
+        }
+    )
 }
 
 const val IMAGES_BASE_URL = BuildConfig.ImageSubUrl

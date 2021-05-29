@@ -10,35 +10,37 @@ import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 
 class WishListViewModel @ViewModelInject constructor(
-        @Assisted private val savedStateHandle: SavedStateHandle,
-        private val wishListRepo: WishListRepo,
-        private val accessoriesRepo: AccessoriesRepo
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val wishListRepo: WishListRepo,
+    private val accessoriesRepo: AccessoriesRepo
 ) : BaseViewModel() {
 
     fun getWishList(
-            skip: Int
+        skip: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.getWishList(skip)
+            wishListRepo.getWishList(skip)
         emit(response)
     }
 
     fun addToWishList(
-            productId: Int
+        entityType: String,
+        productId: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.addToWishList(productId)
+            wishListRepo.addToWishList(entityType,productId)
         emit(response)
     }
 
     fun removeFromWishList(
-            productId: Int
+        entityType: String,
+        productId: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.removeFromWishList(productId)
+            wishListRepo.removeFromWishList(productId,entityType)
         emit(response)
     }
 

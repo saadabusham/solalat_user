@@ -74,7 +74,10 @@ data class Horse(
 	val receivedWhatsapp: Int? = null,
 
 	@field:SerializedName("height")
-	val height: String? = null
+	val height: String? = null,
+
+	@field:SerializedName("is_wishlist")
+	var is_wishlist: Boolean? = null
 ) : Serializable {
     fun action(): String {
         return if (typeOfSale == HorseAdsTypeEnum.SELL.value) price?.formatted ?: ""

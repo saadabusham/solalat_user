@@ -9,8 +9,8 @@ import com.raantech.solalat.user.data.repos.base.BaseRepo
 import javax.inject.Inject
 
 class WishListRepoImp @Inject constructor(
-        responseHandler: ResponseHandler,
-        private val wishListRemoteDao: WishListRemoteDao
+    responseHandler: ResponseHandler,
+    private val wishListRemoteDao: WishListRemoteDao
 ) : BaseRepo(responseHandler), WishListRepo {
 
     override suspend fun getWishList(skip: Int): APIResource<ResponseWrapper<List<WishList>>> {
@@ -21,17 +21,23 @@ class WishListRepoImp @Inject constructor(
         }
     }
 
-    override suspend fun addToWishList(productId: Int): APIResource<ResponseWrapper<Any>> {
+    override suspend fun addToWishList(
+        entity_type: String,
+        entity_id: Int
+    ): APIResource<ResponseWrapper<Any>> {
         return try {
-            responseHandle.handleSuccess(wishListRemoteDao.addToWishList(productId))
+            responseHandle.handleSuccess(wishListRemoteDao.addToWishList(entity_type, entity_id))
         } catch (e: Exception) {
             responseHandle.handleException(e)
         }
     }
 
-    override suspend fun removeFromWishList(productId: Int): APIResource<ResponseWrapper<Any>> {
+    override suspend fun removeFromWishList(
+        productId: Int,
+        entity_type: String
+    ): APIResource<ResponseWrapper<Any>> {
         return try {
-            responseHandle.handleSuccess(wishListRemoteDao.removeFromWishList(productId))
+            responseHandle.handleSuccess(wishListRemoteDao.removeFromWishList(productId,entity_type))
         } catch (e: Exception) {
             responseHandle.handleException(e)
         }

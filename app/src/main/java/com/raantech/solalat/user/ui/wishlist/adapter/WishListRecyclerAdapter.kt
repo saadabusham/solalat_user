@@ -8,6 +8,8 @@ import com.raantech.solalat.user.data.models.wishlist.WishList
 import com.raantech.solalat.user.databinding.RowWishlistBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
+import com.raantech.solalat.user.utils.extensions.setPopUpAnimation
+import com.raantech.solalat.user.utils.extensions.setSlideAnimation
 
 class WishListRecyclerAdapter(
     context: Context
@@ -22,6 +24,7 @@ class WishListRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setSlideAnimation(position)
         if (holder is ViewHolder) {
             holder.bind(items[position])
         }

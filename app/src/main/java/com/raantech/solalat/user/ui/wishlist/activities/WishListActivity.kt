@@ -17,12 +17,14 @@ import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.enums.ServiceTypesEnum
+import com.raantech.solalat.user.data.enums.WishListType
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.data.models.wishlist.WishList
 import com.raantech.solalat.user.databinding.ActivityWishlistBinding
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
+import com.raantech.solalat.user.ui.horse.HorseActivity
 import com.raantech.solalat.user.ui.main.accessories.dialogs.AccessoriesDialog
 import com.raantech.solalat.user.ui.main.barn.activities.BarnDetailsActivity
 import com.raantech.solalat.user.ui.main.truck.activities.TruckDetailsActivity
@@ -225,9 +227,16 @@ class WishListActivity : BaseBindingActivity<ActivityWishlistBinding>(),
         if (view?.id == R.id.imgFavorite) {
             positionToUpdate = position
             if (item.isWishlist == true) {
-                viewModel.removeFromWishList(item.id ?: 0).observe(this, wishListActionObserver())
+                viewModel.removeFromWishList(
+                    if (item.type == ServiceTypesEnum.HORSES.value)
+                        WishListType.HORSE.value else WishListType.PRODUCT.value, item.id ?: 0
+                ).observe(this, wishListActionObserver())
             } else {
-                viewModel.addToWishList(item.id ?: 0).observe(this, wishListActionObserver())
+                viewModel.addToWishList(
+                    if (item.type == ServiceTypesEnum.HORSES.value)
+                        WishListType.HORSE.value else WishListType.PRODUCT.value,
+                    item.id ?: 0
+                ).observe(this, wishListActionObserver())
             }
         } else {
             when (item.type) {
@@ -241,6 +250,9 @@ class WishListActivity : BaseBindingActivity<ActivityWishlistBinding>(),
                 }
                 ServiceTypesEnum.TRANSPORTATION.value -> {
                     item.id?.let { TruckDetailsActivity.start(this, it) }
+                }
+                ServiceTypesEnum.HORSES.value -> {
+                    item.id?.let { HorseActivity.start(this, it) }
                 }
             }
         }

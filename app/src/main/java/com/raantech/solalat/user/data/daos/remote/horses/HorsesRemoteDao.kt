@@ -11,21 +11,27 @@ interface HorsesRemoteDao {
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @GET("horses")
     suspend fun getHorses(
-            @Query("type_of_sale") type_of_sale: String,
-            @Query("skip") skip: Int?
+        @Query("type_of_sale") type_of_sale: String,
+        @Query("skip") skip: Int?
     ): ResponseWrapper<List<Horse>>
+
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @GET("horses/{id}")
+    suspend fun getHorse(
+        @Path("id") id: Int
+    ): ResponseWrapper<Horse>
 
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @POST("user/horses")
     suspend fun addHorses(
-            @Body addHorseRequest: AddHorseRequest
+        @Body addHorseRequest: AddHorseRequest
     ): ResponseWrapper<Any>
 
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @PUT("user/horses/{id}")
     suspend fun updateHorse(
-            @Path("id") id: Int,
-            @Body addHorseRequest: AddHorseRequest
+        @Path("id") id: Int,
+        @Body addHorseRequest: AddHorseRequest
     ): ResponseWrapper<Any>
 
 }

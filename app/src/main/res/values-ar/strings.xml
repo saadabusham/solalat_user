@@ -78,7 +78,6 @@
     <string name="already_have_an_account">هل لديك حساب؟</string>
     <string name="hint_date">التاريخ</string>
     <string name="time">الوقت</string>
-    <string name="email">البريد الالكتروني</string>
     <string name="password">كلمة المرور</string>
     <string name="phone_number">رقم الهاتف</string>
     <string name="otp">رمز التحقق</string>
@@ -123,7 +122,7 @@
 
     <!--    Media   -->
     <string name="add_Media">اضف وسائط</string>
-    <string name="media">الوسائط</string>
+    <string name="media">ملف الصور المخزنة</string>
     <string name="no_data_found">لا يوجد بيانات</string>
     <string name="no_available_data">-- لا يوجد بيانات متاحة --</string>
 
@@ -269,4 +268,26 @@
     <string name="successful_purchase_will_be_delivered_to_you_within_3_days">تمت  عملية الشراء بنجاح ، سيتم توصيلها لك خلال 3 أيام</string>
     <string name="purchas_completed">Purchase Completed</string>
 
+    <!--    Technical Support   -->
+    <string name="title_of_the_problem">عنوان المشكلة</string>
+    <string name="enter_the_title_of_the_problem_you_encountered_in_the_application">ادخل عنوان المشكله التي واجهتها بالتطبيق</string>
+    <string name="complaint_summary">ملخص الشكوى</string>
+    <string name="enter_a_summary_of_the_problem_you_faced_with_the_application">ادخل ملخص المشكله التي واجهتها بالتطبيق</string>
+    <string name="send">ارسل</string>
+
+    <!--    Report Provider     -->
+    <string name="report_type">نوع  البلاغ</string>
+    <string name="title_of_the_complaint">عنوان الشكوى </string>
+    <string name="the_name_of_the_service_provider_name_of_the_service_you_intend_to_complain_about">اسم مقدم / اسم الخدمة الذي تنوي الشكوى عليه</string>
+    <string name="enter_what_is_the_content_of_the_complaint_submitted">ادخل ما هي فحوى الشكوى المقدمة</string>
+
+    <!--    Update Profile  -->
+    <string name="name">الاسم</string>
+    <string name="enter_the_full_name">ادخل الاسم كامل</string>
+    <string name="home_address">عنوان السكن</string>
+    <string name="determine_where_you_will_benefit_from_our_services">حدد المكان الذي ستستفيد به من خدماتنات</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="xxx_xxx_xxx">xxx@xxx.xxx</string>
+    <string name="save">حفظ التعديلات</string>
+    <string name="profile">حسابي الشخصي</string>
 </resources>

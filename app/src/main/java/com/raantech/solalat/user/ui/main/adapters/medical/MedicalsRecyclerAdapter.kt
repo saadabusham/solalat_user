@@ -10,6 +10,8 @@ import com.raantech.solalat.user.data.models.medical.Medical
 import com.raantech.solalat.user.databinding.RowMedicalServiceBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
+import com.raantech.solalat.user.utils.extensions.setPopUpAnimation
+import com.raantech.solalat.user.utils.extensions.setSlideAnimation
 
 class MedicalsRecyclerAdapter(
     context: Context
@@ -26,6 +28,7 @@ class MedicalsRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.setSlideAnimation(position)
         if (holder is ViewHolder) {
             holder.bind(items[position])
         }

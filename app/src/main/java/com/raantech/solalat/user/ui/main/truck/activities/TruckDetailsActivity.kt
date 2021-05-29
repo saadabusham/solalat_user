@@ -41,7 +41,6 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
     lateinit var dataViewAdapter: DataViewRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.truck.value = (intent.getSerializableExtra(Constants.BundleData.TRUCK) as Truck)
         setContentView(
             layoutResID = R.layout.activity_truck_details,
             hasToolbar = true,
@@ -58,6 +57,10 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
             .observe(this, truckObserver())
     }
 
+    private fun setData() {
+        setUpPager()
+        setUpRecyclerView()
+    }
     private fun setUpRecyclerView() {
         dataViewAdapter = DataViewRecyclerAdapter(this)
         binding?.rvDataView?.adapter = dataViewAdapter
@@ -75,11 +78,6 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
                 )
             )
         }
-    }
-
-    private fun setData() {
-        setUpPager()
-        setUpRecyclerView()
     }
 
     private fun setUpBinding() {

@@ -78,7 +78,6 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="hint_date">Date</string>
     <string name="time">Time</string>
-    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="phone_number">Phone number</string>
     <string name="otp">OTP</string>
@@ -271,4 +270,27 @@
     <string name="cart">Cart</string>
     <string name="successful_purchase_will_be_delivered_to_you_within_3_days">Successful purchase, will be delivered to you within 3 days</string>
     <string name="purchas_completed">Purchase Completed</string>
+
+    <!--    Technical Support   -->
+    <string name="title_of_the_problem">Title of the problem</string>
+    <string name="enter_the_title_of_the_problem_you_encountered_in_the_application">Enter the title of the problem you encountered in the application</string>
+    <string name="complaint_summary">Complaint summary</string>
+    <string name="enter_a_summary_of_the_problem_you_faced_with_the_application">Enter a summary of the problem you faced with the application</string>
+    <string name="send">Send</string>
+
+    <!--    Report Provider     -->
+    <string name="report_type">Report Type</string>
+    <string name="title_of_the_complaint">Title of the complaint</string>
+    <string name="the_name_of_the_service_provider_name_of_the_service_you_intend_to_complain_about">The name of the service provider / name of the service you intend to complain about</string>
+    <string name="enter_what_is_the_content_of_the_complaint_submitted">Enter what is the content of the complaint submitted</string>
+
+    <!--    Update Profile  -->
+    <string name="name">Name</string>
+    <string name="enter_the_full_name">Enter the full name</string>
+    <string name="home_address">Home Address</string>
+    <string name="determine_where_you_will_benefit_from_our_services">Determine where you will benefit from our services</string>
+    <string name="email">Email</string>
+    <string name="xxx_xxx_xxx">xxx@xxx.xxx</string>
+    <string name="save">Save</string>
+    <string name="profile">Profile</string>
 </resources>

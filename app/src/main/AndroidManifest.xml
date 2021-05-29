@@ -81,6 +81,15 @@
         <activity
             android:name=".ui.cart.PayedSuccessActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.technicalsupport.TechnicalSupportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.reportprovider.ReportProviderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.updateprofile.UpdateProfileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

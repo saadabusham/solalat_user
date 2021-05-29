@@ -10,15 +10,17 @@ import retrofit2.http.Query
 interface WishListRepo {
 
     suspend fun getWishList(
-            @Query("skip") skip: Int
+        skip: Int
     ): APIResource<ResponseWrapper<List<WishList>>>
 
     suspend fun addToWishList(
-            @Field("product_id") productId: Int
+        entity_type:String,
+        entity_id:Int
     ): APIResource<ResponseWrapper<Any>>
 
     suspend fun removeFromWishList(
-            @Path("product_id") productId: Int
+        productId: Int,
+        entity_type: String
     ): APIResource<ResponseWrapper<Any>>
 
 }

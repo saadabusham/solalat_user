@@ -12,6 +12,10 @@ interface HorseRepo {
             skip: Int?
     ): APIResource<ResponseWrapper<List<Horse>>>
 
+    suspend fun getHorse(
+            id: Int
+    ): APIResource<ResponseWrapper<Horse>>
+
     suspend fun addHorses(
             addHorseRequest: AddHorseRequest
     ): APIResource<ResponseWrapper<Any>>

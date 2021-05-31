@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.raantech.solalat.user.R" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.raantech.solalat.user.ui.filter.viewmodels.FiltersViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/layout_toolbar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_below="@id/seekbarPrice"
+                android:layout_alignStart="@id/seekbarPrice"
+                android:layout_alignEnd="@id/seekbarPrice"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_meter"
+                android:visibility="visible" />
+            <com.raantech.solalat.user.ui.base.views.appseekbar.AppSeekBar
+                android:id="@+id/seekbarPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:gravity="center"
+                app:rsb_gravity="bottom"
+                app:rsb_indicator_background_color="@color/button_color"
+                app:rsb_indicator_height="@dimen/_30sdp"
+                app:rsb_indicator_padding_bottom="@dimen/_3sdp"
+                app:rsb_indicator_padding_left="@dimen/_5sdp"
+                app:rsb_indicator_padding_right="@dimen/_5sdp"
+                app:rsb_indicator_padding_top="@dimen/_5sdp"
+                app:rsb_indicator_show_mode="alwaysShow"
+                app:rsb_max="10000"
+                app:rsb_indicator_radius="@dimen/_3sdp"
+                app:rsb_min="0.0"
+                app:rsb_min_interval="5"
+                app:rsb_mode="range"
+                app:rsb_progress_color="@color/button_color"
+                app:rsb_progress_default_color="#E6E6E6"
+                app:rsb_progress_height="@dimen/_5sdp"
+                app:rsb_step_auto_bonding="true"
+                app:rsb_step_color="@color/colorPrimaryDark"
+                app:rsb_step_drawable="@drawable/rsb_default_thumb"
+                app:rsb_step_height="@dimen/_5sdp"
+                app:rsb_step_radius="4dp"
+                app:rsb_step_width="@dimen/_5sdp"
+                app:rsb_thumb_drawable="@drawable/rsb_default_thumb"
+                app:rsb_tick_mark_layout_gravity="top"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_tick_mark_number="1"
+                app:rsb_tick_mark_text_color="@color/text_gray"
+                app:rsb_tick_mark_text_margin="@dimen/_12sdp"
+                app:rsb_tick_mark_text_size="@dimen/_10ssp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

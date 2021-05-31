@@ -23,11 +23,12 @@ import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.cart.CartActivity
+import com.raantech.solalat.user.ui.filter.FiltersActivity
 import com.raantech.solalat.user.ui.main.adapters.DrawerRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
 import com.raantech.solalat.user.ui.media.MediaActivity
 import com.raantech.solalat.user.ui.more.aboutus.AboutUsActivity
-import com.raantech.solalat.user.ui.more.faqs.FaqsActivity
+import com.raantech.solalat.user.ui.purchase.PurchasesActivity
 import com.raantech.solalat.user.ui.reportprovider.ReportProviderActivity
 import com.raantech.solalat.user.ui.splash.SplashActivity
 import com.raantech.solalat.user.ui.technicalsupport.TechnicalSupportActivity
@@ -68,7 +69,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
             AddHorseActivity.start(this)
         }
         binding?.appBarMain?.layoutToolbar?.imgSearch?.setOnClickListener {
-
+            FiltersActivity.start(this)
         }
     }
 
@@ -164,6 +165,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
             binding?.drawerLayout?.closeDrawer(GravityCompat.START)
             when (position) {
                 0 -> UpdateProfileActivity.start(this)
+                1 -> PurchasesActivity.start(this)
                 2 -> WishListActivity.start(this)
                 3 -> MediaActivity.start(this)
                 4 -> ReportProviderActivity.start(this)

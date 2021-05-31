@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.raantech.solalat.user.data.models.Purchase" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/_15sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textview_normal_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.id.toString()}"
+                        android:textColor="@color/toolbar_title_color"
+                        android:textSize="@dimen/_15ssp"
+                        tools:text="200343" />
+
+                    <TextView
+                        style="@style/textview_normal_regular"
+                        status="@{item.status}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/toolbar_title_color"
+                        android:textSize="@dimen/_9ssp"
+                        tools:text="في الطريق" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@{item.itemsString()}"
+                    android:textColor="@color/toolbar_title_color"
+                    android:textSize="@dimen/_15ssp"
+                    tools:text="2X حذو اغريقي  رمادي\n
+                2X حذو اغريقي  رمادي\n
+                2X حذو اغريقي  رمادي" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end|top"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.date}"
+                    android:textColor="@color/toolbar_title_color"
+                    android:textSize="@dimen/_15ssp"
+                    tools:text="2 jan 2021" />
+
+                <TextView
+                    style="@style/textview_normal_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.price.formatted}"
+                    android:textColor="@color/toolbar_title_color"
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="2000 ر.س" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/divider_color" />
+    </LinearLayout>
+
+</layout>

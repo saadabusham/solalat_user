@@ -122,4 +122,7 @@
     <color name="dark_gray">#2F2F2F</color>
 
     <color name="service_title_color">#3F444A</color>
+
+    <color name="status_in_the_way">#DC0C0C</color>
+    <color name="status_delivered">#00AEC9</color>
 </resources>

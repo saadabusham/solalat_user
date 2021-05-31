@@ -47,7 +47,7 @@ data class Accessory(
 
 	@field:SerializedName("name")
 	@ColumnInfo(name = "name")
-	val name: String? = null,
+	val name: String? = "حذو اغريقي رمادي",
 
 	@field:SerializedName("is_approved")
 	@ColumnInfo(name = "is_approved")

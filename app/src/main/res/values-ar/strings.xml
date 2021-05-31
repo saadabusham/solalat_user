@@ -290,4 +290,7 @@
     <string name="xxx_xxx_xxx">xxx@xxx.xxx</string>
     <string name="save">حفظ التعديلات</string>
     <string name="profile">حسابي الشخصي</string>
+
+    <!--    Filter  -->
+    <string name="search">Search</string>
 </resources>

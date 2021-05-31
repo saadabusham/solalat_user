@@ -293,4 +293,7 @@
     <string name="xxx_xxx_xxx">xxx@xxx.xxx</string>
     <string name="save">Save</string>
     <string name="profile">Profile</string>
+
+    <!--    Filter  -->
+    <string name="search">Search</string>
 </resources>

@@ -516,7 +516,7 @@ public class AppSeekBar extends View {
                 if ((seekBarMode == SEEKBAR_MODE_RANGE) && leftSB.currPercent == rightSB.currPercent) {
                     currTouchSB.materialRestore();
                     if (callback != null) {
-                        callback.onStopTrackingTouch(this, currTouchSB == leftSB, tickMarkTextArray.get((int) ((getLeftSeekBar().getProgress() / 100) * (tickMarkTextArray.size() - 1))));
+                        callback.onStopTrackingTouch(this, currTouchSB == leftSB,null);
                     }
                     if (x - touchDownX > 0) {
                         //method to move right
@@ -597,7 +597,7 @@ public class AppSeekBar extends View {
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
                 if (callback != null) {
-                    callback.onStopTrackingTouch(this, currTouchSB == leftSB, tickMarkTextArray.get((int) ((getLeftSeekBar().getProgress() / 100) * (tickMarkTextArray.size() - 1))));
+                    callback.onStopTrackingTouch(this, currTouchSB == leftSB, null);
                 }
                 changeThumbActivateState(false);
                 break;

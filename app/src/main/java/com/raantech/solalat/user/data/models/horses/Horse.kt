@@ -94,10 +94,10 @@ data class Horse(
     fun horseTitle(): String {
         return when (LocaleUtil.getLanguage() == "ar") {
 			true -> {
-				"$age"+"سنوات"+"/"+category?.name
+				"$age"+"سنوات"+"/"+name
 			}
             else -> {
-                "$age years /${category?.name}"
+                "$age years /${name}"
             }
         }
     }

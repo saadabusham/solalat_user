@@ -67,6 +67,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
                     android:layout_weight="1"
                     android:gravity="center|start"
                     android:orientation="vertical">
@@ -100,7 +101,7 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_minus" />
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -127,12 +128,12 @@
 
                 </LinearLayout>
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:layout_marginTop="@dimen/_17sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="@{item.price.formatted}"
                     android:textColor="@color/button_color"
                     android:textSize="@dimen/_11ssp"

@@ -1,5 +1,6 @@
 package com.raantech.solalat.user.data.repos.cart
 
+import androidx.lifecycle.LiveData
 import com.raantech.solalat.user.data.api.response.ResponseHandler
 import com.raantech.solalat.user.data.daos.local.cart.CartLocalDao
 import com.raantech.solalat.user.data.models.accessories.Accessory
@@ -27,7 +28,7 @@ class CartRepoImp @Inject constructor(
         return cartLocalDao.getCarts(id)
     }
 
-    override suspend fun getCartsCount(): Int {
+    override fun getCartsCount(): LiveData<Int> {
         return cartLocalDao.getCartsCount()
     }
 

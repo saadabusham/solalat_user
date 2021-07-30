@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <TextView
+        <com.raantech.solalat.user.ui.base.views.AppTextView
             android:id="@+id/tv_license"
             style="@style/normalMediumFontStyle"
             android:layout_width="wrap_content"

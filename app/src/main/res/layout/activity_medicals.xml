@@ -43,7 +43,7 @@
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     android:id="@+id/tvAddress"
                     style="@style/textview_normal_regular"
                     android:layout_width="match_parent"

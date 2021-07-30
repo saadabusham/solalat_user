@@ -257,6 +257,8 @@ object DateTimeUtil {
 
     fun getDifferenceTime(start_date: Long, end_date: Long):String {
         val deference = end_date - start_date
+        if(deference <= 0)
+            return "00:00:00"
         val seconds: Long = deference / 1000
         val minutes = seconds / 60
         val hours = minutes / 60

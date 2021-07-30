@@ -94,10 +94,12 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
             if (viewModel.truck.value?.is_wishlist == true) {
                 viewModel.truck.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = false
                     viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
                 }
             } else {
                 viewModel.truck.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = true
                     viewModel.addToWishList(it1).observe(this, wishListActionObserver())
                 }
             }
@@ -131,9 +133,8 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
                     data: ResponseWrapper<Any>?
                 ) {
                     viewModel.truck.value?.is_wishlist = viewModel.truck.value?.is_wishlist != true
-                    binding?.layoutToolbar?.isFavorite = viewModel.truck.value?.is_wishlist
                 }
-            }, true
+            }, false
         )
     }
 

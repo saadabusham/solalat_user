@@ -60,7 +60,7 @@
                     android:gravity="center|start"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvName"
                         style="@style/textview_normal_regular"
                         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                         android:textSize="@dimen/_14ssp"
                         tools:text="د. خالد الخالدي" />
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvDescription"
                         style="@style/textview_normal_regular"
                         android:layout_width="wrap_content"
@@ -85,24 +85,25 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/btnCallNow"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:layout_gravity="center"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="@dimen/_13sdp"
                         app:cardElevation="0dp"
                         app:strokeColor="@color/button_color"
                         app:strokeWidth="@dimen/_1sdp">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -127,13 +128,14 @@
                         android:layout_marginEnd="@dimen/_12sdp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:visibility="visible"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="@dimen/_13sdp"
                         app:cardElevation="0dp"
                         app:strokeColor="@color/button_color"
                         app:strokeWidth="@dimen/_1sdp">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -144,7 +146,7 @@
                             android:layout_marginBottom="@dimen/_7sdp"
                             android:drawableStart="@drawable/ic_service_location"
                             android:drawablePadding="@dimen/_7sdp"
-                            android:text="@{@string/km(item.distance)}"
+                            android:text="@{item.distance != 0.0 ? @string/km(item.distance) : @string/empty_string}"
                             android:textColor="@color/button_color"
                             android:textSize="@dimen/_15ssp"
                             tools:text="1.2" />

@@ -32,7 +32,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_bold"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -44,7 +44,7 @@
                     android:textSize="@dimen/_15ssp"
                     tools:text="2" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -70,7 +70,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_bold"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -82,7 +82,7 @@
                     android:textSize="@dimen/_15ssp"
                     tools:text="2" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -108,7 +108,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_5sdp">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_bold"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -120,7 +120,7 @@
                     android:textSize="@dimen/_15ssp"
                     tools:text="2" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

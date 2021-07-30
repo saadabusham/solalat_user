@@ -75,7 +75,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvProvidedServices"
                         style="@style/textview_normal_regular"
                         android:layout_width="match_parent"

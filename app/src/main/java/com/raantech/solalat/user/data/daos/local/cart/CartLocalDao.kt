@@ -1,5 +1,6 @@
 package com.raantech.solalat.user.data.daos.local.cart
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,8 +23,8 @@ interface CartLocalDao {
     @Query("SELECT * FROM $TABLE_CART WHERE id = :id")
     suspend fun getCarts(id: Int): Accessory
 
-    @Query("SELECT COUNT(*) FROM $TABLE_CART")
-    suspend fun getCartsCount(): Int
+    @Query("SELECT SUM(count) FROM $TABLE_CART")
+    fun getCartsCount(): LiveData<Int>
 
     @Query("DELETE FROM $TABLE_CART WHERE id = :id")
     suspend fun deleteCart(id: Int)

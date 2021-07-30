@@ -17,7 +17,6 @@ import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.data.models.barn.Barn
 import com.raantech.solalat.user.data.models.map.Address
 import com.raantech.solalat.user.data.models.truck.Truck
-import com.raantech.solalat.user.data.models.wishlist.WishList
 import com.raantech.solalat.user.data.pref.configuration.ConfigurationPref
 import com.raantech.solalat.user.data.pref.user.UserPref
 import com.raantech.solalat.user.data.repos.accessories.AccessoriesRepo
@@ -34,19 +33,19 @@ import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
-        @Assisted private val savedStateHandle: SavedStateHandle,
-        private val userRepo: UserRepo,
-        private val sharedPreferencesUtil: SharedPreferencesUtil,
-        private val userPref: UserPref,
-        private val configurationPref: ConfigurationPref,
-        private val configurationRepo: ConfigurationRepo,
-        private val barnRepo: BarnRepo,
-        private val truckRepo: TruckRepo,
-        private val horseRepo: HorseRepo,
-        private val wishListRepo: WishListRepo,
-        private val medicalRepo: MedicalRepo,
-        private val accessoriesRepo: AccessoriesRepo,
-        private val cartRepo: CartRepo
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val userRepo: UserRepo,
+    private val sharedPreferencesUtil: SharedPreferencesUtil,
+    private val userPref: UserPref,
+    private val configurationPref: ConfigurationPref,
+    private val configurationRepo: ConfigurationRepo,
+    private val barnRepo: BarnRepo,
+    private val truckRepo: TruckRepo,
+    private val horseRepo: HorseRepo,
+    private val wishListRepo: WishListRepo,
+    private val medicalRepo: MedicalRepo,
+    private val accessoriesRepo: AccessoriesRepo,
+    private val cartRepo: CartRepo
 ) : BaseViewModel() {
     var address: Address? = null
     var cities: MutableList<City> = mutableListOf()
@@ -57,6 +56,18 @@ class MainViewModel @ViewModelInject constructor(
     val truck: MutableLiveData<Truck> = MutableLiveData()
     val accessory: MutableLiveData<Accessory> = MutableLiveData()
     var category: ServiceCategory? = null
+
+    val cartCount: MutableLiveData<String> = MutableLiveData("0")
+
+    fun getCartsCount() = viewModelScope.launch {
+        cartRepo.getCartsCount().observeForever {
+            if (it != null)
+                cartCount.postValue(it.toString())
+            else
+                cartCount.postValue("0")
+        }
+    }
+
     fun logoutRemote() = liveData {
         emit(APIResource.loading())
         val response = userRepo.logout()
@@ -92,16 +103,17 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun getBarns(
-            skip: Int,
-            latitude: Double?,
-            longitude: Double?
+        skip: Int,
+        latitude: Double?,
+        longitude: Double?
     ) = liveData {
         emit(APIResource.loading())
         val response = barnRepo.getBarns(skip, latitude, longitude)
         emit(response)
     }
+
     fun getBarnDetails(
-            id: Int
+        id: Int
     ) = liveData {
         emit(APIResource.loading())
         val response = barnRepo.getBarn(id)
@@ -115,18 +127,19 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun getTrucks(
-            skip: Int,
-            fromCity: Int?,
-            toCity: Int?,
-            latitude: Double?,
-            longitude: Double?
+        skip: Int,
+        fromCity: Int?,
+        toCity: Int?,
+        latitude: Double?,
+        longitude: Double?
     ) = liveData {
         emit(APIResource.loading())
         val response = truckRepo.getTrucks(skip, fromCity, toCity, latitude, longitude)
         emit(response)
     }
+
     fun getTruck(
-            id: Int
+        id: Int
     ) = liveData {
         emit(APIResource.loading())
         val response = truckRepo.getTruck(id)
@@ -134,38 +147,40 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun getHorses(
-            skip: Int
+        skip: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                horseRepo.getHorses(horseAdsTypeEnum.value?.value
-                        ?: HorseAdsTypeEnum.ALL.value, skip)
+            horseRepo.getHorses(
+                horseAdsTypeEnum.value?.value
+                    ?: HorseAdsTypeEnum.ALL.value, skip
+            )
         emit(response)
     }
 
     fun addToWishList(
-            productId: Int
+        productId: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.addToWishList(WishListType.PRODUCT.value,productId)
+            wishListRepo.addToWishList(WishListType.PRODUCT.value, productId)
         emit(response)
     }
 
     fun removeFromWishList(
-            productId: Int
+        productId: Int
     ) = liveData {
         emit(APIResource.loading())
         val response =
-                wishListRepo.removeFromWishList(productId,WishListType.PRODUCT.value)
+            wishListRepo.removeFromWishList(productId, WishListType.PRODUCT.value)
         emit(response)
     }
 
     fun getMedicals(
-            skip: Int,
-            categoryId: Int?,
-            latitude: Double?,
-            longitude: Double?
+        skip: Int,
+        categoryId: Int?,
+        latitude: Double?,
+        longitude: Double?
     ) = liveData {
         emit(APIResource.loading())
         val response = medicalRepo.getMedicals(skip, categoryId, latitude, longitude)
@@ -174,8 +189,8 @@ class MainViewModel @ViewModelInject constructor(
 
 
     fun getAccessories(
-            skip: Int,
-            categoryId: Int?
+        skip: Int,
+        categoryId: Int?
     ) = liveData {
         emit(APIResource.loading())
         val response = accessoriesRepo.getAccessories(skip, categoryId)
@@ -185,11 +200,13 @@ class MainViewModel @ViewModelInject constructor(
     fun addToCart(accessory: Accessory) = viewModelScope.launch {
         cartRepo.saveCart(accessory)
     }
+
     fun getCarts() = liveData {
         val response = cartRepo.loadCarts()
         emit(response)
     }
-    fun getCart(id:Int) = liveData {
+
+    fun getCart(id: Int) = liveData {
         val response = cartRepo.getCart(id)
         emit(response)
     }

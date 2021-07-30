@@ -46,7 +46,7 @@
                     android:layout_height="@dimen/_50sdp"
                     android:gravity="center">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvFromCity"
                         style="@style/textview_normal_regular"
                         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                         android:minHeight="@dimen/_35sdp"
                         android:text="@string/all_cities"
                         android:textColor="@color/edittext_color"
-                        android:textSize="@dimen/_13ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/_14sdp"
@@ -98,7 +98,7 @@
                     android:layout_height="@dimen/_50sdp"
                     android:gravity="center">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvToCity"
                         style="@style/textview_normal_regular"
                         android:layout_width="match_parent"
@@ -112,7 +112,7 @@
                         android:minHeight="@dimen/_35sdp"
                         android:text="@string/all_cities"
                         android:textColor="@color/edittext_color"
-                        android:textSize="@dimen/_13ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/_14sdp"
@@ -140,10 +140,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:layout_below="@id/layout_no_data"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"

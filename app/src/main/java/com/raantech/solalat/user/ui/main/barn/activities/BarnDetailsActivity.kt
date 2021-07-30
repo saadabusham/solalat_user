@@ -75,10 +75,12 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
             if (viewModel.barn.value?.is_wishlist == true) {
                 viewModel.barn.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = false
                     viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
                 }
             } else {
                 viewModel.barn.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = true
                     viewModel.addToWishList(it1).observe(this, wishListActionObserver())
                 }
             }
@@ -111,9 +113,8 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
                     data: ResponseWrapper<Any>?
                 ) {
                     viewModel.barn.value?.is_wishlist = viewModel.barn.value?.is_wishlist != true
-                    binding?.layoutToolbar?.isFavorite = viewModel.barn.value?.is_wishlist
                 }
-            }, true
+            }, false
         )
     }
 

@@ -205,6 +205,9 @@
     <string name="km">كم %s</string>
 
     <!--    Add Horse   -->
+    <string name="add_horse">اضافة خيل للبيع</string>
+    <string name="add_new">اضافة جديدة</string>
+    <string name="add_price_and_contact_info">2-2 اضافة السعر والاتصال</string>
     <string name="horse_type">نوع الخيل</string>
     <string name="horse_name">اسم الخيل</string>
     <string name="add_horse_name">اضف اسم الخيل</string>
@@ -291,6 +294,24 @@
     <string name="save">حفظ التعديلات</string>
     <string name="profile">حسابي الشخصي</string>
 
+    <!--    Purcheses-->
+    <string name="status_in_the_way">في الطريق</string>
+    <string name="status_delivered">تم التوصيل</string>
+
     <!--    Filter  -->
-    <string name="search">Search</string>
+    <string name="search">بحث</string>
+    <string name="horses">خيول</string>
+    <string name="medical">خدمات صحية</string>
+    <string name="accessories">اكسسوارات</string>
+    <string name="stable">اسطبلات</string>
+    <string name="truck">نقل</string>
+    <string name="search_type">نوع البحث</string>
+    <string name="price">السعر</string>
+    <string name="sell_type">نوع البيع</string>
+    <string name="accessories_type">نوع الاكسسوار</string>
+    <string name="medical_type">نوع الخدمة الطبية</string>
+    <string name="stable_type">نوع الاسطبل</string>
+    <string name="find_a_horse_an_accessory_etc">ابحث عن حصان ، اكسسوار ، … الخ</string>
+    <string name="search_results">(%s) نتيجة بحث</string>
+    <string name="search_result">نتيجة البحث</string>
 </resources>

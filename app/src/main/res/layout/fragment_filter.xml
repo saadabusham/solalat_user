@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,70 +14,189 @@
             type="com.raantech.solalat.user.ui.filter.viewmodels.FiltersViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/layout_toolbar" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
+            <include
+                android:id="@+id/toolbar_layout"
+                layout="@layout/layout_toolbar" />
+
+            <com.raantech.solalat.user.ui.base.views.AppEditText
+                android:id="@+id/edTitle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_10sdp"
-                android:layout_below="@id/seekbarPrice"
-                android:layout_alignStart="@id/seekbarPrice"
-                android:layout_alignEnd="@id/seekbarPrice"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="-10dp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_meter"
-                android:visibility="visible" />
-            <com.raantech.solalat.user.ui.base.views.appseekbar.AppSeekBar
-                android:id="@+id/seekbarPrice"
-                android:layout_width="match_parent"
+                android:layout_height="@dimen/Edittext_height"
+                android:layout_marginStart="@dimen/layouts_margin_start"
+                android:layout_marginEnd="@dimen/layouts_margin_end"
+                android:background="@drawable/shape_edittext_not_focused"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableTint="@color/button_color"
+                android:hint="@string/find_a_horse_an_accessory_etc"
+                android:lines="1"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAlignment="viewStart" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:gravity="center"
-                app:rsb_gravity="bottom"
-                app:rsb_indicator_background_color="@color/button_color"
-                app:rsb_indicator_height="@dimen/_30sdp"
-                app:rsb_indicator_padding_bottom="@dimen/_3sdp"
-                app:rsb_indicator_padding_left="@dimen/_5sdp"
-                app:rsb_indicator_padding_right="@dimen/_5sdp"
-                app:rsb_indicator_padding_top="@dimen/_5sdp"
-                app:rsb_indicator_show_mode="alwaysShow"
-                app:rsb_max="10000"
-                app:rsb_indicator_radius="@dimen/_3sdp"
-                app:rsb_min="0.0"
-                app:rsb_min_interval="5"
-                app:rsb_mode="range"
-                app:rsb_progress_color="@color/button_color"
-                app:rsb_progress_default_color="#E6E6E6"
-                app:rsb_progress_height="@dimen/_5sdp"
-                app:rsb_step_auto_bonding="true"
-                app:rsb_step_color="@color/colorPrimaryDark"
-                app:rsb_step_drawable="@drawable/rsb_default_thumb"
-                app:rsb_step_height="@dimen/_5sdp"
-                app:rsb_step_radius="4dp"
-                app:rsb_step_width="@dimen/_5sdp"
-                app:rsb_thumb_drawable="@drawable/rsb_default_thumb"
-                app:rsb_tick_mark_layout_gravity="top"
-                app:rsb_tick_mark_mode="other"
-                app:rsb_tick_mark_number="1"
-                app:rsb_tick_mark_text_color="@color/text_gray"
-                app:rsb_tick_mark_text_margin="@dimen/_12sdp"
-                app:rsb_tick_mark_text_size="@dimen/_10ssp" />
+                android:layout_marginStart="@dimen/_12sdp"
+                android:includeFontPadding="false"
+                android:text="@string/search_type"
+                android:textAppearance="@style/textview_normal_medium"
+                android:textColor="@color/filter_black"
+                android:textSize="@dimen/_17ssp" />
 
-        </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/row_filter" />
 
-    </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSubCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:includeFontPadding="false"
+                android:text="@string/horse_type"
+                android:textAppearance="@style/textview_normal_medium"
+                android:textColor="@color/filter_black"
+                android:textSize="@dimen/_17ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSubCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/row_filter" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSellType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:includeFontPadding="false"
+                android:text="@string/sell_type"
+                android:textAppearance="@style/textview_normal_medium"
+                android:textColor="@color/filter_black"
+                android:textSize="@dimen/_17ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSellType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/row_filter" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:includeFontPadding="false"
+                android:text="@string/price"
+                android:textAppearance="@style/textview_normal_medium"
+                android:textColor="@color/filter_black"
+                android:textSize="@dimen/_17ssp" />
+
+            <RelativeLayout
+                android:id="@+id/relPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_below="@id/seekbarPrice"
+                    android:layout_alignStart="@id/seekbarPrice"
+                    android:layout_alignEnd="@id/seekbarPrice"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="-10dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_meter"
+                    android:visibility="visible" />
+
+                <com.raantech.solalat.user.ui.base.views.appseekbar.AppSeekBar
+                    android:id="@+id/seekbarPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:gravity="center"
+                    app:rsb_gravity="bottom"
+                    app:rsb_indicator_background_color="@color/button_color"
+                    app:rsb_indicator_height="@dimen/_30sdp"
+                    app:rsb_indicator_padding_bottom="@dimen/_3sdp"
+                    app:rsb_indicator_padding_left="@dimen/_5sdp"
+                    app:rsb_indicator_padding_right="@dimen/_5sdp"
+                    app:rsb_indicator_padding_top="@dimen/_5sdp"
+                    app:rsb_indicator_radius="@dimen/_3sdp"
+                    app:rsb_indicator_show_mode="alwaysShow"
+                    app:rsb_max="10000"
+                    app:rsb_min="0.0"
+                    app:rsb_min_interval="500"
+                    app:rsb_mode="range"
+                    app:rsb_progress_color="@color/button_color"
+                    app:rsb_progress_default_color="#E6E6E6"
+                    app:rsb_progress_height="@dimen/_5sdp"
+                    app:rsb_step_auto_bonding="true"
+                    app:rsb_step_color="@color/colorPrimaryDark"
+                    app:rsb_step_drawable="@drawable/rsb_default_thumb"
+                    app:rsb_step_height="@dimen/_5sdp"
+                    app:rsb_step_radius="4dp"
+                    app:rsb_step_width="@dimen/_5sdp"
+                    app:rsb_thumb_drawable="@drawable/rsb_default_thumb"
+                    app:rsb_tick_mark_layout_gravity="top"
+                    app:rsb_tick_mark_mode="other"
+                    app:rsb_tick_mark_number="1"
+                    app:rsb_tick_mark_text_color="@color/text_gray"
+                    app:rsb_tick_mark_text_margin="@dimen/_12sdp"
+                    app:rsb_tick_mark_text_size="@dimen/_10ssp" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShow"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:text="@{@string/search_results(viewModel.searchResults)}"
+                app:cornerRadius="@dimen/_19sdp"
+                tools:text="@string/search_results" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -176,7 +176,7 @@ class WishListActivity : BaseBindingActivity<ActivityWishlistBinding>(),
                     wishListRecyclerAdapter.notifyItemChanged(positionToUpdate)
                     positionToUpdate = -1
                 }
-            }, true
+            }, false
         )
     }
 

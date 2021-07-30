@@ -91,3 +91,6 @@ fun String.concatStrings(stringToMerge: String, before: Boolean = true): String 
         stringToMerge + this
     } else this + stringToMerge
 }
+fun Double.round(digitNum : Int): String {
+    return String.format(Locale.ENGLISH,"%.${digitNum}f",this)
+}

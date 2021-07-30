@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.raantech.solalat.user.ui.base.views.AppTextView
                 android:id="@+id/tvAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 style="@style/textview_normal_regular"
                 android:textColor="@color/button_color"
                 android:textSize="@dimen/_15ssp" />
-            <TextView
+            <com.raantech.solalat.user.ui.base.views.AppTextView
                 android:id="@+id/tvMazad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:textColor="@color/button_color"
                 android:textSize="@dimen/_15ssp"
                 android:layout_marginStart="@dimen/_15sdp"/>
-            <TextView
+            <com.raantech.solalat.user.ui.base.views.AppTextView
                 android:id="@+id/tvSell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

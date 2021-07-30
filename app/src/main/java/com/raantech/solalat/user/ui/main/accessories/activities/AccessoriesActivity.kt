@@ -23,6 +23,7 @@ import com.raantech.solalat.user.databinding.ActivityAccessoriesBinding
 import com.raantech.solalat.user.ui.base.activity.BaseBindingActivity
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
+import com.raantech.solalat.user.ui.cart.CartActivity
 import com.raantech.solalat.user.ui.main.accessories.dialogs.AccessoriesDialog
 import com.raantech.solalat.user.ui.main.adapters.accessories.AccessoriesGridRecyclerAdapter
 import com.raantech.solalat.user.ui.main.viewmodels.MainViewModel
@@ -38,7 +39,7 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
     private val viewModel: MainViewModel by viewModels()
     private val loading: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isFinished = false
-    lateinit var medicalsRecyclerAdapter: AccessoriesGridRecyclerAdapter
+    lateinit var accessoriesRecyclerAdapter: AccessoriesGridRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,21 +55,29 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
             titleString = viewModel.category?.name
         )
         setUpBinding()
+        setUpListeners()
         setUpRecyclerView()
         loadData()
     }
 
+    private fun setUpListeners() {
+        binding?.relativeCart?.setOnClickListener {
+            CartActivity.start(this)
+        }
+    }
+
     private fun setUpBinding() {
         binding?.viewModel = viewModel
+        viewModel.getCartsCount()
     }
 
     private fun setUpRecyclerView() {
-        medicalsRecyclerAdapter = AccessoriesGridRecyclerAdapter(this)
-        binding?.recyclerView?.adapter = medicalsRecyclerAdapter
+        accessoriesRecyclerAdapter = AccessoriesGridRecyclerAdapter(this)
+        binding?.recyclerView?.adapter = accessoriesRecyclerAdapter
         binding?.recyclerView?.setOnItemClickListener(this)
         Paginate.with(binding?.recyclerView, object : Paginate.Callbacks {
             override fun onLoadMore() {
-                if (loading.value == false && medicalsRecyclerAdapter.itemCount > 0 && !isFinished) {
+                if (loading.value == false && accessoriesRecyclerAdapter.itemCount > 0 && !isFinished) {
                     loadData()
                 }
             }
@@ -105,7 +114,7 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
 
     private fun loadData() {
         viewModel.getAccessories(
-            medicalsRecyclerAdapter.itemCount,
+            accessoriesRecyclerAdapter.itemCount,
             viewModel.category?.id
         ).observe(this, accessoriesObserver())
     }
@@ -122,7 +131,7 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
                 ) {
                     isFinished = data?.body?.isNullOrEmpty() == true
                     data?.body?.let {
-                        medicalsRecyclerAdapter.addItems(it)
+                        accessoriesRecyclerAdapter.addItems(it)
                     }
                     loading.postValue(false)
                     hideShowNoData()
@@ -147,7 +156,7 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
 
 
     private fun hideShowNoData() {
-        if (medicalsRecyclerAdapter.itemCount == 0) {
+        if (accessoriesRecyclerAdapter.itemCount == 0) {
             binding?.recyclerView?.gone()
             binding?.layoutNoData?.linearNoData?.visible()
         } else {
@@ -173,7 +182,7 @@ class AccessoriesActivity : BaseBindingActivity<ActivityAccessoriesBinding>(),
                             viewModel,
                             object : AccessoriesDialog.CallBack {
                                 override fun callBack(position: Int, accessory: Accessory) {
-                                    medicalsRecyclerAdapter.items[position].isWishlist =
+                                    accessoriesRecyclerAdapter.items[position].isWishlist =
                                         accessory.isWishlist
                                 }
 

@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/layout_toolbar"
-            layout="@layout/layout_toolbar" />
+            layout="@layout/layout_toolbar_subtitle" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:orientation="vertical">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,9 +48,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:textAlignment="viewStart"
                     android:background="@drawable/edittext_background"
                     android:gravity="center|start"
                     android:hint="@string/select"
+                    app:arrow_gravity="@{true}"
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/defaultTextColor"
@@ -64,7 +66,7 @@
                     app:spinner_popup_background="@color/white"
                     app:spinner_popup_elevation="14dp" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +101,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -112,6 +114,8 @@
                             android:id="@+id/spinnerHorseGender"
                             style="@style/normalRegularFontStyle"
                             android:layout_width="match_parent"
+                            app:arrow_gravity="@{true}"
+                            android:textAlignment="viewStart"
                             android:layout_height="@dimen/_45sdp"
                             android:background="@drawable/edittext_background"
                             android:gravity="center|start"
@@ -138,7 +142,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -152,6 +156,8 @@
                             style="@style/normalRegularFontStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
+                            app:arrow_gravity="@{true}"
+                            android:textAlignment="viewStart"
                             android:background="@drawable/edittext_background"
                             android:gravity="center|start"
                             android:hint="@string/select"
@@ -183,7 +189,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -197,6 +203,8 @@
                             style="@style/normalRegularFontStyle"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
+                            android:textAlignment="viewStart"
+                            app:arrow_gravity="@{true}"
                             android:background="@drawable/edittext_background"
                             android:gravity="center|start"
                             android:hint="@string/select"
@@ -222,7 +230,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -235,6 +243,8 @@
                             android:id="@+id/spinnerSafety"
                             style="@style/normalRegularFontStyle"
                             android:layout_width="match_parent"
+                            app:arrow_gravity="@{true}"
+                            android:textAlignment="viewStart"
                             android:layout_height="@dimen/_45sdp"
                             android:background="@drawable/edittext_background"
                             android:gravity="center|start"
@@ -256,7 +266,7 @@
 
                 </LinearLayout>
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,7 +291,7 @@
                     android:textColorHint="@color/edittext_hint_color"
                     android:textSize="@dimen/_15ssp" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -306,7 +316,7 @@
                     android:textColorHint="@color/edittext_hint_color"
                     android:textSize="@dimen/_15ssp" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

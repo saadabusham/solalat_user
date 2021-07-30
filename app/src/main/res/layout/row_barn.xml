@@ -24,14 +24,14 @@
         <ImageView
             android:id="@+id/imgMedia"
             ivImageUrl="@{item.baseImage.url}"
-            ivImagePlaceholder="@{R.drawable.barn_sample}"
+            ivImagePlaceholder="@{R.drawable.ic_placeholder_stable}"
             ivImageErrorPlaceholder="@{R.drawable.barn_sample}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/barn_sample" />
+            tools:src="@drawable/ic_placeholder_stable" />
 
-        <TextView
+        <com.raantech.solalat.user.ui.base.views.AppTextView
             android:id="@+id/tvProductName"
             style="@style/textview_normal_bold"
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             android:textSize="@dimen/_13ssp"
             tools:text="المهيدب - الرياض" />
 
-        <TextView
+        <com.raantech.solalat.user.ui.base.views.AppTextView
             android:id="@+id/tvPrice"
             style="@style/textview_normal_regular"
             android:layout_width="wrap_content"

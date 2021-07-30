@@ -73,10 +73,12 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
             if (viewModel.horse.value?.is_wishlist == true) {
                 viewModel.horse.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = false
                     viewModel.removeFromWishList(it1).observe(this, wishListActionObserver())
                 }
             } else {
                 viewModel.horse.value?.id?.let { it1 ->
+                    binding?.layoutToolbar?.isFavorite = true
                     viewModel.addToWishList(it1).observe(this, wishListActionObserver())
                 }
             }
@@ -186,9 +188,8 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                     data: ResponseWrapper<Any>?
                 ) {
                     viewModel.horse.value?.is_wishlist = viewModel.horse.value?.is_wishlist != true
-                    binding?.layoutToolbar?.isFavorite = viewModel.horse.value?.is_wishlist
                 }
-            }, true
+            }, false
         )
     }
 

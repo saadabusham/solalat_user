@@ -6,14 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.raantech.solalat.user.R2
 import com.raantech.solalat.user.data.models.Price
 import com.raantech.solalat.user.data.models.accessories.Accessory
-import com.raantech.solalat.user.data.pref.user.UserPref
 import com.raantech.solalat.user.data.repos.cart.CartRepo
-import com.raantech.solalat.user.data.repos.user.UserRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
-import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import kotlinx.coroutines.launch
 
 class CartViewModel @ViewModelInject constructor(
@@ -23,6 +19,7 @@ class CartViewModel @ViewModelInject constructor(
     companion object{
     }
 
+    val cartCount:MutableLiveData<String> = MutableLiveData("0")
     val TAX_CONST:Double = 0.15
     var tax:MutableLiveData<Price> = MutableLiveData()
     var subTotal:MutableLiveData<Price> = MutableLiveData()
@@ -44,9 +41,11 @@ class CartViewModel @ViewModelInject constructor(
         val response = cartRepo.getCart(id)
         emit(response)
     }
-    fun getCartsCount() = liveData {
-        val response = cartRepo.getCartsCount()
-        emit(response)
+    fun getCartsCount() = viewModelScope.launch{
+        cartRepo.getCartsCount().observeForever {
+            if (it != null)
+                cartCount.postValue(it.toString())
+        }
     }
 
 

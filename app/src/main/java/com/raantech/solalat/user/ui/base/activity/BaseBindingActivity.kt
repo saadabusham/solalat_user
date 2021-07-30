@@ -25,6 +25,8 @@ import com.raantech.solalat.user.utils.extensions.longToast
 import com.raantech.solalat.user.utils.extensions.visible
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
+import kotlinx.android.synthetic.main.layout_toolbar.view.tvTitle
+import kotlinx.android.synthetic.main.layout_toolbar_subtitle.view.*
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -121,9 +123,9 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         } else {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
-
         if (hasSubTitle) {
-            supportActionBar?.subtitle = getString(subTitle)
+            toolbar?.tvSubTitle?.text = getString(subTitle)
+            toolbar?.tvSubTitle?.visible()
         }
 
         if (hasBackButton) {

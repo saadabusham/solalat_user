@@ -207,6 +207,9 @@
     <string name="km">%s km</string>
 
     <!--    Add Horse   -->
+    <string name="add_horse">Add horse</string>
+    <string name="add_new">Add new</string>
+    <string name="add_price_and_contact_info">2-2 Add price and contact info</string>
     <string name="horse_type">Horse Type</string>
     <string name="horse_name">Horse Name</string>
     <string name="add_horse_name">Add Horse Name</string>
@@ -294,6 +297,24 @@
     <string name="save">Save</string>
     <string name="profile">Profile</string>
 
+    <!--    Purcheses-->
+    <string name="status_in_the_way">في الطريق</string>
+    <string name="status_delivered">تم التوصيل</string>
+
     <!--    Filter  -->
     <string name="search">Search</string>
+    <string name="horses">Horses</string>
+    <string name="medical">Medical</string>
+    <string name="accessories">Accessories</string>
+    <string name="stable">Stable</string>
+    <string name="truck">Truck</string>
+    <string name="search_type">Search Type</string>
+    <string name="price">Price</string>
+    <string name="sell_type">Sell type</string>
+    <string name="accessories_type">Accessories type</string>
+    <string name="medical_type">Medical type</string>
+    <string name="stable_type">Stable type</string>
+    <string name="find_a_horse_an_accessory_etc">Find a horse, an accessory, etc.</string>
+    <string name="search_results">(%s) Search results</string>
+    <string name="search_result">Search results</string>
 </resources>

@@ -6,68 +6,96 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.data.api.response.APIResource
-import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.enums.ServiceTypesEnum
-import com.raantech.solalat.user.data.models.ServiceCategory
-import com.raantech.solalat.user.data.models.horses.AddHorseRequest
-import com.raantech.solalat.user.data.models.horses.Files
+import com.raantech.solalat.user.data.models.GeneralLookup
+import com.raantech.solalat.user.data.models.accessories.Accessory
+import com.raantech.solalat.user.data.models.barn.Barn
+import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.models.medical.Medical
+import com.raantech.solalat.user.data.models.truck.Truck
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
-import com.raantech.solalat.user.data.repos.horse.HorseRepo
+import com.raantech.solalat.user.data.repos.filter.FilterRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
-import com.raantech.solalat.user.utils.extensions.checkPhoneNumberFormat
-import com.raantech.solalat.user.utils.extensions.concatStrings
 
 class FiltersViewModel @ViewModelInject constructor(
-        @Assisted private val savedStateHandle: SavedStateHandle,
-        private val horseRepo: HorseRepo,
-        private val configurationRepo: ConfigurationRepo
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val configurationRepo: ConfigurationRepo,
+    private val filterRepo: FilterRepo
 ) : BaseViewModel() {
 
-    val horseAdsTypeEnum: MutableLiveData<HorseAdsTypeEnum> = MutableLiveData(HorseAdsTypeEnum.SELL)
-    var category: ServiceCategory? = null
-    val horseName: MutableLiveData<String> = MutableLiveData()
-    val fatherName: MutableLiveData<String> = MutableLiveData()
-    val motherName: MutableLiveData<String> = MutableLiveData()
-    val horsePrice: MutableLiveData<String> = MutableLiveData()
-    val phoneNumber: MutableLiveData<String> = MutableLiveData()
-    val selectedCountryCode: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val files: MutableList<Int> = mutableListOf()
-    var isPollinated: Boolean = false
-    var gender: String = ""
-    var safety: String = ""
-    var age: Int = -1
-    var height: String = ""
+    val searchText: MutableLiveData<String> = MutableLiveData("")
+    var selectedCategory: GeneralLookup? = null
+    var selectedSubCategory: GeneralLookup? = null
+    var minPrice: Double? = null
+    var maxPrice: Double? = null
+    var typeOfSale: String? = null
+    val searchResults: MutableLiveData<String> = MutableLiveData("0")
 
-    fun addHorse(addHorseRequest: AddHorseRequest) = liveData {
+    val horsesResults = mutableListOf<Horse>()
+    val accessoriesResults = mutableListOf<Accessory>()
+    val medicalResults = mutableListOf<Medical>()
+    val stableResults = mutableListOf<Barn>()
+    val truckResults = mutableListOf<Truck>()
+
+
+    fun getServicesCategories(serviceTypesEnum: String) = liveData {
         emit(APIResource.loading())
-        val response = horseRepo.addHorses(addHorseRequest)
+        val response = configurationRepo.getServiceCategories(serviceTypesEnum)
         emit(response)
     }
 
-    fun getHorseRequest(receivedWhatsapp: Boolean, isActive: Boolean): AddHorseRequest {
-        return AddHorseRequest(
-                isVaccinated = isPollinated,
-                isActive = isActive,
-                sex = gender,
-                motherName = motherName.value,
-                contactNumber = phoneNumber.value.toString().checkPhoneNumberFormat()
-                        .concatStrings(selectedCountryCode.value.toString()),
-                typeOfSale = horseAdsTypeEnum.value?.value,
-                categoryId = category?.id,
-                fatherName = fatherName.value,
-                price = horsePrice.value?.toDouble(),
-                safety = safety,
-                name = horseName.value,
-                age = age,
-                receivedWhatsapp = receivedWhatsapp,
-                height = height,
-                files = Files(baseImage = files[0], additionalImages = files)
+    fun filterAccessories() = liveData {
+        emit(APIResource.loading())
+        val response = filterRepo.filterAccessories(
+            ServiceTypesEnum.ACCESSORIES.value,
+            searchText.value,
+            selectedSubCategory?.id,
+            minPrice,
+            maxPrice
         )
+        emit(response)
     }
 
-    fun getServicesCategories() = liveData {
+    fun filterHorses() = liveData {
         emit(APIResource.loading())
-        val response = configurationRepo.getServiceCategories(ServiceTypesEnum.HORSES.value)
+        val response = filterRepo.filterHorses(
+            ServiceTypesEnum.HORSES.value,
+            searchText.value,
+            selectedSubCategory?.id,
+            minPrice,
+            maxPrice,
+            typeOfSale
+        )
+        emit(response)
+    }
+
+    fun filterMedical() = liveData {
+        emit(APIResource.loading())
+        val response = filterRepo.filterMedical(
+            ServiceTypesEnum.MEDICAL.value,
+            searchText.value,
+            selectedSubCategory?.id
+        )
+        emit(response)
+    }
+
+    fun filterTruck() = liveData {
+        emit(APIResource.loading())
+        val response = filterRepo.filterTruck(
+            ServiceTypesEnum.TRANSPORTATION.value,
+            searchText.value
+        )
+        emit(response)
+    }
+
+    fun filterStable() = liveData {
+        emit(APIResource.loading())
+        val response = filterRepo.filterStable(
+            ServiceTypesEnum.BARN.value,
+            searchText.value,
+            minPrice,
+            maxPrice
+        )
         emit(response)
     }
 

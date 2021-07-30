@@ -63,7 +63,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                         android:minHeight="@dimen/_50sdp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                             android:textSize="@dimen/_15ssp"
                             tools:text="اسطبل مكيف" />
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             android:id="@+id/tvPrice"
                             style="@style/textview_normal_regular"
                             android:layout_width="0dp"
@@ -107,7 +107,7 @@
 
                     </LinearLayout>
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
 
                     </LinearLayout>
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                         android:textColor="@color/edittext_color"
                         android:textSize="@dimen/_14ssp" />
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvAddress"
                         style="@style/textview_normal_regular"
                         android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                         android:layout_marginEnd="@dimen/_12sdp"
                         android:orientation="vertical">
 
-                        <TextView
+                        <com.raantech.solalat.user.ui.base.views.AppTextView
                             style="@style/textview_normal_regular"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

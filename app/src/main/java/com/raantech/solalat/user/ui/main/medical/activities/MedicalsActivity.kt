@@ -207,12 +207,12 @@ class MedicalsActivity : BaseBindingActivity<ActivityMedicalsBinding>(),
                     subErrorCode: ResponseSubErrorsCodeEnum,
                     data: ResponseWrapper<Any>?
                 ) {
-                    medicalsRecyclerAdapter.items[positionToUpdate].isWishlist =
-                        medicalsRecyclerAdapter.items[positionToUpdate].isWishlist != true
-                    medicalsRecyclerAdapter.notifyItemChanged(positionToUpdate)
-                    positionToUpdate = -1
+//                    medicalsRecyclerAdapter.items[positionToUpdate].isWishlist =
+//                        medicalsRecyclerAdapter.items[positionToUpdate].isWishlist != true
+//                    medicalsRecyclerAdapter.notifyItemChanged(positionToUpdate)
+//                    positionToUpdate = -1
                 }
-            }, true
+            }, false
         )
     }
 

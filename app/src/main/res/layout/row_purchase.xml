@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                         android:textSize="@dimen/_15ssp"
                         tools:text="200343" />
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_regular"
                         status="@{item.status}"
                         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                         tools:text="في الطريق" />
                 </LinearLayout>
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:gravity="center|end|top"
                 android:orientation="vertical">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:textSize="@dimen/_15ssp"
                     tools:text="2 jan 2021" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

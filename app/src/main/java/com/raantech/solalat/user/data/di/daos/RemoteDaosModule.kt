@@ -3,6 +3,7 @@ package com.raantech.solalat.user.data.di.daos
 import com.raantech.solalat.user.data.daos.remote.accessories.AccessoriesRemoteDao
 import com.raantech.solalat.user.data.daos.remote.barn.BarnRemoteDao
 import com.raantech.solalat.user.data.daos.remote.configuration.ConfigurationRemoteDao
+import com.raantech.solalat.user.data.daos.remote.filter.FilterRemoteDao
 import com.raantech.solalat.user.data.daos.remote.horses.HorsesRemoteDao
 import com.raantech.solalat.user.data.daos.remote.media.MediaRemoteDao
 import com.raantech.solalat.user.data.daos.remote.medical.MedicalRemoteDao
@@ -91,6 +92,14 @@ object RemoteDaosModule {
             retrofit: Retrofit
     ): AccessoriesRemoteDao {
         return retrofit.create(AccessoriesRemoteDao::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFilterRemoteDao(
+            retrofit: Retrofit
+    ): FilterRemoteDao {
+        return retrofit.create(FilterRemoteDao::class.java)
     }
 
 }

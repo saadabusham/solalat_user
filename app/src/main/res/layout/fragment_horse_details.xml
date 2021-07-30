@@ -72,7 +72,7 @@
                     app:cardCornerRadius="@dimen/_16sdp"
                     app:cardElevation="0dp">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_bold"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/button_height"
@@ -121,7 +121,7 @@
                     android:orientation="vertical"
                     android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.SELL.value) ? View.VISIBLE : View.GONE}">
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         android:id="@+id/tvProvidedServices"
                         style="@style/textview_normal_regular"
                         android:layout_width="match_parent"

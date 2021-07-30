@@ -5,9 +5,14 @@
 
     <data>
 
+        <import type="com.raantech.solalat.user.R" />
+
         <import type="com.raantech.solalat.user.data.enums.HorseAdsTypeEnum" />
-        <import type="com.raantech.solalat.user.utils.extensions.DataTimeExtensionsKt"/>
-        <import type="android.view.View"/>
+
+        <import type="com.raantech.solalat.user.utils.extensions.DataTimeExtensionsKt" />
+
+        <import type="android.view.View" />
+
         <variable
             name="item"
             type="com.raantech.solalat.user.data.models.horses.Horse" />
@@ -17,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp"
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
@@ -29,6 +34,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_140sdp">
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_140sdp"
@@ -38,6 +44,8 @@
 
                 <ImageView
                     android:id="@+id/imgMedia"
+                    ivImageErrorPlaceholder="@{R.drawable.ic_placeholder_hourse}"
+                    ivImagePlaceholder="@{R.drawable.ic_placeholder_hourse}"
                     ivImageUrl="@{item.baseImage.url}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -48,10 +56,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mazad"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:visibility="@{item.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) ? View.VISIBLE : View.GONE}"/>
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_mazad"
+                android:visibility="@{item.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) ? View.VISIBLE : View.GONE}" />
         </RelativeLayout>
 
         <LinearLayout

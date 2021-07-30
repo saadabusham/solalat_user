@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.raantech.solalat.user.ui.main.viewmodels.MainViewModel" />
+    </data>
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -21,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     android:id="@+id/tvTitle"
                     style="@style/textview_normal_bold"
                     android:layout_width="wrap_content"
@@ -38,25 +45,53 @@
                     android:layout_height="@dimen/_28sdp"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_toStartOf="@id/imgCart"
+                    android:layout_toStartOf="@id/relativeCart"
                     android:background="?selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="@dimen/_1sdp"
                     android:src="@drawable/ic_addhourse" />
 
-                <ImageView
-                    android:id="@+id/imgCart"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_toStartOf="@id/imgSearch"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="@dimen/_3sdp"
-                    android:src="@drawable/ic_cart" />
+                <RelativeLayout
+                    android:id="@+id/relativeCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/imgSearch">
+
+                    <ImageView
+                        android:id="@+id/imgCart"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_3sdp"
+                        android:src="@drawable/ic_cart"
+                        app:tint="@color/button_color" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/_15sdp"
+                        android:minHeight="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/button_color"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:gravity="center"
+                            android:text="@{viewModel.cartCount}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_7ssp"
+                            tools:text="10" />
+                    </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/imgSearch"

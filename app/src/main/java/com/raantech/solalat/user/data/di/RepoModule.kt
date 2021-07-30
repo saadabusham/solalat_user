@@ -8,6 +8,8 @@ import com.raantech.solalat.user.data.repos.cart.CartRepo
 import com.raantech.solalat.user.data.repos.cart.CartRepoImp
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepoImp
+import com.raantech.solalat.user.data.repos.filter.FilterRepo
+import com.raantech.solalat.user.data.repos.filter.FilterRepoImp
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepoImp
 import com.raantech.solalat.user.data.repos.media.MediaRepo
@@ -69,5 +71,9 @@ abstract class RepoModule {
     @Singleton
     @Binds
     abstract fun bindCartRepo(cartRepoImp: CartRepoImp): CartRepo
+
+    @Singleton
+    @Binds
+    abstract fun bindFilterRepo(filterRepoImp: FilterRepoImp): FilterRepo
 
 }

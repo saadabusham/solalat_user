@@ -106,14 +106,7 @@ class AccessoriesServicesFragment :
                     errors: List<GeneralError>?
                 ) {
                     super.onError(subErrorCode, message, errors)
-//                        hideShowNoData()
-                    categoryRecyclerAdapter.submitItems(
-                        arrayListOf(
-                            ServiceCategory(id = 0, name = "حذوات الخيل", count = 5, logo = null),
-                            ServiceCategory(id = 0, name = "سراج الخيل", count = 5, logo = null),
-                            ServiceCategory(id = 0, name = "لجام الخيل", count = 5, logo = null)
-                        )
-                    )
+                        hideShowNoData()
                 }
             }, showError = false
         )

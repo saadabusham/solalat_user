@@ -72,8 +72,10 @@ class AccessoriesDialog(
 
     fun  onFavoriteClicked(){
         if(accessory.isWishlist == true){
+            binding.isFavorite = false
             accessory.id?.let { viewModel.removeFromWishList(it).observe(lifecycle,wishListActionObserver()) }
         }else{
+            binding.isFavorite = true
             accessory.id?.let { viewModel.addToWishList(it).observe(lifecycle,wishListActionObserver()) }
         }
     }
@@ -100,7 +102,7 @@ class AccessoriesDialog(
                     accessory.isWishlist = accessory.isWishlist != true
                     binding.isFavorite = accessory.isWishlist
                 }
-            }, true
+            }, false
         )
     }
 

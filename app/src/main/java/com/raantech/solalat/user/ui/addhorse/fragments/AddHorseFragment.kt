@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 
 @AndroidEntryPoint
 class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
-        BaseBindingRecyclerViewAdapter.OnItemClickListener {
+    BaseBindingRecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel: AddHorseViewModel by activityViewModels()
 
@@ -46,13 +46,14 @@ class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
     override fun onViewVisible() {
         super.onViewVisible()
         addToolbar(
-                hasToolbar = true,
-                hasBackButton = true,
-                showBackArrow = true,
-                toolbarView = toolbar,
-                hasTitle = true,
-                title = R.string.solalat,
-                hasSubTitle = false
+            hasToolbar = true,
+            hasBackButton = true,
+            showBackArrow = true,
+            toolbarView = toolbar,
+            hasTitle = true,
+            title = R.string.add_horse,
+            hasSubTitle = true,
+            subTitle = R.string.add_new
         )
         setUpBinding()
         setUpListeners()
@@ -79,7 +80,8 @@ class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
 
         binding?.btnAddProduct?.setOnClickListener {
             if (isDataValid()) {
-                viewModel.category = categoriesSpinnerAdapter.spinnerItems[categoriesSpinnerAdapter.index]
+                viewModel.category =
+                    categoriesSpinnerAdapter.spinnerItems[categoriesSpinnerAdapter.index]
                 viewModel.files.clear()
                 viewModel.files.addAll(smallMediaRecyclerAdapter.items.map { it.id })
                 viewModel.isPollinated = binding?.checkboxIsPollinated?.isChecked ?: false
@@ -100,36 +102,41 @@ class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
 
     private fun setUpCategories() {
         categoriesSpinnerAdapter =
-                CategoriesSpinnerAdapter(binding!!.spinnerCategory, requireContext())
+            CategoriesSpinnerAdapter(binding!!.spinnerCategory, requireContext())
         categoriesSpinnerAdapter.let { binding?.spinnerCategory?.setSpinnerAdapter(it) }
         binding?.spinnerCategory?.getSpinnerRecyclerView()?.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         binding?.spinnerCategory?.setOnSpinnerItemSelectedListener<ServiceCategory> { oldIndex, oldItem, newIndex, newItem ->
             binding?.spinnerCategory?.dismiss()
         }
         viewModel.getServicesCategories()
-                .observe(this, categoriesResultObserver())
+            .observe(this, categoriesResultObserver())
     }
 
     private fun setUpGender() {
         genderSpinnerAdapter =
-                GeneralStringDropDownAdapter(binding!!.spinnerHorseGender, requireContext())
+            GeneralStringDropDownAdapter(binding!!.spinnerHorseGender, requireContext())
         genderSpinnerAdapter.let { binding?.spinnerHorseGender?.setSpinnerAdapter(it) }
         binding?.spinnerHorseGender?.getSpinnerRecyclerView()?.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         binding?.spinnerHorseGender?.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
             binding?.spinnerHorseGender?.dismiss()
         }
-        genderSpinnerAdapter.setItems(arrayListOf(resources.getString(R.string.male), resources.getString(R.string.female)))
+        genderSpinnerAdapter.setItems(
+            arrayListOf(
+                resources.getString(R.string.male),
+                resources.getString(R.string.female)
+            )
+        )
         binding?.spinnerHorseGender?.selectItemByIndex(0)
     }
 
     private fun setUpHorseAge() {
         ageSpinnerAdapter =
-                GeneralStringDropDownAdapter(binding!!.spinnerAge, requireContext())
+            GeneralStringDropDownAdapter(binding!!.spinnerAge, requireContext())
         ageSpinnerAdapter.let { binding?.spinnerAge?.setSpinnerAdapter(it) }
         binding?.spinnerAge?.getSpinnerRecyclerView()?.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         binding?.spinnerAge?.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
             binding?.spinnerAge?.dismiss()
         }
@@ -143,30 +150,30 @@ class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
 
     private fun setUpHorseSaftey() {
         safteySpinnerAdapter =
-                GeneralStringDropDownAdapter(binding!!.spinnerSafety, requireContext())
+            GeneralStringDropDownAdapter(binding!!.spinnerSafety, requireContext())
         safteySpinnerAdapter.let { binding?.spinnerSafety?.setSpinnerAdapter(it) }
         binding?.spinnerSafety?.getSpinnerRecyclerView()?.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         binding?.spinnerSafety?.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
             binding?.spinnerSafety?.dismiss()
         }
         safteySpinnerAdapter.setItems(
-                arrayOf(
-                        resources.getString(R.string.weak),
-                        resources.getString(R.string.good),
-                        resources.getString(R.string.very_good),
-                        resources.getString(R.string.excellent)
-                ).toList()
+            arrayOf(
+                resources.getString(R.string.weak),
+                resources.getString(R.string.good),
+                resources.getString(R.string.very_good),
+                resources.getString(R.string.excellent)
+            ).toList()
         )
         binding?.spinnerSafety?.selectItemByIndex(0)
     }
 
     private fun setUpHorseHeight() {
         heightSpinnerAdapter =
-                GeneralStringDropDownAdapter(binding!!.spinnerHeight, requireContext())
+            GeneralStringDropDownAdapter(binding!!.spinnerHeight, requireContext())
         heightSpinnerAdapter.let { binding?.spinnerHeight?.setSpinnerAdapter(it) }
         binding?.spinnerHeight?.getSpinnerRecyclerView()?.layoutManager =
-                LinearLayoutManager(activity)
+            LinearLayoutManager(activity)
         binding?.spinnerHeight?.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
             binding?.spinnerHeight?.dismiss()
         }
@@ -180,83 +187,83 @@ class AddHorseFragment : BaseBindingFragment<FragmentAddHorseBinding>(),
 
     private fun categoriesResultObserver(): CustomObserverResponse<ServiceCategoriesResponse> {
         return CustomObserverResponse(
-                requireActivity(),
-                object : CustomObserverResponse.APICallBack<ServiceCategoriesResponse> {
-                    override fun onSuccess(
-                            statusCode: Int,
-                            subErrorCode: ResponseSubErrorsCodeEnum,
-                            data: ServiceCategoriesResponse?
-                    ) {
-                        data?.categories?.let {
-                            categoriesSpinnerAdapter.setItems(it)
-                            binding?.spinnerCategory?.selectItemByIndex(0)
-                        }
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<ServiceCategoriesResponse> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: ServiceCategoriesResponse?
+                ) {
+                    data?.categories?.let {
+                        categoriesSpinnerAdapter.setItems(it)
+                        binding?.spinnerCategory?.selectItemByIndex(0)
                     }
-                })
+                }
+            })
     }
 
     var resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    // There are no request codes
-                    val data: Intent? = result.data
-                    smallMediaRecyclerAdapter.submitItem(data?.getSerializableExtra(Constants.BundleData.MEDIA) as Media)
-                    binding?.imagesRecyclerView?.smoothScrollToPosition(smallMediaRecyclerAdapter.itemCount - 1)
-                }
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+                smallMediaRecyclerAdapter.submitItem(data?.getSerializableExtra(Constants.BundleData.MEDIA) as Media)
+                binding?.imagesRecyclerView?.smoothScrollToPosition(smallMediaRecyclerAdapter.itemCount - 1)
             }
+        }
 
     private fun isDataValid(): Boolean {
         if (categoriesSpinnerAdapter.index == -1) {
             requireActivity().showErrorAlert(
-                    resources.getString(R.string.app_name),
-                    resources.getString(R.string.please_select_horse_type)
+                resources.getString(R.string.app_name),
+                resources.getString(R.string.please_select_horse_type)
             )
             return false
         }
         binding?.edHorseName?.text.toString().validate(
-                ValidatorInputTypesEnums.TEXT,
-                requireContext()
+            ValidatorInputTypesEnums.TEXT,
+            requireContext()
         )
-                .let {
-                    if (!it.isValid) {
-                        requireActivity().showValidationErrorAlert(
-                                title = resources.getString(R.string.horse_name),
-                                message = it.errorMessage
-                        )
-                        return false
-                    }
+            .let {
+                if (!it.isValid) {
+                    requireActivity().showValidationErrorAlert(
+                        title = resources.getString(R.string.horse_name),
+                        message = it.errorMessage
+                    )
+                    return false
                 }
+            }
         binding?.edFatherName?.text.toString().validate(
-                ValidatorInputTypesEnums.TEXT,
-                requireContext()
+            ValidatorInputTypesEnums.TEXT,
+            requireContext()
         )
-                .let {
-                    if (!it.isValid) {
-                        requireActivity().showValidationErrorAlert(
-                                title = resources.getString(R.string.father_name),
-                                message = it.errorMessage
-                        )
-                        return false
-                    }
+            .let {
+                if (!it.isValid) {
+                    requireActivity().showValidationErrorAlert(
+                        title = resources.getString(R.string.father_name),
+                        message = it.errorMessage
+                    )
+                    return false
                 }
+            }
         binding?.edMotherName?.text.toString().validate(
-                ValidatorInputTypesEnums.DOUBLE,
-                requireContext()
+            ValidatorInputTypesEnums.DOUBLE,
+            requireContext()
         )
-                .let {
-                    if (!it.isValid) {
-                        requireActivity().showValidationErrorAlert(
-                                title = resources.getString(R.string.mother_name),
-                                message = it.errorMessage
-                        )
-                        return false
-                    }
+            .let {
+                if (!it.isValid) {
+                    requireActivity().showValidationErrorAlert(
+                        title = resources.getString(R.string.mother_name),
+                        message = it.errorMessage
+                    )
+                    return false
                 }
+            }
 
         if (smallMediaRecyclerAdapter.itemCount == 0) {
             requireActivity().showErrorAlert(
-                    resources.getString(R.string.horse_images),
-                    resources.getString(R.string.please_select_the_horse_images)
+                resources.getString(R.string.horse_images),
+                resources.getString(R.string.please_select_the_horse_images)
             )
             return false
         }

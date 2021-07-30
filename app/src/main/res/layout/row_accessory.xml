@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.raantech.solalat.user.R" />
+
         <import type="com.raantech.solalat.user.data.enums.HorseAdsTypeEnum" />
 
         <import type="com.raantech.solalat.user.utils.extensions.DataTimeExtensionsKt" />
@@ -36,17 +38,20 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_140sdp"
+                android:alpha="@{item.isAvailable() ? 1.0F : 0.5F}"
                 app:cardBackgroundColor="@color/cardview_stroke_gray"
                 app:cardCornerRadius="@dimen/_15sdp"
                 app:cardElevation="0dp">
 
                 <ImageView
                     android:id="@+id/imgMedia"
+                    ivImageErrorPlaceholder="@{R.drawable.ic_placeholder_accessories}"
+                    ivImagePlaceholder="@{R.drawable.ic_placeholder_accessories}"
                     ivImageUrl="@{item.baseImage.url}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/ic_cat_medical" />
+                    tools:src="@drawable/ic_placeholder_accessories" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -61,15 +66,15 @@
                 app:cardBackgroundColor="#85FFFFFF"
                 app:cardCornerRadius="@dimen/_5sdp">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@{@string/available_at(DataTimeExtensionsKt.getDateWithMonthName(item.dateOfAvailability))}"
                     android:textColor="@color/red"
-                    tools:text="يتوفر في 20 يناير"
-                    android:textSize="@dimen/_11ssp"/>
+                    android:textSize="@dimen/_9ssp"
+                    tools:text="يتوفر في 20 يناير" />
             </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
@@ -84,6 +89,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -96,7 +102,7 @@
                     android:singleLine="true"
                     android:text="@{item.name}"
                     android:textColor="@color/button_color"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_11ssp"
                     tools:text="حذو اغريقي رمادي" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -108,7 +114,7 @@
                     android:singleLine="true"
                     android:text="@{item.price.formatted}"
                     android:textColor="@color/button_color"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_11ssp"
                     tools:text="1000 ر.س" />
             </LinearLayout>
 
@@ -118,7 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:src="@drawable/ic_cart" />
+                android:src="@{item.isAvailable() ? @drawable/ic_cart_add : @drawable/ic_cart}"
+                tools:src="@drawable/ic_cart_add" />
         </LinearLayout>
 
     </LinearLayout>

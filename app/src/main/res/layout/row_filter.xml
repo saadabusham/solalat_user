@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.raantech.solalat.user.data.models.GeneralLookup" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@{item.selected ? @color/light_blue : @color/white}"
+        app:cardCornerRadius="@dimen/_13sdp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/button_color"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <com.raantech.solalat.user.ui.base.views.AppTextView
+            android:id="@+id/tvTitle"
+            style="@style/textview_normal_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="@{item.value}"
+            android:textColor="@{item.selected ? @color/white : @color/button_color}"
+            android:textSize="@dimen/_14ssp"
+            tools:text="@string/call_now" />
+    </com.google.android.material.card.MaterialCardView>
+</layout>

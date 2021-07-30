@@ -16,6 +16,7 @@ import com.raantech.solalat.user.ui.base.bindingadapters.setOnItemClickListener
 import com.raantech.solalat.user.ui.cart.adapters.CartRecyclerAdapter
 import com.raantech.solalat.user.ui.cart.viewmodels.CartViewModel
 import com.raantech.solalat.user.utils.extensions.gone
+import com.raantech.solalat.user.utils.extensions.round
 import com.raantech.solalat.user.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_favorite_toolbar.*
@@ -72,12 +73,27 @@ class CartActivity : BaseBindingActivity<ActivityCartBinding>(),
         binding?.count = cartRecyclerAdapter.itemCount
         var subtotal = 0.0
         cartRecyclerAdapter.items.forEach {
-            subtotal += it.price?.amount?.toDouble()?.times(it.count ?:1)?:0.0
+            subtotal += it.price?.amount?.toDouble()?.times(it.count ?: 1) ?: 0.0
         }
-        viewModel.subTotal.postValue(Price(amount = subtotal.toString(),formatted = "$subtotal ${resources.getString(R.string.sar)}"))
+        viewModel.subTotal.postValue(
+            Price(
+                amount = subtotal.toString(),
+                formatted = "$subtotal ${resources.getString(R.string.sar)}"
+            )
+        )
         viewModel.TAX_CONST?.times(subtotal)?.let {
-            viewModel.tax.postValue(Price(amount = it.toString(),formatted = "${it} ${resources.getString(R.string.sar)}"))
-            viewModel.total.postValue(Price(amount = (subtotal+it).toString(),formatted = "${(subtotal+it)} ${resources.getString(R.string.sar)}"))
+            viewModel.tax.postValue(
+                Price(
+                    amount = it.toString(),
+                    formatted = "${it.round(2)} ${resources.getString(R.string.sar)}"
+                )
+            )
+            viewModel.total.postValue(
+                Price(
+                    amount = (subtotal + it).toString(),
+                    formatted = "${(subtotal + it).round(2)} ${resources.getString(R.string.sar)}"
+                )
+            )
         }
     }
 

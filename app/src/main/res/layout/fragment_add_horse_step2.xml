@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +18,7 @@
 
         <include
             android:id="@+id/layout_toolbar"
-            layout="@layout/layout_toolbar" />
+            layout="@layout/layout_toolbar_subtitle" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,7 +32,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:orientation="vertical">
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,9 +51,11 @@
                     android:gravity="center|start"
                     android:hint="@string/select"
                     android:padding="10dp"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/black"
                     android:textColorHint="@color/defaultTextColor"
                     android:textSize="@dimen/_12ssp"
+                    app:arrow_gravity="@{true}"
                     app:spinner_arrow_gravity="end"
                     app:spinner_arrow_padding="8dp"
                     app:spinner_arrow_tint="@color/button_color"
@@ -64,7 +65,7 @@
                     app:spinner_popup_background="@color/white"
                     app:spinner_popup_elevation="14dp" />
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     android:id="@+id/tvPriceTitle"
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
@@ -89,17 +90,17 @@
                         android:background="@drawable/edittext_background"
                         android:digits="0123456789."
                         android:hint="0"
-                        android:text="@={viewModel.horsePrice}"
                         android:inputType="numberDecimal"
                         android:minHeight="@dimen/_35sdp"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
+                        android:text="@={viewModel.horsePrice}"
                         android:textColor="@color/edittext_color"
                         android:textColorHint="@color/edittext_hint_color"
                         android:textSize="@dimen/_15ssp" />
 
 
-                    <TextView
+                    <com.raantech.solalat.user.ui.base.views.AppTextView
                         style="@style/textview_normal_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +112,7 @@
 
                 </LinearLayout>
 
-                <TextView
+                <com.raantech.solalat.user.ui.base.views.AppTextView
                     style="@style/textview_normal_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,11 +178,11 @@
                             android:layout_height="@dimen/Edittext_height"
                             android:background="@android:color/transparent"
                             android:hint="XXXXXXXXX"
-                            android:text="@={viewModel.phoneNumber}"
                             android:includeFontPadding="false"
                             android:inputType="phone"
                             android:paddingStart="0dp"
                             android:paddingEnd="0dp"
+                            android:text="@={viewModel.phoneNumber}"
                             android:textColor="@color/edittext_color"
                             android:textColorHint="@color/edittext_hint_color"
                             android:textSize="@dimen/_16ssp" />
@@ -198,23 +199,23 @@
                     android:id="@+id/checkboxReceiveWhatsapp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:button="@drawable/checkbox_selector"
                     android:checked="true"
-                    android:paddingStart="@dimen/_7sdp"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/receive_whatsapp"/>
+                    android:paddingStart="@dimen/_7sdp"
+                    android:text="@string/receive_whatsapp" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkboxIsActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:button="@drawable/checkbox_selector"
                     android:checked="true"
-                    android:paddingStart="@dimen/_7sdp"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/is_ad_active"/>
+                    android:paddingStart="@dimen/_7sdp"
+                    android:text="@string/is_ad_active" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAddProduct"

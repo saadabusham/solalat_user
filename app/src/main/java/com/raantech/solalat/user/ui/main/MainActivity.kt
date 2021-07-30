@@ -75,6 +75,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(),
 
     private fun setUpBinding() {
         binding?.viewModel = viewModel
+        binding?.appBarMain?.layoutToolbar?.viewModel = viewModel
+        viewModel.getCartsCount()
     }
 
 

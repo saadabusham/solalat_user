@@ -224,7 +224,7 @@ class MedicalsActivity : BaseBindingActivity<ActivityMedicalsBinding>(),
             navigateToLocation(item.latitude?.toDouble(), item.longitude?.toDouble())
         if (view?.id == R.id.imgFavorite) {
             positionToUpdate = position
-            if (item.isWishlist == true) {
+            if (item.isWishlist == false) {
                 viewModel.removeFromWishList(item.id ?: 0).observe(this, wishListActionObserver())
             } else {
                 viewModel.addToWishList(item.id ?: 0).observe(this, wishListActionObserver())

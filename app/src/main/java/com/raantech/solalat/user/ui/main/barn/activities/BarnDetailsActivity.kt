@@ -49,7 +49,6 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
             hasBackButton = true,
             showBackArrow = true
         )
-        binding?.layoutToolbar?.isFavorite = viewModel.barn.value?.is_wishlist
         setUpBinding()
         setUpListeners()
         viewModel.getBarnDetails(intent.getIntExtra(Constants.BundleData.ID, 0))
@@ -97,6 +96,7 @@ class BarnDetailsActivity : BaseBindingActivity<ActivityBarnDetailsBinding>(),
                     data: Barn?
                 ) {
                     viewModel.barn.value = (data)
+                    binding?.layoutToolbar?.isFavorite = data?.is_wishlist
                     setData()
                 }
             }

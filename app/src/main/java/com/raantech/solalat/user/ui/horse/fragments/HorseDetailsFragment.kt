@@ -182,6 +182,7 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
                     data: Horse?
                 ) {
                     viewModel.horse.value = data
+                    binding?.layoutToolbar?.isFavorite = data?.is_wishlist
                     init()
                 }
             }, true

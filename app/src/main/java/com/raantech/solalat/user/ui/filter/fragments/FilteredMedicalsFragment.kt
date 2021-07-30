@@ -81,7 +81,7 @@ class FilteredMedicalsFragment : BaseBindingFragment<FragmentFilteredMedicalsBin
                 item.longitude?.toDouble()
             )
         if (view?.id == R.id.imgFavorite) {
-            if (item.isWishlist == true) {
+            if (item.isWishlist == false) {
                 mainViewModel.removeFromWishList(item.id ?: 0)
                     .observe(this, wishListActionObserver())
             } else {

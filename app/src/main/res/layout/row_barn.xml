@@ -25,7 +25,7 @@
             android:id="@+id/imgMedia"
             ivImageUrl="@{item.baseImage.url}"
             ivImagePlaceholder="@{R.drawable.ic_placeholder_stable}"
-            ivImageErrorPlaceholder="@{R.drawable.barn_sample}"
+            ivImageErrorPlaceholder="@{R.drawable.ic_placeholder_stable}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
             android:scaleType="centerCrop"

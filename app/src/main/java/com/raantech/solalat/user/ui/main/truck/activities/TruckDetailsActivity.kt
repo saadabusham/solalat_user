@@ -50,7 +50,6 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
             hasBackButton = true,
             showBackArrow = true
         )
-        binding?.layoutToolbar?.isFavorite = viewModel.truck.value?.is_wishlist
         setUpBinding()
         setUpListeners()
         viewModel.getTruck(intent.getIntExtra(Constants.BundleData.ID, 0))
@@ -117,6 +116,7 @@ class TruckDetailsActivity : BaseBindingActivity<ActivityTruckDetailsBinding>(),
                     data: Truck?
                 ) {
                     viewModel.truck.value = data
+                    binding?.layoutToolbar?.isFavorite = data?.is_wishlist
                     setData()
                 }
             }

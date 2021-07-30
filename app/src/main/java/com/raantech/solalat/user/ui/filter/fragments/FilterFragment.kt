@@ -301,7 +301,7 @@ class FilterFragment : BaseBindingFragment<FragmentFilterBinding>() {
                 ServiceTypesEnum.TRANSPORTATION.value -> {
                     setResultCount(0)
                     hideShowSellType(true)
-                    hideShowPrice(false)
+                    hideShowPrice(true)
                     hideShowSubCategory(true)
                     applySearch()
                     R.string.truck_type
@@ -309,7 +309,7 @@ class FilterFragment : BaseBindingFragment<FragmentFilterBinding>() {
                 else -> {
                     setResultCount(0)
                     hideShowSellType(true)
-                    hideShowPrice(true)
+                    hideShowPrice(false)
                     hideShowSubCategory(true)
                     applySearch()
                     R.string.stable_type

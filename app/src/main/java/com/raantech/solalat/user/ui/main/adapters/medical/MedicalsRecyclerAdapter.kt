@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
+import com.raantech.solalat.user.R
 import com.raantech.solalat.user.data.models.medical.Medical
 import com.raantech.solalat.user.databinding.RowMedicalServiceBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
 import com.raantech.solalat.user.ui.base.adapters.BaseViewHolder
-import com.raantech.solalat.user.utils.extensions.gone
 import com.raantech.solalat.user.utils.extensions.setSlideAnimation
 
 class MedicalsRecyclerAdapter(
@@ -37,13 +37,13 @@ class MedicalsRecyclerAdapter(
         BaseViewHolder<Medical>(binding.root) {
 
         override fun bind(item: Medical) {
-            binding.item = item
 
             viewBinderHelper.setOpenOnlyOne(false)
             viewBinderHelper.bind(
                 binding.swipeLayout,
                 items[adapterPosition].id.toString()
             )
+            binding.item = item
 
             binding.btnCallNow.setOnClickListener {
                 itemClickListener?.onItemClick(it, adapterPosition, item)
@@ -51,14 +51,18 @@ class MedicalsRecyclerAdapter(
             binding.btnLocation.setOnClickListener {
                 itemClickListener?.onItemClick(it, adapterPosition, item)
             }
-            if(item.distance == null || item.distance == 0.0){
-//                binding.btnLocation.gone()
-            }
             binding.imgFavorite.setOnClickListener {
                 item.isWishlist = item.isWishlist == false
                 notifyItemChanged(adapterPosition)
                 itemClickListener?.onItemClick(it, adapterPosition, item)
             }
+            binding.imgFavorite.setImageResource(
+                if (item.isWishlist == true) {
+                    R.drawable.ic_favorite_selected
+                } else {
+                    R.drawable.ic_favorite
+                }
+            )
         }
     }
 }

@@ -254,6 +254,9 @@ class WishListActivity : BaseBindingActivity<ActivityWishlistBinding>(),
                 ServiceTypesEnum.HORSES.value -> {
                     item.id?.let { HorseActivity.start(this, it) }
                 }
+                ServiceTypesEnum.HORSE.value -> {
+                    item.id?.let { HorseActivity.start(this, it) }
+                }
             }
         }
     }

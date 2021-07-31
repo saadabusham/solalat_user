@@ -5,5 +5,6 @@ enum class ServiceTypesEnum(val value:String) {
     MEDICAL("medical"),
     BARN("stable"),
     TRANSPORTATION("truck"),
-    HORSES("horses")
+    HORSES("horses"),
+    HORSE("horse")
 }

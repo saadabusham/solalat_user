@@ -86,6 +86,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_13sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
+                        android:visibility="gone"
                         android:onClick="@{()->viewModel.onDoneClicked()}"
                         android:text="@string/select" />
 

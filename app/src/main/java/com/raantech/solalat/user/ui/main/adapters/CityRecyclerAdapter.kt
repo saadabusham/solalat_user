@@ -43,8 +43,9 @@ class CityRecyclerAdapter constructor(
                         notifyItemChanged(it.index)
                     }
                 }
-                item.selected = !item.selected!!
+                item.selected = !item.selected
                 notifyItemChanged(adapterPosition)
+                itemClickListener?.onItemClick(it,adapterPosition,item)
             }
         }
     }

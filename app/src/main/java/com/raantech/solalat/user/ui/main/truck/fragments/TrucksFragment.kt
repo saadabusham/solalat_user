@@ -78,23 +78,23 @@ class TrucksFragment : BaseBindingFragment<FragmentTrucksBinding>(),
     private fun setUpListeners() {
         binding?.cvFromCity?.setOnClickListener {
             CitiesBottomSheet(object : CitiesBottomSheet.CityPickerCallBack {
-                override fun callBack(selectedCities: List<City>) {
-                    viewModel.fromCity = selectedCities[0]
-                    binding?.tvFromCity?.text = selectedCities.map { it.name }.joinToString()
+                override fun callBack(selectedCities: City) {
+                    viewModel.fromCity = selectedCities
+                    binding?.tvFromCity?.text = selectedCities.name
                     trucksGridRecyclerAdapter.items.clear()
                     loadBarns()
                 }
-            }, viewModel, viewModel.cities,true).show(childFragmentManager, "CitiesPicker")
+            }, viewModel, viewModel.fromCity, true).show(childFragmentManager, "CitiesPicker")
         }
         binding?.cvToCity?.setOnClickListener {
             CitiesBottomSheet(object : CitiesBottomSheet.CityPickerCallBack {
-                override fun callBack(selectedCities: List<City>) {
-                    viewModel.toCity = selectedCities[0]
-                    binding?.tvToCity?.text = selectedCities.map { it.name }.joinToString()
+                override fun callBack(selectedCities: City) {
+                    viewModel.toCity = selectedCities
+                    binding?.tvToCity?.text = selectedCities.name
                     trucksGridRecyclerAdapter.items.clear()
                     loadBarns()
                 }
-            }, viewModel, viewModel.cities,true).show(childFragmentManager, "CitiesPicker")
+            }, viewModel, viewModel.toCity, true).show(childFragmentManager, "CitiesPicker")
         }
     }
 
@@ -200,7 +200,10 @@ class TrucksFragment : BaseBindingFragment<FragmentTrucksBinding>(),
                 ) {
                     isFinished = data?.body?.isNullOrEmpty() == true
                     data?.body?.let {
-                        trucksGridRecyclerAdapter.addItems(it)
+                        if (trucksGridRecyclerAdapter.itemCount == 0)
+                            trucksGridRecyclerAdapter.submitItems(it)
+                        else
+                            trucksGridRecyclerAdapter.addItems(it)
                     }
                     loading.postValue(false)
                     hideShowNoData()

@@ -48,7 +48,7 @@ class MainViewModel @ViewModelInject constructor(
     private val cartRepo: CartRepo
 ) : BaseViewModel() {
     var address: Address? = null
-    var cities: MutableList<City> = mutableListOf()
+//    var cities: MutableList<City> = mutableListOf()
     var fromCity: City? = null
     var toCity: City? = null
     val horseAdsTypeEnum: MutableLiveData<HorseAdsTypeEnum> = MutableLiveData(HorseAdsTypeEnum.ALL)

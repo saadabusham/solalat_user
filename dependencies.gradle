@@ -206,6 +206,7 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     implementation 'com.github.dwfox:DWRulerView:1.1.0'
+
 }
 //apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.crashlytics'

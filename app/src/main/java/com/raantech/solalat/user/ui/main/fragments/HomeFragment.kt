@@ -111,6 +111,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
         Paginate.with(binding?.recyclerView, object : Paginate.Callbacks {
             override fun onLoadMore() {
                 if (loading.value == false && horsesGridRecyclerAdapter.itemCount > 0 && !isFinished) {
+                    loading.value = true
                     loadData()
                 }
             }
@@ -168,7 +169,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
                     data?.body?.let {
                         horsesGridRecyclerAdapter.addItems(it)
                     }
-                    loading.postValue(false)
+                    loading.value = false
                     hideShowNoData()
                 }
 
@@ -178,12 +179,12 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(),
                     errors: List<GeneralError>?
                 ) {
                     super.onError(subErrorCode, message, errors)
-                    loading.postValue(false)
+                    loading.value = false
                     hideShowNoData()
                 }
 
                 override fun onLoading() {
-                    loading.postValue(true)
+                    loading.value = true
                 }
             }, false, showError = false
         )

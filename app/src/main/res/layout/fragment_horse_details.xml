@@ -108,7 +108,20 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:text="@string/join_auction"
-                    android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) &amp;&amp; viewModel.horseExtraData.isSubscribed == false? View.VISIBLE : View.GONE}"
+                    app:cornerRadius="@dimen/_19sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewAuction"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/view_auction"
+                    android:visibility="@{viewModel.horse.typeOfSale.equals(HorseAdsTypeEnum.AUCTION.value) &amp;&amp; viewModel.horseExtraData.isSubscribed == true? View.VISIBLE : View.GONE}"
                     app:cornerRadius="@dimen/_19sdp" />
 
                 <LinearLayout

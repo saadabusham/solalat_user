@@ -248,6 +248,7 @@
     <string name="vaccinate">اللقاح</string>
     <string name="vaccinated">ملقح</string>
     <string name="join_auction">شارك في المزاد</string>
+    <string name="view_auction">عرض المزاد</string>
     <string name="minute_">دقيقة</string>
     <string name="hour_">ساعة</string>
     <string name="day_">يوم</string>
@@ -257,7 +258,7 @@
     <string name="starting_auction_price">سعر  بداية المزاد</string>
     <string name="last_payed_price">السعر المدفوع الى الان</string>
     <string name="add_new_price">اضف سعر جديد أعلى</string>
-    <string name="the_minimum_increase_is_200_sar">( الحد الادنى للزيادة 200 ر.س )</string>
+    <string name="the_minimum_increase_is_sar">( الحد الادنى للزيادة 200 ر.س )</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">تمت عملية اضافة الخيل بنجاح ، سيتم دراسة طلبك وسنبلغك بالموافقة حال صدورها</string>
     <!--   Cart    -->
     <string name="done">تم</string>
@@ -314,4 +315,5 @@
     <string name="find_a_horse_an_accessory_etc">ابحث عن حصان ، اكسسوار ، … الخ</string>
     <string name="search_results">(%s) نتيجة بحث</string>
     <string name="search_result">نتيجة البحث</string>
+    <string name="failed_to_subscribe">لقد حدث خطأ في دفع الاشتارك</string>
 </resources>

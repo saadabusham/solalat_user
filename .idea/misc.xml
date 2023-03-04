@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/activity_payed_success.xml" value="0.17255434782608695" />
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/activity_payment.xml" value="0.17255434782608695" />
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/activity_view_image.xml" value="0.17255434782608695" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/fragment_add_horse.xml" value="0.1" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/fragment_filter.xml" value="0.2" />
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/fragment_horse_auction.xml" value="0.17255434782608695" />
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/fragment_horse_details.xml" value="0.17255434782608695" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/loading_row.xml" value="0.1" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/row_city.xml" value="0.1" />
+        <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/row_horse.xml" value="0.17255434782608695" />
         <entry key="..\:/freelance/solalat horses/new/solalat_user/app/src/main/res/layout/row_medical_service.xml" value="0.1" />
       </map>
     </option>

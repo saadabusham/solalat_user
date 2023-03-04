@@ -119,6 +119,10 @@
             android:name=".ui.purchase.PurchasesActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
+        <activity
+            android:name=".ui.payment.activity.PaymentActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -86,7 +86,7 @@
                         android:layout_gravity="center|start"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:layout_weight="1"
-                        android:text="@{viewModel.horse.price.formatted}"
+                        android:text="@{viewModel.horseExtraData.minimumBid.formatted}"
                         android:textAppearance="@style/textview_normal_bold"
                         android:textColor="@color/toolbar_title_color"
                         android:textSize="@dimen/_14ssp"
@@ -100,7 +100,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.horseExtraData.auctionStarted == true &amp;&amp; viewModel.horseExtraData.auctionEnded == false ? View.VISIBLE : View.GONE}">
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/textview_normal_regular"
@@ -119,7 +120,7 @@
                         android:layout_gravity="center|start"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:layout_weight="1"
-                        android:text="@{viewModel.horse.price.formatted}"
+                        android:text="@{viewModel.horseExtraData.maxPrice.formatted}"
                         android:textAppearance="@style/textview_normal_bold"
                         android:textColor="@color/button_color"
                         android:textSize="@dimen/_14ssp"
@@ -136,7 +137,8 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:text="@string/add_new_price"
                     android:textColor="@color/product_body_color"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="@{viewModel.horseExtraData.auctionStarted == true &amp;&amp; viewModel.horseExtraData.auctionEnded == false ? View.VISIBLE : View.GONE}" />
 
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/textview_normal_regular"
@@ -145,18 +147,21 @@
                     android:layout_gravity="center|start"
                     android:layout_marginStart="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:text="@string/the_minimum_increase_is_200_sar"
+                    android:text="@{@string/the_minimum_increase_is_sar(viewModel.horseExtraData.minimumBid.formatted)}"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="@{viewModel.horseExtraData.auctionStarted == true &amp;&amp; viewModel.horseExtraData.auctionEnded == false ? View.VISIBLE : View.GONE}"
+                    tools:text="@string/the_minimum_increase_is_sar" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/_70sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:minHeight="@dimen/_70sdp"
+                    android:orientation="horizontal">
 
+<!--                    android:visibility="@{viewModel.horseExtraData.auctionStarted == true &amp;&amp; viewModel.horseExtraData.auctionEnded == false ? View.VISIBLE : View.GONE}"-->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvPrice"
                         android:layout_width="wrap_content"
@@ -191,6 +196,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:text="@string/add_price"
+                    android:visibility="@{viewModel.horseExtraData.auctionStarted == true &amp;&amp; viewModel.horseExtraData.auctionEnded == false ? View.VISIBLE : View.GONE}"
                     app:cornerRadius="@dimen/_19sdp" />
 
             </LinearLayout>

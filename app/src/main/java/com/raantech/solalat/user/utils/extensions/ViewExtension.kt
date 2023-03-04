@@ -2,6 +2,7 @@ package com.raantech.solalat.user.utils.extensions
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -13,8 +14,13 @@ import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.PopupMenu
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.raantech.solalat.user.BuildConfig
+import com.raantech.solalat.user.ui.base.bindingadapters.getLoadingUrl
 import java.lang.System.currentTimeMillis
 
 fun View?.hideKeyboard(activity: Context?) {
@@ -139,6 +145,35 @@ fun ImageView.loadImage(url: String?) {
     } as String
 
     Glide.with(this).load(fullUrl)
+        .into(this)
+}
+
+fun ImageView.loadImage(url: String, onLoadingFinished: () -> Unit = {}) {
+    val listener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            onLoadingFinished()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            onLoadingFinished()
+            return false
+        }
+    }
+    Glide.with(this)
+        .load(getLoadingUrl(url))
+        .listener(listener)
         .into(this)
 }
 

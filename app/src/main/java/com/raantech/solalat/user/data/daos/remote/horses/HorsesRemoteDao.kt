@@ -4,6 +4,8 @@ import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.NetworkConstants
 import com.raantech.solalat.user.data.models.horses.AddHorseRequest
 import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.models.horses.HorseDetails
+import com.raantech.solalat.user.data.models.horses.horsesubscription.HorseSubscription
 import retrofit2.http.*
 
 interface HorsesRemoteDao {
@@ -19,7 +21,7 @@ interface HorsesRemoteDao {
     @GET("horses/{id}")
     suspend fun getHorse(
         @Path("id") id: Int
-    ): ResponseWrapper<Horse>
+    ): ResponseWrapper<HorseDetails>
 
     @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
     @POST("user/horses")
@@ -32,6 +34,25 @@ interface HorsesRemoteDao {
     suspend fun updateHorse(
         @Path("id") id: Int,
         @Body addHorseRequest: AddHorseRequest
+    ): ResponseWrapper<Any>
+
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @POST("horses/auction/subscriptions/store")
+    suspend fun addAuctionSubscription(
+        @Query("horse_id") horseId: Int,
+        @Query("payment_method") paymentMethod: String,
+    ): ResponseWrapper<HorseSubscription>
+
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @POST("horses/auction/subscriptions/{horseId}/destory")
+    suspend fun cancelAuctionSubscription(
+        @Path("horseId") horseId: Int
+    ): ResponseWrapper<Any>
+
+    @Headers("${NetworkConstants.SKIP_AUTHORIZATION_HEADER}:false")
+    @POST("horses/auction/subscriptions/{horseId}/minimum-bids")
+    suspend fun increaseAuctionSubscription(
+        @Path("horseId") horseId: Int
     ): ResponseWrapper<Any>
 
 }

@@ -26,6 +26,7 @@ object Constants {
         const val IMAGE: String = "image"
         const val MEDIA: String = "media"
         const val SELECT_MEDIA: String = "selectMedia"
+        const val PAYMENT_URL: String ="paymentUrl"
     }
 
     object NotificationsChannels {

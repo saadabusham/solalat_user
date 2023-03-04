@@ -9,6 +9,7 @@ import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.models.horses.HorseDetails
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.databinding.FragmentHorseAuctionBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
@@ -55,10 +56,6 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         setUpListeners()
         setUpPager()
         setUpRvPrice()
-        viewModel.horse.value?.price?.amount =
-            viewModel.horse.value?.price?.amount?.replace(".", "")
-        lastPrice = viewModel.horse.value?.price?.amount
-        viewModel.horse.value?.price?.amount?.let { refreshAuction() }
     }
 
     private fun setUpBinding() {
@@ -88,6 +85,7 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     private fun setUpRvPrice() {
         priceDigitsRecyclerAdapter = PriceDigitsRecyclerAdapter(requireContext())
         binding?.rvPrice?.adapter = priceDigitsRecyclerAdapter
+//        binding?.rvPrice?.itemAnimator = null
         binding?.rvPrice?.setOnItemClickListener(object :
             BaseBindingRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, position: Int, item: Any) {
@@ -106,8 +104,12 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                 } else {
                     priceDigitsRecyclerAdapter.items.reversed().joinToString(separator = "")
                         .toInt().let {
-                            if (it > 200 &&
-                                it > viewModel.horse?.value?.price?.amount?.toInt()?.plus(200) ?: 0
+                            if (it > (viewModel.horseExtraData.value?.minimumBid?.amount?.toDoubleOrNull()
+                                    ?: 200.0) &&
+                                it > (viewModel.horse.value?.price?.amount?.toInt()?.plus(
+                                    viewModel.horseExtraData.value?.minimumBid?.amount?.toDoubleOrNull()
+                                        ?: 200.0
+                                ) ?: 0.0)
                             ) {
                                 var numberToMinus = StringBuilder()
                                 for (i in 0..position)
@@ -116,7 +118,7 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                                     if (doublePrice) numberToMinus.toString().toInt() * 2
                                     else numberToMinus.toString().toInt()
                                 )?.let {
-                                    if (it > viewModel.horse?.value?.price?.amount?.toInt() ?: 0) {
+                                    if (it > (viewModel.horse.value?.price?.amount?.toInt() ?: 0)) {
                                         lastPrice = it.toString()
                                         refreshAuction()
                                     }
@@ -142,8 +144,8 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         onBoardingAdapter = SliderAdapter(requireContext())
         binding?.vpOnBoarding?.adapter =
             onBoardingAdapter.apply {
-                viewModel.horse?.value?.additionalImages?.let {
-                    viewModel.horse?.value?.baseImage?.let { it1 -> submitItem(it1) }
+                viewModel.horse.value?.additionalImages?.let {
+                    viewModel.horse.value?.baseImage?.let { it1 -> submitItem(it1) }
                     submitItems(it)
                 }
             }
@@ -193,17 +195,23 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         )
     }
 
-    private fun horseObserver(): CustomObserverResponse<Horse> {
+    private fun horseObserver(): CustomObserverResponse<HorseDetails> {
         return CustomObserverResponse(
             requireActivity(),
-            object : CustomObserverResponse.APICallBack<Horse> {
+            object : CustomObserverResponse.APICallBack<HorseDetails> {
                 override fun onSuccess(
                     statusCode: Int,
                     subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: Horse?
+                    data: HorseDetails?
                 ) {
-                    viewModel.horse.value = data
+                    viewModel.horse.value = data?.horse
+                    viewModel.horseExtraData.value = data?.extraData
                     init()
+                    viewModel.horseExtraData.value?.maxPrice?.amount
+                        ?: viewModel.horse.value?.price?.amount?.let {
+                            lastPrice = it.replace(".", "")
+                            refreshAuction()
+                        }
                 }
             }, true
         )

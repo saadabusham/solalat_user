@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.enums.WishListType
 import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.models.horses.HorseExtraData
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
 import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
@@ -22,6 +23,7 @@ class HorseViewModel @Inject constructor(
 
     var horseId: Int? = null
     var horse: MutableLiveData<Horse> = MutableLiveData()
+    var horseExtraData: MutableLiveData<HorseExtraData> = MutableLiveData()
     var days: MutableLiveData<Int> = MutableLiveData(0)
     var hours: MutableLiveData<Int> = MutableLiveData(0)
     var minutes: MutableLiveData<Int> = MutableLiveData(0)
@@ -82,6 +84,33 @@ class HorseViewModel @Inject constructor(
         emit(APIResource.loading())
         val response =
             wishListRepo.removeFromWishList(productId, WishListType.HORSE.value)
+        emit(response)
+    }
+
+    fun addAuctionSubscription(
+        horseId: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            horseRepo.addAuctionSubscription(horseId, "moyasar")
+        emit(response)
+    }
+
+    fun cancelAuctionSubscription(
+        horseId: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            horseRepo.cancelAuctionSubscription(horseId)
+        emit(response)
+    }
+
+    fun increaseAuctionSubscription(
+        horseId: Int
+    ) = liveData {
+        emit(APIResource.loading())
+        val response =
+            horseRepo.increaseAuctionSubscription(horseId)
         emit(response)
     }
 

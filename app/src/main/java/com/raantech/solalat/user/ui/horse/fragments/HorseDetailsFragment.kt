@@ -1,6 +1,7 @@
 package com.raantech.solalat.user.ui.horse.fragments
 
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
@@ -9,7 +10,8 @@ import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.CustomObserverResponse
 import com.raantech.solalat.user.data.enums.HorseAdsTypeEnum
 import com.raantech.solalat.user.data.models.DataView
-import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.models.horses.HorseDetails
+import com.raantech.solalat.user.data.models.horses.horsesubscription.HorseSubscription
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.databinding.FragmentHorseDetailsBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
@@ -20,8 +22,10 @@ import com.raantech.solalat.user.ui.horse.viewmodels.HorseViewModel
 import com.raantech.solalat.user.ui.main.adapters.DataViewRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.IndecatorImagesRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.SliderAdapter
+import com.raantech.solalat.user.ui.payment.activity.PaymentActivity
 import com.raantech.solalat.user.utils.extensions.openDial
 import com.raantech.solalat.user.utils.extensions.openWhatsApp
+import com.raantech.solalat.user.utils.extensions.showErrorAlert
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.row_image_view.view.*
@@ -100,6 +104,15 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
             requireActivity().openDial(viewModel.horse.value?.contactNumber)
         }
         binding?.btnJoinAuction?.setOnClickListener {
+            viewModel.horseId?.let { it1 ->
+                viewModel.addAuctionSubscription(it1).observe(
+                    this,
+                    horseSubscriptionObserver()
+                )
+            }
+
+        }
+        binding?.btnViewAuction?.setOnClickListener {
             navigationController.navigate(R.id.action_horseDetailsFragment_to_horseAuctionFragment)
         }
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
@@ -172,17 +185,53 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
         )
     }
 
-    private fun horseObserver(): CustomObserverResponse<Horse> {
+    private fun horseSubscriptionObserver(): CustomObserverResponse<HorseSubscription> {
         return CustomObserverResponse(
             requireActivity(),
-            object : CustomObserverResponse.APICallBack<Horse> {
+            object : CustomObserverResponse.APICallBack<HorseSubscription> {
                 override fun onSuccess(
                     statusCode: Int,
                     subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: Horse?
+                    data: HorseSubscription?
                 ) {
-                    viewModel.horse.value = data
-                    binding?.layoutToolbar?.isFavorite = data?.is_wishlist
+                    data?.let {
+                        it.redirectUrl?.let { it1 ->
+                            PaymentActivity.start(
+                                context = requireContext(),
+                                paymentUrl = it1,
+                                resultLauncher = paymentResultLauncher
+                            )
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    var paymentResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == PaymentActivity.RESULT_SUCCESS) {
+                navigationController.navigate(R.id.action_horseDetailsFragment_to_horseAuctionFragment)
+            } else if (result.resultCode == PaymentActivity.RESULT_FAILED) {
+                requireActivity().showErrorAlert(
+                    title = getString(R.string.app_name),
+                    message = getString(R.string.failed_to_subscribe)
+                )
+            }
+        }
+
+    private fun horseObserver(): CustomObserverResponse<HorseDetails> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<HorseDetails> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: HorseDetails?
+                ) {
+                    viewModel.horse.value = data?.horse
+                    viewModel.horseExtraData.value = data?.extraData
+                    binding?.layoutToolbar?.isFavorite = data?.horse?.is_wishlist
                     init()
                 }
             }, true

@@ -250,6 +250,7 @@
     <string name="vaccinate">Vaccinate</string>
     <string name="vaccinated">Vaccinated</string>
     <string name="join_auction">Join Auction</string>
+    <string name="view_auction">View Auction</string>
     <string name="minute_">Minute</string>
     <string name="hour_">Hour</string>
     <string name="day_">Day</string>
@@ -259,7 +260,7 @@
     <string name="starting_auction_price">Starting auction price</string>
     <string name="last_payed_price">Last payed price</string>
     <string name="add_new_price">Add new price</string>
-    <string name="the_minimum_increase_is_200_sar">(The minimum increase is 200 SAR)</string>
+    <string name="the_minimum_increase_is_sar">(The minimum increase is %s)</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">The horse addition has been successfully\ncompleted. Your request will be studied and we will inform you of the approval once it is issued</string>
 
     <!--    Cart    -->
@@ -317,4 +318,5 @@
     <string name="find_a_horse_an_accessory_etc">Find a horse, an accessory, etc.</string>
     <string name="search_results">(%s) Search results</string>
     <string name="search_result">Search results</string>
+    <string name="failed_to_subscribe">Failed to subscribe</string>
 </resources>

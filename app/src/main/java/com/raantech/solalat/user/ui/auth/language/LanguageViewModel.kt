@@ -1,13 +1,15 @@
 package com.raantech.solalat.user.ui.auth.language
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.common.CommonEnums
 import com.raantech.solalat.user.data.pref.configuration.ConfigurationPref
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LanguageViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LanguageViewModel @Inject constructor(
     private val configurationpref: ConfigurationPref
 ) : BaseViewModel() {
 

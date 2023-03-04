@@ -1,9 +1,6 @@
 package com.raantech.solalat.user.ui.main.viewmodels
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.raantech.solalat.user.common.CommonEnums
@@ -30,10 +27,12 @@ import com.raantech.solalat.user.data.repos.user.UserRepo
 import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val userRepo: UserRepo,
     private val sharedPreferencesUtil: SharedPreferencesUtil,
     private val userPref: UserPref,
@@ -48,7 +47,8 @@ class MainViewModel @ViewModelInject constructor(
     private val cartRepo: CartRepo
 ) : BaseViewModel() {
     var address: Address? = null
-//    var cities: MutableList<City> = mutableListOf()
+
+    //    var cities: MutableList<City> = mutableListOf()
     var fromCity: City? = null
     var toCity: City? = null
     val horseAdsTypeEnum: MutableLiveData<HorseAdsTypeEnum> = MutableLiveData(HorseAdsTypeEnum.ALL)

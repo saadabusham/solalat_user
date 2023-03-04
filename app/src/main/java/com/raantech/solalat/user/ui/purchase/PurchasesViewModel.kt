@@ -1,18 +1,17 @@
 package com.raantech.solalat.user.ui.purchase
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PurchasesViewModel @ViewModelInject constructor(
-        @Assisted private val savedStateHandle: SavedStateHandle,
-        private val configurationRepo: ConfigurationRepo,
-        private val sharedPreferencesUtil: SharedPreferencesUtil
+@HiltViewModel
+class PurchasesViewModel @Inject constructor(
+    private val configurationRepo: ConfigurationRepo,
+    private val sharedPreferencesUtil: SharedPreferencesUtil
 ) : BaseViewModel() {
 
     fun getFAQs() = liveData {

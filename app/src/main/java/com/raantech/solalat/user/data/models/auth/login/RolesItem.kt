@@ -1,12 +1,13 @@
 package com.raantech.solalat.user.data.models.auth.login
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RolesItem(
 
-	@field:Json(name ="name")
-	val name: String? = null,
+    @field:SerializedName("name")
+    val name: String? = null,
 
-	@field:Json(name ="id")
-	val id: Int? = null
-)
+    @field:SerializedName("id")
+    val id: Int? = null
+) : Serializable

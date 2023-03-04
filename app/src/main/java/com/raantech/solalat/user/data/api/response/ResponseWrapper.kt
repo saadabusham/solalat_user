@@ -1,14 +1,15 @@
 package com.raantech.solalat.user.data.api.response
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ResponseWrapper<RETURN_MODEL>(
-    @field:Json(name = "errors")
+    @field:SerializedName("errors")
     val errors: List<GeneralError>,
-    @field:Json(name = "code")
+    @field:SerializedName("code")
     val code: Int,
-    @field:Json(name = "message")
+    @field:SerializedName("message")
     val message: String,
-    @field:Json(name = "body")
+    @field:SerializedName("body")
     val body: RETURN_MODEL?
-)
+) : Serializable

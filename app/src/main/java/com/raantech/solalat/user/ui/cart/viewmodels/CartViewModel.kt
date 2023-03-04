@@ -1,29 +1,28 @@
 package com.raantech.solalat.user.ui.cart.viewmodels
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.raantech.solalat.user.data.models.Price
 import com.raantech.solalat.user.data.models.accessories.Accessory
 import com.raantech.solalat.user.data.repos.cart.CartRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CartViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class CartViewModel @Inject constructor(
     private val cartRepo: CartRepo
 ) : BaseViewModel() {
-    companion object{
+    companion object {
     }
 
-    val cartCount:MutableLiveData<String> = MutableLiveData("0")
-    val TAX_CONST:Double = 0.15
-    var tax:MutableLiveData<Price> = MutableLiveData()
-    var subTotal:MutableLiveData<Price> = MutableLiveData()
-    var total:MutableLiveData<Price> = MutableLiveData()
+    val cartCount: MutableLiveData<String> = MutableLiveData("0")
+    val TAX_CONST: Double = 0.15
+    var tax: MutableLiveData<Price> = MutableLiveData()
+    var subTotal: MutableLiveData<Price> = MutableLiveData()
+    var total: MutableLiveData<Price> = MutableLiveData()
     fun updateCartItem(accessory: Accessory) = viewModelScope.launch {
         cartRepo.saveCart(accessory)
     }
@@ -41,7 +40,8 @@ class CartViewModel @ViewModelInject constructor(
         val response = cartRepo.getCart(id)
         emit(response)
     }
-    fun getCartsCount() = viewModelScope.launch{
+
+    fun getCartsCount() = viewModelScope.launch {
         cartRepo.getCartsCount().observeForever {
             if (it != null)
                 cartCount.postValue(it.toString())

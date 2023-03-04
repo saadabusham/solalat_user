@@ -2,7 +2,6 @@ package com.raantech.solalat.user.ui.auth.login.viewmodels
 
 import android.content.Context
 import android.os.CountDownTimer
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.R
@@ -15,9 +14,12 @@ import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
 import com.raantech.solalat.user.utils.DateTimeUtil
 import com.raantech.solalat.user.utils.extensions.*
 import com.raantech.solalat.user.utils.pref.SharedPreferencesUtil
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class LoginViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val userRepo: UserRepo,
     private val sharedPreferencesUtil: SharedPreferencesUtil,
     @ApplicationContext context: Context

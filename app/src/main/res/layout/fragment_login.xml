@@ -111,7 +111,7 @@
                         android:includeFontPadding="false"
                         android:inputType="phone"
                         android:text="@={viewModel.phoneNumberWithoutCountryCode}"
-                        android:textColorHint="@color/gray_btn_bg_color"
+                        android:textColorHint="@color/dark_gray"
                         android:textSize="@dimen/_16ssp" />
 
                     <View

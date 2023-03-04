@@ -1,12 +1,10 @@
 package com.raantech.solalat.user.utils.extensions
 
 import android.content.Context
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.raantech.solalat.user.utils.DateTimeUtil
 import com.raantech.solalat.user.utils.validation.Validator
 import com.raantech.solalat.user.utils.validation.ValidatorInputTypesEnums
 import java.net.URLDecoder
-import java.text.SimpleDateFormat
 import java.util.*
 
 fun String?.toDate(format: String = DateTimeUtil.FULL_DATE_TIME_FORMATTING): Date? {
@@ -22,19 +20,6 @@ fun String.validateConfirmPassword(validatorInputTypesEnums: ValidatorInputTypes
     return Validator().validate(validatorInputTypesEnums,this,passwordToMatch,context)
 }
 
-fun String?.getCalendarDay(): CalendarDay {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-    val outputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH)
-    outputFormat.timeZone = TimeZone.getDefault()
-    val date = outputFormat.format(inputFormat.parse(this))
-
-    return CalendarDay.from(
-        date.substring(0, 4).toInt(),
-        date.substring(5, 7).toInt(),
-        date.substring(8, 10).toInt()
-    )
-}
 
 
 fun String?.toUtf8(): String {

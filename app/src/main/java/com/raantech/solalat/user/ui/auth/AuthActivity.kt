@@ -39,9 +39,9 @@ class AuthActivity : BaseBindingActivity<ActivityAuthBinding>() {
         val graph = inflater.inflate(R.navigation.auth_nav_graph)
 
         if (prefs.getIsFirstOpen()) {
-            graph.startDestination = R.id.languageFragment
+            graph.setStartDestination(R.id.languageFragment)
         } else {
-            graph.startDestination = R.id.loginFragment
+            graph.setStartDestination(R.id.loginFragment)
         }
         navHostFragment.navController.graph = graph
     }

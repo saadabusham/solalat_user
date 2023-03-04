@@ -3,8 +3,6 @@ package com.raantech.solalat.user.ui.base.bindingadapters
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.raantech.solalat.user.R
-import com.raantech.solalat.user.R2.color.status_delivered
-import com.raantech.solalat.user.R2.color.status_in_the_way
 import com.raantech.solalat.user.data.enums.PurchaseStatusEnum
 
 @BindingAdapter("status")

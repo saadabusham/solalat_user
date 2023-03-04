@@ -1,10 +1,7 @@
 package com.raantech.solalat.user.ui.horse.viewmodels
 
 import android.os.CountDownTimer
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.enums.WishListType
@@ -13,9 +10,11 @@ import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.horse.HorseRepo
 import com.raantech.solalat.user.data.repos.wishlist.WishListRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HorseViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class HorseViewModel @Inject constructor(
     private val horseRepo: HorseRepo,
     private val configurationRepo: ConfigurationRepo,
     private val wishListRepo: WishListRepo
@@ -73,7 +72,7 @@ class HorseViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response =
-            wishListRepo.addToWishList(WishListType.HORSE.value,productId)
+            wishListRepo.addToWishList(WishListType.HORSE.value, productId)
         emit(response)
     }
 
@@ -82,7 +81,7 @@ class HorseViewModel @ViewModelInject constructor(
     ) = liveData {
         emit(APIResource.loading())
         val response =
-            wishListRepo.removeFromWishList(productId,WishListType.HORSE.value)
+            wishListRepo.removeFromWishList(productId, WishListType.HORSE.value)
         emit(response)
     }
 

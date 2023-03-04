@@ -20,7 +20,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.raantech.solalat.user.ui.splash.SplashActivity">
+        <activity android:name="com.raantech.solalat.user.ui.splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,72 +31,94 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
 
         <activity
             android:name=".ui.auth.AuthActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
 
         <activity
             android:name=".ui.media.MediaActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.dataview.viewimage.ViewImageActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.dataview.dataviewer.DataViewerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".ui.more.aboutus.AboutUsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".ui.more.faqs.FaqsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.map.MapActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.main.barn.activities.BarnDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".ui.main.truck.activities.TruckDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".ui.main.medical.activities.MedicalsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.addhorse.AddHorseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.horse.HorseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.main.accessories.activities.AccessoriesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.cart.CartActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.wishlist.activities.WishListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".ui.cart.PayedSuccessActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.technicalsupport.TechnicalSupportActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.reportprovider.ReportProviderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.updateprofile.UpdateProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.filter.FiltersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.purchase.PurchasesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:exported="true" />
     </application>
 
 </manifest>

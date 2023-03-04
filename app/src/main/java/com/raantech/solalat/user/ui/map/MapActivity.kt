@@ -19,7 +19,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.firebase.crashlytics.internal.common.CommonUtils.hideKeyboard
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.jakewharton.rxbinding3.widget.textChangeEvents
 import com.raantech.solalat.user.data.models.map.Address
 import com.raantech.solalat.user.R
@@ -203,24 +203,28 @@ class MapActivity : BaseBindingActivity<ActivityMapBinding>(), OnMapReadyCallbac
         val request = FetchPlaceRequest.builder(placeId, placeFields).build()
         placesClient.fetchPlace(request)
             .addOnSuccessListener { p0 ->
-                hideKeyboard(this,binding!!.root)
-                googleMap?.animateCamera(
+                hideKeyboard(binding!!.root)
+                p0?.place?.latLng?.let {
                     CameraUpdateFactory.newLatLngZoom(
-                        p0?.place?.latLng,
+                        it,
                         14f
                     )
-                )
+                }?.let {
+                    googleMap?.animateCamera(
+                        it
+                    )
+                }
             }
     }
 
-    override fun onMapReady(p0: GoogleMap?) {
+    override fun onMapReady(p0: GoogleMap) {
         googleMap = p0
         googleMap?.uiSettings?.isCompassEnabled = false
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_LOCATION) {
-            val states = LocationSettingsStates.fromIntent(data)
+            val states = data?.let { LocationSettingsStates.fromIntent(it) }
             when (resultCode) {
                 RESULT_OK -> {
                     enableLocationServices()

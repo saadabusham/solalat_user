@@ -1,9 +1,6 @@
 package com.raantech.solalat.user.ui.filter.viewmodels
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.liveData
 import com.raantech.solalat.user.data.api.response.APIResource
 import com.raantech.solalat.user.data.enums.ServiceTypesEnum
@@ -16,9 +13,11 @@ import com.raantech.solalat.user.data.models.truck.Truck
 import com.raantech.solalat.user.data.repos.configuration.ConfigurationRepo
 import com.raantech.solalat.user.data.repos.filter.FilterRepo
 import com.raantech.solalat.user.ui.base.viewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FiltersViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class FiltersViewModel @Inject constructor(
     private val configurationRepo: ConfigurationRepo,
     private val filterRepo: FilterRepo
 ) : BaseViewModel() {

@@ -178,7 +178,7 @@
                     app:rsb_tick_mark_layout_gravity="top"
                     app:rsb_tick_mark_mode="other"
                     app:rsb_tick_mark_number="1"
-                    app:rsb_tick_mark_text_color="@color/text_gray"
+                    app:rsb_tick_mark_text_color="@color/dark_gray"
                     app:rsb_tick_mark_text_margin="@dimen/_12sdp"
                     app:rsb_tick_mark_text_size="@dimen/_10ssp" />
 

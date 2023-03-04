@@ -13,13 +13,13 @@ import com.raantech.solalat.user.data.daos.remote.wishlist.WishListRemoteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object RemoteDaosModule {
 
     @Singleton
@@ -41,7 +41,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideMediaRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): MediaRemoteDao {
         return retrofit.create(MediaRemoteDao::class.java)
     }
@@ -49,7 +49,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideBarnRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): BarnRemoteDao {
         return retrofit.create(BarnRemoteDao::class.java)
     }
@@ -57,7 +57,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideTruckRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): TruckRemoteDao {
         return retrofit.create(TruckRemoteDao::class.java)
     }
@@ -65,7 +65,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideHorseRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): HorsesRemoteDao {
         return retrofit.create(HorsesRemoteDao::class.java)
     }
@@ -73,7 +73,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideWishListRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): WishListRemoteDao {
         return retrofit.create(WishListRemoteDao::class.java)
     }
@@ -81,7 +81,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideMedicalRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): MedicalRemoteDao {
         return retrofit.create(MedicalRemoteDao::class.java)
     }
@@ -89,7 +89,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideAccessoriesRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): AccessoriesRemoteDao {
         return retrofit.create(AccessoriesRemoteDao::class.java)
     }
@@ -97,7 +97,7 @@ object RemoteDaosModule {
     @Singleton
     @Provides
     fun provideFilterRemoteDao(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): FilterRemoteDao {
         return retrofit.create(FilterRemoteDao::class.java)
     }

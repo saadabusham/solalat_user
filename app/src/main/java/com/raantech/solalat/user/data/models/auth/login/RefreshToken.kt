@@ -1,12 +1,13 @@
 package com.raantech.solalat.user.data.models.auth.login
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RefreshToken(
 
-	@field:Json(name ="validUntil")
-	val validUntil: String? = null,
+    @field:SerializedName("validUntil")
+    val validUntil: String? = null,
 
-	@field:Json(name ="refreshToken")
-	val refreshToken: String? = null
-)
+    @field:SerializedName("refreshToken")
+    val refreshToken: String? = null
+):Serializable

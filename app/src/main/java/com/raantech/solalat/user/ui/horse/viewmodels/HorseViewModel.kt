@@ -24,6 +24,7 @@ class HorseViewModel @Inject constructor(
     var horseId: Int? = null
     var horse: MutableLiveData<Horse> = MutableLiveData()
     var horseExtraData: MutableLiveData<HorseExtraData> = MutableLiveData()
+    var latestPrice: MutableLiveData<Double> = MutableLiveData()
     var days: MutableLiveData<Int> = MutableLiveData(0)
     var hours: MutableLiveData<Int> = MutableLiveData(0)
     var minutes: MutableLiveData<Int> = MutableLiveData(0)

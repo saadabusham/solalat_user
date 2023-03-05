@@ -5,8 +5,11 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import java.io.Serializable
 
 fun Context?.openDial(phone: String?) {
     if (phone.isNullOrEmpty()) return
@@ -140,6 +143,34 @@ fun Context?.openShareView(dataWillShare: String) {
 }
 
 fun String?.openWhatsApp(activity: Activity) {
+    try {
+        val uri =
+            Uri.parse("https://api.whatsapp.com/send?phone=" + this.toString())
+
+        val sendIntent = Intent(Intent.ACTION_VIEW, uri)
+
+        activity.startActivity(sendIntent)
+    } catch (e: Exception) {
+        Log.e("TAG", "ERROR_OPEN_MESSANGER$e")
+    }
+}
+
+fun <T : Serializable?> Intent.getSerializableData(name: String, clazz: Class<T>): T {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        this.getSerializableExtra(name, clazz)!!
+    else
+        this.getSerializableExtra(name) as T
+}
+
+fun <T : Serializable?> Bundle.getSerializableData(name: String, clazz: Class<T>): T? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        this.getSerializable(name, clazz)!!
+    else
+        this.getSerializable(name) as T
+}
+
+fun Intent?.openWhatsApp(activity: Activity) {
+
     try {
         val uri =
             Uri.parse("https://api.whatsapp.com/send?phone=" + this.toString())

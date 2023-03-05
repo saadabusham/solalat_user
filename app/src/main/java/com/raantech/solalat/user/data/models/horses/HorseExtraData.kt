@@ -16,7 +16,7 @@ data class HorseExtraData(
     val minimumBid: Price? = null,
 
     @field:SerializedName("max_price")
-    val maxPrice: Price? = null,
+    var maxPrice: Price? = null,
 
     @field:SerializedName("is_win")
     val isWin: Boolean? = null,

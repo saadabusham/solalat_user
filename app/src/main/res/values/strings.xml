@@ -262,6 +262,9 @@
     <string name="add_new_price">Add new price</string>
     <string name="the_minimum_increase_is_sar">(The minimum increase is %s)</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">The horse addition has been successfully\ncompleted. Your request will be studied and we will inform you of the approval once it is issued</string>
+    <string name="leave_auction">Leave auction</string>
+    <string name="failed_to_subscribe">Failed to subscribe</string>
+    <string name="congratulations_you_won_this_auction">Congratulations, You won this auction</string>
 
     <!--    Cart    -->
     <string name="done">Done</string>
@@ -318,5 +321,13 @@
     <string name="find_a_horse_an_accessory_etc">Find a horse, an accessory, etc.</string>
     <string name="search_results">(%s) Search results</string>
     <string name="search_result">Search results</string>
-    <string name="failed_to_subscribe">Failed to subscribe</string>
+
+
+    <!-- notifications -->
+    <string name="title_notifications">Notifications</string>
+    <string name="label_notifications_empty">No Notifications!</string>
+    <string name="notification_title_key">englishTitle</string>
+    <string name="notification_message_key">englishBody</string>
+    <string name="notification_type_key">notificationType</string>
+    <string name="notification_value_key">Data</string>
 </resources>

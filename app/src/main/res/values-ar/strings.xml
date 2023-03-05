@@ -260,6 +260,10 @@
     <string name="add_new_price">اضف سعر جديد أعلى</string>
     <string name="the_minimum_increase_is_sar">( الحد الادنى للزيادة 200 ر.س )</string>
     <string name="the_horse_addition_has_been_successfully_completed_your_request_will_be_studied_and_we_will_inform_you_of_the_approval_once_it_is_issued">تمت عملية اضافة الخيل بنجاح ، سيتم دراسة طلبك وسنبلغك بالموافقة حال صدورها</string>
+    <string name="failed_to_subscribe">لقد حدث خطأ في دفع الاشتارك</string>
+    <string name="leave_auction">الانسحاب من المزاد</string>
+    <string name="congratulations_you_won_this_auction">مبروك ، لقد ربحت هذا المزاد</string>
+
     <!--   Cart    -->
     <string name="done">تم</string>
     <string name="add_to_cart">Add to cart</string>
@@ -315,5 +319,4 @@
     <string name="find_a_horse_an_accessory_etc">ابحث عن حصان ، اكسسوار ، … الخ</string>
     <string name="search_results">(%s) نتيجة بحث</string>
     <string name="search_result">نتيجة البحث</string>
-    <string name="failed_to_subscribe">لقد حدث خطأ في دفع الاشتارك</string>
 </resources>

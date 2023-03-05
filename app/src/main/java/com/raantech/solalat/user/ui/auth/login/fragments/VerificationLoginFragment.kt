@@ -28,6 +28,7 @@ class VerificationLoginFragment : BaseBindingFragment<FragmentVerificationLoginB
     private val viewModel: LoginViewModel by navGraphViewModels(R.id.auth_nav_graph) { defaultViewModelProviderFactory }
 
     override fun getLayoutId(): Int = R.layout.fragment_verification_login
+
     @Inject
     lateinit var prefs: UserPref
     override fun onViewVisible() {
@@ -86,12 +87,14 @@ class VerificationLoginFragment : BaseBindingFragment<FragmentVerificationLoginB
         otp_view.setAnimationEnable(true)
         binding?.tvTimeToResend?.setOnClickListener {
             if (viewModel.signUpResendPinCodeEnabled.value == true) {
-            viewModel.resendVerificationCode().observe(this, sendOtpResultObserver())
+                viewModel.resendVerificationCode().observe(this, sendOtpResultObserver())
             }
         }
         binding?.btnVerify?.setOnClickListener {
             if (validateInput()) {
-                viewModel.verifyCode().observe(this, verifyOtpResultObserver())
+                viewModel.getFcmToken {
+                    viewModel.verifyCode(it).observe(this, verifyOtpResultObserver())
+                }
             }
         }
     }

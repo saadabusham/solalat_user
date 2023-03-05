@@ -8,6 +8,7 @@ import com.raantech.solalat.user.data.models.horses.AddHorseRequest
 import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.models.horses.HorseDetails
 import com.raantech.solalat.user.data.models.horses.horsesubscription.HorseSubscription
+import com.raantech.solalat.user.data.models.horses.horsesubscription.IncreaseResponse
 import com.raantech.solalat.user.data.repos.base.BaseRepo
 import javax.inject.Inject
 
@@ -78,7 +79,7 @@ class HorseRepoImp @Inject constructor(
         }
     }
 
-    override suspend fun increaseAuctionSubscription(horseId: Int): APIResource<ResponseWrapper<Any>> {
+    override suspend fun increaseAuctionSubscription(horseId: Int): APIResource<ResponseWrapper<IncreaseResponse>> {
         return try {
             responseHandle.handleSuccess(horsesRemoteDao.increaseAuctionSubscription(horseId))
         } catch (e: Exception) {

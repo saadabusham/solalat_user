@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     signingConfigs {
@@ -31,13 +31,13 @@ android {
     defaultConfig {
         applicationId "com.raantech.solalat.user"
         minSdkVersion 27
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        setProperty("archivesBaseName", "TraxJO (${currentLocalVersion.toString().replace("\"", "")}) (${currentLocalBuild.toString().replace("\"", "")})")
+        setProperty("archivesBaseName", "Solalat user (${currentLocalVersion.toString().replace("\"", "")}) (${currentLocalBuild.toString().replace("\"", "")})")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -308,5 +308,5 @@ dependencies {
     implementation 'com.github.dwfox:DWRulerView:1.1.0'
 
 }
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

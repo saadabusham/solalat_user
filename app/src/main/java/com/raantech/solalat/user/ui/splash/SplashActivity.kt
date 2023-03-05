@@ -1,10 +1,13 @@
 package com.raantech.solalat.user.ui.splash
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.raantech.solalat.user.R
 import com.raantech.solalat.user.common.MyApplication
@@ -37,11 +40,25 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
             layoutResID = R.layout.activity_splash,
             hasToolbar = false
         )
-        Handler(Looper.getMainLooper()).postDelayed({
-            viewModel.getConfigurationData().observe(this, configurationResultObserver())
-        }, 3000)
-
         RuntimeException("This is a RUNTIME EXCEPTION")
+
+        requestPermissions()
+    }
+
+    private fun requestPermissions() {
+        val permReqLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                val granted = permissions.entries.all {
+                    it.value
+                }
+                viewModel.getConfigurationData().observe(this, configurationResultObserver())
+            }
+
+        if (Build.VERSION.SDK_INT >= 33) {
+            permReqLauncher.launch(arrayOf(Manifest.permission.POST_NOTIFICATIONS))
+        } else {
+            viewModel.getConfigurationData().observe(this, configurationResultObserver())
+        }
     }
 
     private fun configurationResultObserver(): CustomObserverResponse<ConfigurationWrapperResponse> {
@@ -55,9 +72,15 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
                 ) {
                     SharedPreferencesUtil.getInstance(this@SplashActivity)
                         .setConfigurationPreferences(data)
-                    goToNextPage()
+                    startSplash()
                 }
             })
+    }
+
+    private fun startSplash() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            goToNextPage()
+        }, 3000)
     }
 
     private fun goToNextPage() {

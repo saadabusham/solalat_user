@@ -6,6 +6,7 @@ import com.raantech.solalat.user.data.models.horses.AddHorseRequest
 import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.models.horses.HorseDetails
 import com.raantech.solalat.user.data.models.horses.horsesubscription.HorseSubscription
+import com.raantech.solalat.user.data.models.horses.horsesubscription.IncreaseResponse
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -40,5 +41,5 @@ interface HorseRepo {
 
     suspend fun increaseAuctionSubscription(
         horseId: Int
-    ): APIResource<ResponseWrapper<Any>>
+    ): APIResource<ResponseWrapper<IncreaseResponse>>
 }

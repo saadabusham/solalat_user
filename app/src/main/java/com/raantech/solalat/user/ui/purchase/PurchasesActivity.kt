@@ -42,6 +42,16 @@ class PurchasesActivity : BaseBindingActivity<ActivityPurchasesBinding>() {
 //        viewModel.getFAQs().observe(this, faqsObserver())
     }
 
+
+    private fun setUpAdapter() {
+        adapter = PurchasesRecyclerAdapter(this)
+        binding?.recyclerView?.adapter = adapter
+    }
+
+    private fun setUpListeners() {
+
+    }
+
     private fun faqsObserver(): CustomObserverResponse<List<Purchase>> {
         return CustomObserverResponse(
             this,
@@ -56,104 +66,6 @@ class PurchasesActivity : BaseBindingActivity<ActivityPurchasesBinding>() {
                 }
             }, showError = false
         )
-    }
-
-
-    private fun setUpAdapter() {
-        adapter = PurchasesRecyclerAdapter(this)
-        binding?.recyclerView?.adapter = adapter
-        adapter.submitItems(
-            arrayListOf(
-                Purchase(
-                    status = PurchaseStatusEnum.IN_THE_WAY.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                ),
-                Purchase(
-                    status = PurchaseStatusEnum.DELIVERED.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                ),
-                Purchase(
-                    status = PurchaseStatusEnum.DELIVERED.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                ),
-                Purchase(
-                    status = PurchaseStatusEnum.DELIVERED.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                ),
-                Purchase(
-                    status = PurchaseStatusEnum.IN_THE_WAY.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                ),
-                Purchase(
-                    status = PurchaseStatusEnum.IN_THE_WAY.value,
-                    items = arrayListOf(
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory(),
-                        Accessory()
-                    )
-                )
-            )
-        )
-    }
-
-    private fun setUpListeners() {
-
     }
 
     companion object {

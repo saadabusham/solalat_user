@@ -6,6 +6,7 @@ import com.raantech.solalat.user.data.models.horses.AddHorseRequest
 import com.raantech.solalat.user.data.models.horses.Horse
 import com.raantech.solalat.user.data.models.horses.HorseDetails
 import com.raantech.solalat.user.data.models.horses.horsesubscription.HorseSubscription
+import com.raantech.solalat.user.data.models.horses.horsesubscription.IncreaseResponse
 import retrofit2.http.*
 
 interface HorsesRemoteDao {
@@ -53,6 +54,6 @@ interface HorsesRemoteDao {
     @POST("horses/auction/subscriptions/{horseId}/minimum-bids")
     suspend fun increaseAuctionSubscription(
         @Path("horseId") horseId: Int
-    ): ResponseWrapper<Any>
+    ): ResponseWrapper<IncreaseResponse>
 
 }

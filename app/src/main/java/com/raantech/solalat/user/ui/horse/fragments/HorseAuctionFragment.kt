@@ -1,15 +1,21 @@
 package com.raantech.solalat.user.ui.horse.fragments
 
-import android.transition.TransitionManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.viewpager2.widget.ViewPager2
 import com.raantech.solalat.user.R
 import com.raantech.solalat.user.data.api.response.ResponseSubErrorsCodeEnum
 import com.raantech.solalat.user.data.api.response.ResponseWrapper
 import com.raantech.solalat.user.data.common.CustomObserverResponse
-import com.raantech.solalat.user.data.models.horses.Horse
+import com.raantech.solalat.user.data.enums.NotificationsTypeEnum
 import com.raantech.solalat.user.data.models.horses.HorseDetails
+import com.raantech.solalat.user.data.models.horses.horsesubscription.IncreaseResponse
+import com.raantech.solalat.user.data.models.horses.horsesubscription.MinimumBid
 import com.raantech.solalat.user.data.models.media.Media
 import com.raantech.solalat.user.databinding.FragmentHorseAuctionBinding
 import com.raantech.solalat.user.ui.base.adapters.BaseBindingRecyclerViewAdapter
@@ -20,6 +26,7 @@ import com.raantech.solalat.user.ui.horse.adapters.PriceDigitsRecyclerAdapter
 import com.raantech.solalat.user.ui.horse.viewmodels.HorseViewModel
 import com.raantech.solalat.user.ui.main.adapters.barn.IndecatorImagesRecyclerAdapter
 import com.raantech.solalat.user.ui.main.adapters.barn.SliderAdapter
+import com.raantech.solalat.user.utils.extensions.getSerializableData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.row_image_view.view.*
@@ -33,12 +40,26 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
     lateinit var onBoardingAdapter: SliderAdapter
     private var indicatorPosition = 0
     private lateinit var priceDigitsRecyclerAdapter: PriceDigitsRecyclerAdapter
-    private var lastPrice: String? = null
     override fun getLayoutId(): Int = R.layout.fragment_horse_auction
+
+    override fun onResume() {
+        super.onResume()
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            newHorseBidPassingReceiver, IntentFilter(
+                NotificationsTypeEnum.NEW_HORSE_AUCTION_BID.value
+            )
+        )
+        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(requireContext())
+            .unregisterReceiver(newHorseBidPassingReceiver)
+    }
 
     override fun onViewVisible() {
         super.onViewVisible()
-        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
     }
 
     private fun init() {
@@ -55,7 +76,7 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         setUpBinding()
         setUpListeners()
         setUpPager()
-        setUpRvPrice()
+//        setUpRvPrice()
     }
 
     private fun setUpBinding() {
@@ -65,7 +86,16 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
 
     private fun setUpListeners() {
         binding?.btnAddPrice?.setOnClickListener {
-
+            viewModel.horse.value?.id?.let { it1 ->
+                viewModel.increaseAuctionSubscription(it1)
+                    .observe(this, increaseAuctionResultObserver())
+            }
+        }
+        binding?.btnLeaveAuction?.setOnClickListener {
+            viewModel.horse.value?.id?.let { it1 ->
+                viewModel.cancelAuctionSubscription(it1)
+                    .observe(this, cancelHorseSubscriptionObserver())
+            }
         }
         binding?.layoutToolbar?.imgFavorite?.setOnClickListener {
             if (viewModel.horse.value?.is_wishlist == true) {
@@ -95,12 +125,12 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                     var numberToPlus = StringBuilder()
                     for (i in 0..position)
                         numberToPlus.append(if (i == 0) 1 else 0)
-                    lastPrice =
-                        (lastPrice?.toInt()?.plus(
-                            if (doublePrice) numberToPlus.toString().toInt() * 2
-                            else numberToPlus.toString().toInt()
-                        )).toString()
-                    refreshAuction()
+                    ((viewModel.latestPrice.value ?: 0.0).plus(
+                        if (doublePrice) numberToPlus.toString().toInt() * 2
+                        else numberToPlus.toString().toInt()
+                    )).let {
+                        refreshAuction(it)
+                    }
                 } else {
                     priceDigitsRecyclerAdapter.items.reversed().joinToString(separator = "")
                         .toInt().let {
@@ -114,13 +144,12 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                                 var numberToMinus = StringBuilder()
                                 for (i in 0..position)
                                     numberToMinus.append(if (i == 0) 1 else 0)
-                                lastPrice?.toInt()?.minus(
+                                viewModel.latestPrice.value?.minus(
                                     if (doublePrice) numberToMinus.toString().toInt() * 2
                                     else numberToMinus.toString().toInt()
                                 )?.let {
                                     if (it > (viewModel.horse.value?.price?.amount?.toInt() ?: 0)) {
-                                        lastPrice = it.toString()
-                                        refreshAuction()
+                                        refreshAuction(it)
                                     }
                                 }
                             }
@@ -130,14 +159,15 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         })
     }
 
-    private fun refreshAuction() {
-        val list = mutableListOf<Int>()
-        lastPrice?.reversed()?.forEach {
-            list.add(Integer.parseInt(it.toString()))
-        }
-        TransitionManager.beginDelayedTransition(binding?.rvPrice)
-        priceDigitsRecyclerAdapter.items.clear()
-        priceDigitsRecyclerAdapter.submitItems(list)
+    private fun refreshAuction(latestPrice: Double) {
+//        val list = mutableListOf<Int>()
+//        viewModel.latestPrice.value?.toString()?.reversed()?.forEach {
+//            list.add(Integer.parseInt(it.toString()))
+//        }
+//        TransitionManager.beginDelayedTransition(binding?.rvPrice)
+//        priceDigitsRecyclerAdapter.items.clear()
+//        priceDigitsRecyclerAdapter.submitItems(list)
+        viewModel.latestPrice.value = latestPrice
     }
 
     private fun setUpPager() {
@@ -207,13 +237,48 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
                     viewModel.horse.value = data?.horse
                     viewModel.horseExtraData.value = data?.extraData
                     init()
-                    viewModel.horseExtraData.value?.maxPrice?.amount
-                        ?: viewModel.horse.value?.price?.amount?.let {
-                            lastPrice = it.replace(".", "")
-                            refreshAuction()
-                        }
+                    (viewModel.horseExtraData.value?.maxPrice?.amount
+                        ?: viewModel.horse.value?.price?.amount)?.let {
+//                            viewModel.latestPrice.value = it.toDoubleOrNull() ?: 0.0
+                        refreshAuction(it.toDoubleOrNull() ?: 0.0)
+                    }
                 }
             }, true
+        )
+    }
+
+    private fun cancelHorseSubscriptionObserver(): CustomObserverResponse<Any> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<Any> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: Any?
+                ) {
+                    requireActivity().onBackPressed()
+                }
+            }
+        )
+    }
+
+    private fun increaseAuctionResultObserver(): CustomObserverResponse<IncreaseResponse> {
+        return CustomObserverResponse(
+            requireActivity(),
+            object : CustomObserverResponse.APICallBack<IncreaseResponse> {
+                override fun onSuccess(
+                    statusCode: Int,
+                    subErrorCode: ResponseSubErrorsCodeEnum,
+                    data: IncreaseResponse?
+                ) {
+//                    refreshAuction(
+//                        data?.minimumBid?.newPrice?.amount?.toDoubleOrNull() ?: 0.0
+//                    )
+//                    viewModel.horseExtraData.value = viewModel.horseExtraData.value?.apply {
+//                        this.maxPrice = data?.minimumBid?.newPrice
+//                    }
+                }
+            }
         )
     }
 
@@ -230,4 +295,25 @@ class HorseAuctionFragment : BaseBindingFragment<FragmentHorseAuctionBinding>(),
         }
     }
 
+    private val newHorseBidPassingReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val bundle = intent.extras
+            if (bundle != null) {
+                try {
+                    if (bundle.containsKey("data")) {
+                        bundle.getSerializableData("data",MinimumBid::class.java)?.let {
+                            refreshAuction(
+                                it.newPrice?.amount?.toDoubleOrNull() ?: 0.0
+                            )
+                            viewModel.horseExtraData.value = viewModel.horseExtraData.value?.apply {
+                                this.maxPrice = it.newPrice
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+
+                }
+            }
+        }
+    }
 }

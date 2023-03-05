@@ -42,9 +42,13 @@ class HorseDetailsFragment : BaseBindingFragment<FragmentHorseDetailsBinding>(),
 
     override fun getLayoutId(): Int = R.layout.fragment_horse_details
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
+    }
+
     override fun onViewVisible() {
         super.onViewVisible()
-        viewModel.horseId?.let { viewModel.getHorse(it).observe(this, horseObserver()) }
     }
 
     private fun init() {

@@ -66,7 +66,8 @@ fun Fragment.displayLocationSettingsRequest(activity: Activity, requestCode: Int
 fun Fragment.getLocationName(latitude: Double?, longitude: Double?): String {
     try {
 
-        val address = Geocoder(context, Locale.ENGLISH).getFromLocation(
+        val address = Geocoder(requireContext()
+            , Locale.ENGLISH).getFromLocation(
                 latitude ?: 0.0,
                 longitude ?: 0.0,
                 1
